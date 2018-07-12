@@ -1,0 +1,15 @@
+<div [formGroup]="form" [ngClass]="compactStyle ? 'col' : 'row col'">
+  <div class="col">
+    <div [ngSwitch]="question.controlType">
+      <div *ngSwitchCase="'input'">
+        <mainio-form-single-line-input [formGroup]="form" [question]="question" class="form-control m-input"></mainio-form-single-line-input>
+      </div>
+      <div *ngSwitchCase="'dropdown'">
+        <mainio-form-dropdown-input [formGroup]="form" [question]="question" class="form-control m-input"></mainio-form-dropdown-input>
+      </div>
+      <div *ngSwitchCase="'dropdown-search'">
+        <mainio-form-dropdown-input-search [formGroup]="form" [question]="question" class="form-control m-input"></mainio-form-dropdown-input-search>
+      </div>
+    </div>
+  </div>
+</div>
