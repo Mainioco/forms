@@ -1,0 +1,12 @@
+<mat-form-field [formGroup]="formGroup">
+  <mat-select placeholder="{{question.label}}" [formControlName]="question.key" [value]="selectedOption" (selectionChange)="setSelection($event)">
+    <mat-optgroup *ngFor="let group of question.groups " [label]="group.groupName">
+      <mat-option *ngFor="let option of group?.options" [value]="option.key">
+        {{option.label}}
+      </mat-option>
+    </mat-optgroup>
+    <mat-option *ngFor="let option of question.options" [value]="option.key">
+      {{option.value}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

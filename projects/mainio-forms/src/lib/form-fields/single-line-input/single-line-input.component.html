@@ -1,0 +1,10 @@
+<mat-form-field [formGroup]="formGroup">
+
+  <input matInput placeholder="{{question.label}}" [formControlName]="question.key" [id]="question.key" [type]="question.type"
+    [minLength]="question.minLength < 0 ? 0 : question.minLength" [maxLength]="question.maxLength > question.minLength && question.maxLength > 0 ? question.maxLength : 0">
+  <mat-hint align="end">
+    <span *ngIf="(question.minLength > 0)">{{question.minLength}}</span>
+    <span *ngIf="question.minLength > 0 && question.maxLength > 0">/</span>
+    <span *ngIf="question.maxLength"> {{question.maxLength}}</span>
+  </mat-hint>
+</mat-form-field>
