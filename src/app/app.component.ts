@@ -8,11 +8,11 @@ import { InputQuestion } from "mainio-forms";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = "app";
+  title = "Mainioco Forms demo";
   questions: QuestionBase<any>[] = [
     new InputQuestion({
-      key: "api_token",
-      label: "API Key",
+      key: "x1",
+      label: "Input with min and max length",
       type: "input",
       order: 2,
       required: true,
@@ -20,40 +20,34 @@ export class AppComponent {
       maxLength: 200
     }),
     new InputQuestion({
-      key: "api_secret",
-      label: "API Secret",
+      key: "x2",
+      label: "Input with only max length",
       type: "input",
       order: 2,
       required: true,
-      minLength: 5,
       maxLength: 200
     }),
     new InputQuestion({
-      key: "a_api_address",
-      label: "API Address",
+      key: "x3",
+      label: "Input with only min length, but not required",
       type: "input",
       order: 2,
-      required: true,
-      minLength: 5,
-      maxLength: 200
+      required: false,
+      minLength: 5
     }),
     new InputQuestion({
-      key: "a_api_conn_name",
-      label: "Connection Name",
+      key: "x4",
+      label: "No length limitations",
       type: "input",
       order: 2,
-      required: true,
-      minLength: 5,
-      maxLength: 200
+      required: true
     }),
     new InputQuestion({
-      key: "h_external_system",
-      label: "Connection Name",
-      type: "input",
+      key: "x5",
+      label: "Number",
+      type: "number",
       order: 2,
-      required: true,
-      minLength: 5,
-      maxLength: 200
+      required: true
     })
   ];
 }
