@@ -1,11 +1,28 @@
 {
   "name": "mainio-forms",
   "version": "0.0.1",
+  "description": "Angular 6 dynamic forms module. The goal is to provide easy to integrate forms to projects",
+  "homepage": "https://github.com/Mainioco/forms",
+  "bugs": {
+    "email": "tutkimus@mainio.co",
+    "url": "https://github.com/Mainioco/forms/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mainioco/forms.git"
+  },
+  "private": false,
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/forms":"6.0.0",
-    "@angular/material": "6.0.0",
+    "@angular/forms": "6.0.0",
+    "@angular/material": "6.3.1",
     "@angular/cdk": "6.0.0"
   }
 }
