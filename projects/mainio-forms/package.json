@@ -1,6 +1,6 @@
 {
   "name": "mainio-forms",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Angular 6 dynamic forms module. The goal is to provide easy to integrate forms to projects",
   "homepage": "https://github.com/Mainioco/forms",
   "bugs": {
