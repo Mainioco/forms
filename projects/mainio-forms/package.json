@@ -1,18 +1,23 @@
 {
   "name": "mainio-forms",
   "version": "0.2.1",
+  "author": {
+    "name": "Juha Möttönen",
+    "email": "juha.mottonen@mainio.co",
+    "url": "https://twitter.com/JuhaMttnen"
+  },
   "description": "Angular 6 dynamic forms module. The goal is to provide easy to integrate forms to projects",
   "homepage": "https://github.com/Mainioco/forms",
+  "keywords": [
+    "angular",
+    "dynamic",
+    "forms"
+  ],
   "bugs": {
     "email": "tutkimus@mainio.co",
     "url": "https://github.com/Mainioco/forms/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://www.opensource.org/licenses/mit-license.php"
-    }
-  ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Mainioco/forms.git"

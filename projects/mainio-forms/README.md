@@ -37,23 +37,3 @@ The project's split to two parts; one for dynamic form components (such as input
 | Open Text          |             |            |
 | Range choice       |             |            |
 | Radio button group |             |            |
-
-## How to run on local machine
-
-This project's initalized using [Angular Cli](https://cli.angular.io/). Running ng serve on the root folder will launch the demo.
-
-## How to build on local machine
-
-Run `ng build mainio-forms` to build the NPM package locally. To include the npm package to your own local project's include `"@mainio/*": [ "PATH/*" ]` to tsconfig.json. Change PATH to dist folder of the repository
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
