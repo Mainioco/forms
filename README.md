@@ -25,6 +25,7 @@ The project's split to two parts; one for dynamic form components (such as input
 | Basic validators                               | X           |            |           | Min, max length of input field             |
 | Advanced validators                            |             |            |           | Support for Regex for example              |
 | Clean styles                                   |             |            |           | No Angular material dependencies           |
+| Rxjs Store                                     |             |            |           |                                            |
 
 ### Form components
 
