@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
-import { InputQuestion } from "../../input-question";
+import { InputQuestion } from "../../models/input-question";
 
 @Component({
   selector: "mainio-form-single-line-input",

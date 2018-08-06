@@ -7,15 +7,15 @@ import {
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
-import { QuestionBase } from "../question-base";
+import { QuestionBase } from "../models/question-base";
 import {
   DropdownSearchQuestion,
   IOptions,
   IOptionGroup
-} from "../drop-down-search";
+} from "../models/drop-down-search";
 import { Observable, Subject } from "rxjs";
 import { startWith, map } from "rxjs/operators";
-import { DropdownQuestion } from "../dropdown-question";
+import { DropdownQuestion } from "../models/dropdown-question";
 
 @Component({
   selector: "app-question",
