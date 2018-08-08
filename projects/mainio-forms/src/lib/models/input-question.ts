@@ -1,12 +1,13 @@
 import { QuestionBase } from "./question-base";
 import * as Forms from "@angular/forms";
+import { IInputQuestionOptions } from "../interfaces/i-input-question-options";
 
 export class InputQuestion extends QuestionBase<string> {
   controlType = "input";
   type: string;
   minLength: number = -1;
   maxLength: number = -1;
-  constructor(options: {} = {}) {
+  constructor(options: IInputQuestionOptions = {}) {
     super(options);
     this.type = options["type"] || "";
     this.minLength = options["minLength"] || -1;

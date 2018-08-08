@@ -1,4 +1,6 @@
 import * as Forms from "@angular/forms";
+import { IQuestionBaseOptions } from "../interfaces/i-question-base-options";
+
 export class QuestionBase<T> {
   value: T;
   key: string;
@@ -7,16 +9,7 @@ export class QuestionBase<T> {
   order: number;
   controlType: string;
   validators: ((control: Forms.AbstractControl) => Forms.ValidationErrors)[];
-  constructor(
-    options: {
-      value?: T;
-      key?: string;
-      label?: string;
-      required?: boolean;
-      order?: number;
-      controlType?: string;
-    } = {}
-  ) {
+  constructor(options: IQuestionBaseOptions = {}) {
     this.value = options.value;
     this.key = options.key || "";
     this.label = options.label || "";
