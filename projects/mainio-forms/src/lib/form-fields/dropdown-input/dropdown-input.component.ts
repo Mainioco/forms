@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, OnChanges } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
-import { QuestionBase } from "../../question-base";
-import { DropdownQuestion } from "../../dropdown-question";
+import { QuestionBase } from "../../models/question-base";
+import { DropdownQuestion } from "../../models/dropdown-question";
 
 @Component({
   selector: "mainio-form-dropdown-input",

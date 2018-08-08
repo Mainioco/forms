@@ -13,6 +13,7 @@ import {
 } from "@angular/material";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormFieldsModule } from "./form-fields/form-fields.module";
+import { DynamicStoreFormComponent } from './dynamic-store-form/dynamic-store-form.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -25,7 +26,7 @@ import { FormFieldsModule } from "./form-fields/form-fields.module";
     MatSelectModule,
     FormFieldsModule
   ],
-  declarations: [DynamicFormComponent, DynamicFormQuestionComponent],
+  declarations: [DynamicFormComponent, DynamicFormQuestionComponent, DynamicStoreFormComponent],
   providers: [QuestionControlService],
   exports: [DynamicFormComponent, DynamicFormQuestionComponent]
 })
