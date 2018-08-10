@@ -8,6 +8,7 @@ export class QuestionBase<T> {
   required: boolean;
   order: number;
   controlType: string;
+  group:string;
   validators: ((control: Forms.AbstractControl) => Forms.ValidationErrors)[];
   constructor(options: IQuestionBaseOptions = {}) {
     this.value = options.value;
@@ -16,6 +17,7 @@ export class QuestionBase<T> {
     this.required = !!options.required;
     this.order = options.order === undefined ? 1 : options.order;
     this.controlType = options.controlType || "";
+    this.group = options.group;
   }
 
   getValidators(): ((

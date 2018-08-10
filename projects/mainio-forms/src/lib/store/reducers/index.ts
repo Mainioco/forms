@@ -3,7 +3,8 @@ import {
   createFeatureSelector,
   ActionReducerMap,
   ActionReducer,
-  MetaReducer
+  MetaReducer,
+  MemoizedSelector
 } from "@ngrx/store";
 import * as lifecycle from "./form-livecycle-reducers";
 import * as library from "./library-reducers";
@@ -37,8 +38,8 @@ export const reducers: ActionReducerMap<State> = {
   export const metaReducers: MetaReducer<State>[] = !state.production
   ? [logger, storeFreeze]
   : [];
-   */
-export const getLibraryState = createFeatureSelector<library.State>("library");
+   
+export const getLibraryState = createFeatureSelector<library.State>("library"):MemoizedSelector<object,State>;
 export const getLifecycleState = createFeatureSelector<lifecycle.State>(
   "lifecycle"
 );
@@ -66,3 +67,4 @@ export const getDebugMode = createSelector(
   selectLibraryState,
   library.debugMode
 );
+*/

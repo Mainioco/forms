@@ -2,85 +2,94 @@ import {
   MainioLifecycleActionTypes,
   LifecycleActions
 } from "../actions/form-lifecycle-actions";
-import { Form } from "../../models/form";
+import { QuestionBase } from "../../models/question-base";
+import { Form, QuestionGroup } from "../../models/form";
+import { FormGroup } from "@angular/forms";
 
 export interface State {
   debugMode: boolean;
-  forms: Array<Form>;
+  forms?: { id: string; form: Form };
 }
 
 export const initialState: State = {
   debugMode: false,
-  forms: []
+  forms: undefined
 };
 
 export function reducer(state = initialState, action: LifecycleActions): State {
   switch (action.type) {
     case MainioLifecycleActionTypes.Created: {
-      if (hasForm(action.payload, state.forms)) {
+      if (hasForm(action.payload, state)) {
         break;
       }
-      let newForms = [...state.forms, action.payload];
       return {
         ...state,
-        forms: newForms
+        forms: {
+          ...state.forms,
+          [action.payload.id]: action.payload
+        }
       };
     }
 
     case MainioLifecycleActionTypes.Destroyed: {
-      let index = findIndexForForm(action.payload, state);
-      if (index === -1) {
+      if (hasForm(action.payload, state)) {
         break;
       }
-      let newForms = [...state.forms];
-      newForms.splice(index, 1);
+      delete state.forms[action.payload.id];
       return {
         ...state,
-        forms: newForms
+        forms: state.forms
       };
     }
 
     case MainioLifecycleActionTypes.QuestionsUpdated: {
-      let index = findIndexForForm(action.payload.form, state);
-      if (index === -1) {
+      if (!hasForm(action.payload.form, state)) {
         break;
       }
-      let newForms = [...state.forms];
-      newForms[index].questions = action.payload.newQuestions;
       return {
         ...state,
-        forms: newForms
+        [action.payload.form.id]: {
+          ...action.payload.form,
+          questions: action.payload.newQuestions
+        }
       };
     }
 
     case MainioLifecycleActionTypes.FormGroupCreated: {
-      let index = findIndexForForm(action.payload.form, state);
-      if (index === -1) {
+      if (!hasForm(action.payload.form, state)) {
         break;
       }
-      let newForms = [...state.forms];
-      newForms[index].questionGroups = [
-        ...newForms[index].questionGroups,
-        action.payload.formGroup
-      ];
       return {
         ...state,
-        forms: newForms
+        [action.payload.form.id]: {
+          ...action.payload.form,
+          questionGroups: state.forms[
+            action.payload.form.id
+          ].questionGroups.map((x: QuestionGroup) => {
+            return x.group === action.payload.formGroup.group
+              ? {
+                  ...action.payload.formGroup
+                }
+              : x;
+          })
+        }
       };
     }
 
     case MainioLifecycleActionTypes.FormGroupDeleted: {
-      let index = findIndexForForm(action.payload.form, state);
-      if (index === -1) {
+      if (!hasForm(action.payload.form, state)) {
         break;
       }
-      let newForms = [...state.forms];
-      newForms[index].questionGroups = newForms[index].questionGroups.filter(
-        x => x !== action.payload.formGroup
-      );
       return {
         ...state,
-        forms: newForms
+        [action.payload.form.id]: {
+          ...action.payload.form,
+          questionGroups: state.forms[
+            action.payload.form.id
+          ].questionGroups.filter((x: QuestionGroup) => {
+            return x.group !== action.payload.formGroup.group;
+          })
+        }
       };
     }
     default:
@@ -90,21 +99,13 @@ export function reducer(state = initialState, action: LifecycleActions): State {
 }
 
 export const getForms = (state: State) => state.forms;
-export const getForm = (state: State, id: string) =>
-  state.forms.find(x => x.id === id);
+export const getForm = (state: State, id: string) => state.forms[id];
 export const getFormQuestions = (state: State, id: string) =>
-  state.forms.find(x => x.id === id)
-    ? state.forms.find(x => x.id === id).questions
-    : [];
+  state.forms[id] ? state.forms[id].questions : [];
 
-function findIndexForForm(form: Form, state: State = initialState) {
-  let x = state.forms.find(x => x.id === form.id);
-  if (!x) {
-    return -1;
-  }
-  return state.forms.indexOf(x);
+function hasFormId(id: string, state: State) {
+  return !!state.forms[id];
 }
-function hasForm(form: Form, formArr: Form[]): boolean {
-  let x = formArr.find(x => x.id === form.id);
-  return !!x;
+function hasForm(form: Form, state: State): boolean {
+  return hasFormId(form.id, state);
 }

@@ -5,4 +5,5 @@ export interface IQuestionBaseOptions {
   required?: boolean;
   order?: number;
   controlType?: string;
+  group?:string;
 }
