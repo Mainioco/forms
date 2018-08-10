@@ -10,7 +10,7 @@ import {
 import { FormGroup } from "@angular/forms";
 
 import { QuestionBase } from "../models/question-base";
-import { QuestionControlService } from "../question-control.service";
+import { QuestionControlService } from "../services/question-control.service";
 
 @Component({
   selector: "mainio-dynamic-form",
@@ -33,6 +33,9 @@ export class DynamicFormComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
+    if (this.form) {
+      return;
+    }
     this.form = this.qcs.toFormGroup(this.questions);
     if (!this.form) {
       return;

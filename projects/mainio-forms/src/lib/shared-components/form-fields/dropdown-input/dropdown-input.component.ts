@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, OnChanges } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
-import { QuestionBase } from "../../models/question-base";
-import { DropdownQuestion } from "../../models/dropdown-question";
-import { ControlType } from "../../models/control-type.enum";
+import { QuestionBase } from "../../../models/question-base";
+import { DropdownQuestion } from "../../../models/dropdown-question";
+import { ControlType } from "../../../models/control-type.enum";
 
 @Component({
   selector: "mainio-form-dropdown-input",
@@ -11,8 +11,10 @@ import { ControlType } from "../../models/control-type.enum";
   styleUrls: ["./dropdown-input.component.css"]
 })
 export class DropdownInputComponent implements OnInit, OnChanges {
-  @Input() question: DropdownQuestion;
-  @Input() formGroup: FormGroup;
+  @Input()
+  question: DropdownQuestion;
+  @Input()
+  formGroup: FormGroup;
   selectedOption: string = "";
 
   constructor() {}

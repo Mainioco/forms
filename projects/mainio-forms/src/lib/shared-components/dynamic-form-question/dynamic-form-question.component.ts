@@ -7,16 +7,16 @@ import {
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
-import { QuestionBase } from "../models/question-base";
+import { QuestionBase } from "../../models/question-base";
 import {
   DropdownSearchQuestion,
   IOptions,
   IOptionGroup
-} from "../models/drop-down-search";
+} from "../../models/drop-down-search";
 import { Observable, Subject } from "rxjs";
 import { startWith, map } from "rxjs/operators";
-import { DropdownQuestion } from "../models/dropdown-question";
-import { ControlType } from "../models/control-type.enum";
+import { DropdownQuestion } from "../../models/dropdown-question";
+import { ControlType } from "../../models/control-type.enum";
 
 @Component({
   selector: "mainio-form-question",

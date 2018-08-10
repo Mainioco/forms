@@ -16,9 +16,6 @@ export class InputQuestion extends QuestionBase<string> {
   }
 
   getValidators() {
-    if (this.validators) {
-      return this.validators;
-    }
     let exist = super.getValidators();
     if (this.minLength > -1) {
       exist.push(Forms.Validators.minLength(this.minLength));
@@ -30,6 +27,6 @@ export class InputQuestion extends QuestionBase<string> {
       var re = new RegExp("^-?\\d{1,9}");
       exist.push(Forms.Validators.pattern(re));
     }
-    return (this.validators = exist);
+    return exist;
   }
 }

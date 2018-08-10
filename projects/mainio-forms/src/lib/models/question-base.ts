@@ -10,9 +10,6 @@ export class QuestionBase<T> {
   order: number;
   controlType: ControlType;
   group: string;
-  validators: ((
-    control: Forms.AbstractControl
-  ) => Forms.ValidationErrors)[] = [];
   constructor(options: IQuestionBaseOptions = {}) {
     this.value = options.value;
     this.key = options.key || "";
@@ -23,16 +20,9 @@ export class QuestionBase<T> {
     this.group = options.group;
   }
 
-  resetValidators() {
-    this.validators = [];
-    this.validators = this.getValidators();
-  }
   getValidators(): ((
     control: Forms.AbstractControl
   ) => Forms.ValidationErrors)[] {
-    if (this.validators.length > 0) {
-      return this.validators;
-    }
     if (this.required) {
       return [Forms.Validators.required];
     }

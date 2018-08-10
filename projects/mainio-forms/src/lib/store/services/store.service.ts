@@ -1,7 +1,6 @@
-import { Component, OnInit, Injectable } from "@angular/core";
+import { Component, OnInit, Injectable, Inject } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { Form } from "../../models/form";
-import * as recuders from "../index";
 import * as libraryActions from "../actions/library-actions";
 import * as lifecycleActions from "../actions/form-lifecycle-actions";
 import { QuestionBase } from "../../models/question-base";
@@ -9,15 +8,19 @@ import { FormGroupService } from "../../services/form-group.service";
 import { FormGroup } from "@angular/forms";
 import { QuestionCreatorService } from "../../services/question-creator.service";
 import { QuestionGroup } from "../../models/question-group";
+import { LifecycleState } from "../states/forms-state";
+import { MainioFormStoreServiceConfig } from "../tokens/service-config";
+import { MainioFormsStoreConfig } from "../interfaces/store-config";
 
 @Injectable({
   providedIn: "root"
 })
 export class StoreService {
   constructor(
-    private _store: Store<recuders.MainioFormsState>,
+    private _store: Store<LifecycleState>,
     private _formGroupService: FormGroupService,
-    private _creatorService: QuestionCreatorService
+    private _creatorService: QuestionCreatorService,
+    @Inject(MainioFormStoreServiceConfig) private config: MainioFormsStoreConfig
   ) {}
 
   get store() {
@@ -33,12 +36,11 @@ export class StoreService {
   }
 
   formValuesChanged(id: string, formGroup: FormGroup) {
-    let form: Form = this.store.select(x => x.lifecycle.forms)[id];
-    console.log("id", id, this.store.select(x => x.lifecycle.forms));
     this.store.dispatch(
       new lifecycleActions.ValueChanged({
         formId: id,
-        newValues: formGroup.value
+        newValues: formGroup.value,
+        groupIsValid: !formGroup.invalid
       })
     );
   }
@@ -51,7 +53,7 @@ export class StoreService {
     f.id = id;
     f.questions = [];
     f.values = undefined;
-    let groups: QuestionGroup[] = [];
+    f.questionGroups;
     for (let q of questions) {
       f.questions.push(q);
       if (limitToGroup && q.group !== limitToGroup) {
@@ -60,18 +62,22 @@ export class StoreService {
       if (!q.group) {
         continue;
       }
-      let g = groups.find(x => x.group == q.group);
+      let g: QuestionGroup = f.questionGroups
+        ? f.questionGroups[q.group]
+        : undefined;
       if (!g) {
         g = {
           group: q.group,
-          questionsIds: []
+          questionsIds: [],
+          isValid: false
         };
-        groups.push(g);
+        if (!f.questionGroups) {
+          f.questionGroups = {};
+        }
+        f.questionGroups[q.group] = g;
       }
       g.questionsIds.push(q.key);
     }
-    f.questionGroups = [...groups];
-
     this.createForm(f);
 
     return limitToGroup
@@ -80,4 +86,11 @@ export class StoreService {
   }
 
   createFromGroup(form: Form) {}
+
+  private getStore() {
+    if (!this.config) {
+      return "forms";
+    }
+    return this.config.storeName;
+  }
 }

@@ -49,7 +49,9 @@ export class FormGroupDeleted implements Action {
 export class ValueChanged implements Action {
   readonly type = MainioLifecycleActionTypes.ValueChanges;
 
-  constructor(public payload: { formId: string; newValues: any }) {}
+  constructor(
+    public payload: { formId: string; newValues: any; groupIsValid: boolean }
+  ) {}
 }
 
 export class ValueReset implements Action {

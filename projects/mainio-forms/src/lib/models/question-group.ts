@@ -1,4 +1,5 @@
 export interface QuestionGroup {
-  group: string;
-  questionsIds: string[];
+  group?: string;
+  questionsIds?: string[];
+  isValid?: boolean;
 }

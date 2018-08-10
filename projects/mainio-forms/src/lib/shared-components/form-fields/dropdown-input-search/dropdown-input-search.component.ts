@@ -1,12 +1,12 @@
 import { Component, Input, OnInit, OnChanges } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
-import { QuestionBase } from "../../models/question-base";
+import { QuestionBase } from "../../../models/question-base";
 import {
   DropdownSearchQuestion,
   IOptions,
   IOptionGroup
-} from "../../models/drop-down-search";
+} from "../../../models/drop-down-search";
 import { Subject } from "rxjs";
 import { startWith, map } from "rxjs/operators";
 
@@ -24,8 +24,10 @@ export const _filter = (opt: any[], value: IOptions | string): IOptions[] => {
   styleUrls: ["./dropdown-input-search.component.css"]
 })
 export class DropdownInputSearchComponent implements OnInit, OnChanges {
-  @Input() question: DropdownSearchQuestion;
-  @Input() formGroup: FormGroup;
+  @Input()
+  question: DropdownSearchQuestion;
+  @Input()
+  formGroup: FormGroup;
   stateGroupOptions: Subject<IOptionGroup[]> = new Subject<IOptionGroup[]>();
   selectedOption: string = "";
   constructor() {}

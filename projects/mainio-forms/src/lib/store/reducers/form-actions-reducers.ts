@@ -14,19 +14,21 @@ export function formActionsReducer(
 ): LifecycleState {
   switch (action.type) {
     case MainioLifecycleActionTypes.ValueChanges: {
-      console.log("getting form", action.payload);
-      if (hasFormId(action.payload.formId, state)) {
-        console.log("does not have form");
+      if (!hasFormId(action.payload.formId, state)) {
         break;
       }
-      state[action.payload.formId] = {
-        ...state[action.payload.formId],
+      let x = {
+        ...state.forms[action.payload.formId],
         values: {
           ...action.payload.newValues
         }
       };
       return {
-        ...state
+        ...state,
+        forms: {
+          ...state.forms,
+          [action.payload.formId]: x
+        }
       };
     }
 

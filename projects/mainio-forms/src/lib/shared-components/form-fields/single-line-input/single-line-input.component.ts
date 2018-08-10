@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
-import { InputQuestion } from "../../models/input-question";
+import { InputQuestion } from "../../../models/input-question";
 
 @Component({
   selector: "mainio-form-single-line-input",
@@ -15,8 +15,10 @@ import { InputQuestion } from "../../models/input-question";
   styleUrls: ["./single-line-input.component.css"]
 })
 export class SingleLineInputComponent implements AfterContentInit, OnChanges {
-  @Input() question: InputQuestion;
-  @Input() formGroup: FormGroup;
+  @Input()
+  question: InputQuestion;
+  @Input()
+  formGroup: FormGroup;
   minLength: number = 0;
   maxLength: number = 0;
   inputHint: string = "";

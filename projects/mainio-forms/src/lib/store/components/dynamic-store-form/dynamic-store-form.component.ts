@@ -7,11 +7,11 @@ import {
   OnChanges,
   SimpleChanges
 } from "@angular/core";
-import { QuestionBase } from "../models/question-base";
+import { QuestionBase } from "../../../models/question-base";
 import { FormGroup } from "@angular/forms";
-import { StoreService } from "../store/services/store.service";
-import { QuestionControlService } from "../question-control.service";
-import { QuestionGroup } from "../models/question-group";
+import { StoreService } from "../../services/store.service";
+import { QuestionControlService } from "../../../services/question-control.service";
+import { QuestionGroup } from "../../../models/question-group";
 
 @Component({
   selector: "mainio-form-dynamic-store-form",
