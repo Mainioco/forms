@@ -1,0 +1,55 @@
+{
+  "id": "form",
+  "questions": [
+    {
+      "key": "x1",
+      "label": "Input with min and max length",
+      "required": true,
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]Input",
+      "minLength": 5,
+      "maxLength": 200,
+      "type": "input"
+    },
+    {
+      "key": "x2",
+      "label": "Input with only max length",
+      "required": true,
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]Input",
+      "minLength": -1,
+      "maxLength": 200,
+      "type": "input"
+    },
+    {
+      "key": "x3",
+      "label": "Input with only min length, but not required",
+      "required": false,
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]Input",
+      "minLength": 5,
+      "maxLength": -1,
+      "type": "input"
+    },
+    {
+      "key": "x4",
+      "label": "No length limitations",
+      "required": true,
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]Input",
+      "minLength": -1,
+      "maxLength": -1,
+      "type": "input"
+    },
+    {
+      "key": "x5",
+      "label": "Number",
+      "required": true,
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]Input",
+      "minLength": -1,
+      "maxLength": -1,
+      "type": "number"
+    }
+  ]
+}

@@ -6,11 +6,14 @@ import {
   MetaReducer,
   MemoizedSelector
 } from "@ngrx/store";
-import * as lifecycle from "./form-livecycle-reducers";
-import * as library from "./library-reducers";
+import * as lifecycle from "./reducers/form-livecycle-reducers";
+import * as library from "./reducers/library-reducers";
+import * as mainioState from "./states/forms-state";
 
-export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
-  return function(state: State, action: any): State {
+export function logger(
+  reducer: ActionReducer<MainioFormsState>
+): ActionReducer<MainioFormsState> {
+  return function(state: MainioFormsState, action: any): MainioFormsState {
     console.log("state", state);
     console.log("action", action);
 
@@ -18,14 +21,14 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
   };
 }
 
-export interface State {
-  library: library.State;
-  lifecycle: lifecycle.State;
+export interface MainioFormsState {
+  library: library.LibraryState;
+  lifecycle: mainioState.LifecycleState;
 }
 
-export const reducers: ActionReducerMap<State> = {
-  library: library.reducer,
-  lifecycle: lifecycle.reducer
+export const reducers: ActionReducerMap<MainioFormsState> = {
+  library: library.libraryReducer,
+  lifecycle: lifecycle.lifecycleReducer
 };
 
 /**

@@ -3,20 +3,16 @@ import {
   LifecycleActions
 } from "../actions/form-lifecycle-actions";
 import { QuestionBase } from "../../models/question-base";
-import { Form, QuestionGroup } from "../../models/form";
+import { Form } from "../../models/form";
 import { FormGroup } from "@angular/forms";
+import { QuestionGroup } from "../../models/question-group";
+import { formActionsReducer } from "./form-actions-reducers";
+import { LifecycleState, mainioFormsInitialState } from "../states/forms-state";
 
-export interface State {
-  debugMode: boolean;
-  forms?: { id: string; form: Form };
-}
-
-export const initialState: State = {
-  debugMode: false,
-  forms: undefined
-};
-
-export function reducer(state = initialState, action: LifecycleActions): State {
+export function lifecycleReducer(
+  state = mainioFormsInitialState,
+  action: LifecycleActions
+): LifecycleState {
   switch (action.type) {
     case MainioLifecycleActionTypes.Created: {
       if (hasForm(action.payload, state)) {
@@ -95,17 +91,17 @@ export function reducer(state = initialState, action: LifecycleActions): State {
     default:
       break;
   }
-  return state;
+  return formActionsReducer(state, action);
 }
 
-export const getForms = (state: State) => state.forms;
-export const getForm = (state: State, id: string) => state.forms[id];
-export const getFormQuestions = (state: State, id: string) =>
-  state.forms[id] ? state.forms[id].questions : [];
+export const getForms = (state: LifecycleState) => state.forms;
+export const getForm = (state: LifecycleState, id: string) => state.forms[id];
+export const getFormQuestions = (state: LifecycleState, id: string) =>
+  state.forms ? (state.forms[id] ? state.forms[id].questions : []) : [];
 
-function hasFormId(id: string, state: State) {
-  return !!state.forms[id];
+function hasFormId(id: string, state: LifecycleState) {
+  return state.forms ? !!state.forms[id] : false;
 }
-function hasForm(form: Form, state: State): boolean {
+function hasForm(form: Form, state: LifecycleState): boolean {
   return hasFormId(form.id, state);
 }

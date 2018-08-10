@@ -13,7 +13,7 @@ import { QuestionBase } from "../models/question-base";
 import { QuestionControlService } from "../question-control.service";
 
 @Component({
-  selector: "app-dynamic-form",
+  selector: "mainio-dynamic-form",
   templateUrl: "./dynamic-form.component.html",
   providers: [QuestionControlService]
 })

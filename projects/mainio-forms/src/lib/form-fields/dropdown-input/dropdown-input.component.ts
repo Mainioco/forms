@@ -3,6 +3,7 @@ import { FormGroup } from "@angular/forms";
 
 import { QuestionBase } from "../../models/question-base";
 import { DropdownQuestion } from "../../models/dropdown-question";
+import { ControlType } from "../../models/control-type.enum";
 
 @Component({
   selector: "mainio-form-dropdown-input",
@@ -19,13 +20,13 @@ export class DropdownInputComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges() {
-    if (this.question.controlType === "dropdown") {
+    if (this.question.controlType === ControlType.Dropdown) {
       this.selectedOption = this.getSelected();
     }
   }
 
   setSelection(event) {
-    if (this.question.controlType === "dropdown") {
+    if (this.question.controlType === ControlType.Dropdown) {
       (this.question as DropdownQuestion).selected = event.value;
     }
   }
@@ -34,7 +35,7 @@ export class DropdownInputComponent implements OnInit, OnChanges {
     if (!(this.question as DropdownQuestion)) {
       return "";
     }
-    if (this.question.controlType !== "dropdown") {
+    if (this.question.controlType !== ControlType.Dropdown) {
       return "";
     }
     let a: DropdownQuestion = this.question as DropdownQuestion;

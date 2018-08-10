@@ -13,7 +13,8 @@ import {
 } from "@angular/material";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormFieldsModule } from "./form-fields/form-fields.module";
-import { DynamicStoreFormComponent } from './dynamic-store-form/dynamic-store-form.component';
+import { DynamicStoreFormComponent } from "./dynamic-store-form/dynamic-store-form.component";
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   imports: [
     CommonModule,
@@ -24,10 +25,19 @@ import { DynamicStoreFormComponent } from './dynamic-store-form/dynamic-store-fo
     FormsModule,
     MatFormFieldModule,
     MatSelectModule,
-    FormFieldsModule
+    FormFieldsModule,
+    HttpClientModule
   ],
-  declarations: [DynamicFormComponent, DynamicFormQuestionComponent, DynamicStoreFormComponent],
+  declarations: [
+    DynamicFormComponent,
+    DynamicFormQuestionComponent,
+    DynamicStoreFormComponent
+  ],
   providers: [QuestionControlService],
-  exports: [DynamicFormComponent, DynamicFormQuestionComponent]
+  exports: [
+    DynamicFormComponent,
+    DynamicFormQuestionComponent,
+    DynamicStoreFormComponent
+  ]
 })
 export class MainioFormsModule {}

@@ -16,9 +16,10 @@ import {
 import { Observable, Subject } from "rxjs";
 import { startWith, map } from "rxjs/operators";
 import { DropdownQuestion } from "../models/dropdown-question";
+import { ControlType } from "../models/control-type.enum";
 
 @Component({
-  selector: "app-question",
+  selector: "mainio-form-question",
   styleUrls: ["./dynamic-form-question.component.css"],
   templateUrl: "./dynamic-form-question.component.html"
 })
@@ -27,10 +28,14 @@ export class DynamicFormQuestionComponent {
   @Input() question: QuestionBase<any>;
   @Input() form: FormGroup;
 
-  get isValid() {
-    if (!this.form.controls[this.question.key]) {
-      return false;
+  get controlTypeString() {
+    switch (this.question.controlType) {
+      case ControlType.Dropdown:
+        return "dropdown";
+      case ControlType.DropdownSearch:
+        return "dropdown-search";
+      default:
+        return "input";
     }
-    return this.form.controls[this.question.key].valid;
   }
 }

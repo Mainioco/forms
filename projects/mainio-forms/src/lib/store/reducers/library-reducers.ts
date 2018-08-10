@@ -4,17 +4,20 @@ import {
 } from "../actions/library-actions";
 import { Form } from "../../models/form";
 
-export interface State {
+export interface LibraryState {
   debugMode: boolean;
   forms: Array<Form>;
 }
 
-export const initialState: State = {
+export const mainioFormsLibraryInitialState: LibraryState = {
   debugMode: false,
   forms: []
 };
 
-export function reducer(state = initialState, action: LibraryActions): State {
+export function libraryReducer(
+  state = mainioFormsLibraryInitialState,
+  action: LibraryActions
+): LibraryState {
   switch (action.type) {
     case MainioLibraryActionTypes.SetDebugMode: {
       return {
@@ -29,4 +32,4 @@ export function reducer(state = initialState, action: LibraryActions): State {
   return state;
 }
 
-export const debugMode = (state: State) => state.debugMode;
+export const debugMode = (state: LibraryState) => state.debugMode;

@@ -23,7 +23,6 @@
     "type": "git",
     "url": "https://github.com/Mainioco/forms.git"
   },
-  "files": [],
   "private": false,
   "peerDependencies": {
     "@angular/cdk": "6.3.1",

@@ -10,37 +10,40 @@ import {
 import { QuestionBase } from "../models/question-base";
 import { FormGroup } from "@angular/forms";
 import { StoreService } from "../store/services/store.service";
+import { QuestionControlService } from "../question-control.service";
+import { QuestionGroup } from "../models/question-group";
 
 @Component({
   selector: "mainio-form-dynamic-store-form",
   templateUrl: "./dynamic-store-form.component.html",
   styleUrls: ["./dynamic-store-form.component.css"]
 })
-export class DynamicStoreFormComponent implements OnInit, OnChanges {
+export class DynamicStoreFormComponent implements OnChanges {
   @Input() useOneRowLayout: boolean;
   @Input() questionsUrl: string;
   @Input() id: string;
+  @Input() limitToGroup: string;
   @Input() questions: QuestionBase<any>[] = [];
   @Input() submitButtonTitle: string;
   @Input() dontShowDefaultActions: boolean = false;
   @Output() onStatusChage: EventEmitter<any> = new EventEmitter<any>();
   @Output() onSubmit: EventEmitter<any> = new EventEmitter<any>();
+  displayQuestions: QuestionBase<any>[] = [];
+  private initalized: boolean = false;
 
   form: FormGroup;
   payLoad = "";
 
-  constructor(private qcs: StoreService) {}
-
-  ngOnInit() {}
+  constructor(
+    private _storeService: StoreService,
+    private qcs: QuestionControlService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!this.id) {
-      console.error("Store form requires ID of the form");
+    if (this.initalized) {
       return;
     }
-    if (!this.questionsUrl) {
-      this.form = this.qcs.createFormFromQuestions(this.id, this.questions);
-    }
+    this.initialize();
   }
 
   onSubmitActions() {
@@ -48,5 +51,28 @@ export class DynamicStoreFormComponent implements OnInit, OnChanges {
       return;
     }
     this.onSubmit.emit(this.form);
+  }
+
+  private initialize() {
+    if (!this.id) {
+      return;
+    }
+    if (!this.questionsUrl) {
+      let group: QuestionBase<
+        any
+      >[] = this._storeService.createFormFromQuestions(
+        this.id,
+        this.questions,
+        this.limitToGroup
+      );
+      this.form = this.qcs.toFormGroup(group);
+      this.displayQuestions = group;
+      if (this.form) {
+        this.form.valueChanges.subscribe(x => {
+          this._storeService.formValuesChanged(this.id, this.form);
+        });
+      }
+    }
+    this.initalized = !!this.form;
   }
 }

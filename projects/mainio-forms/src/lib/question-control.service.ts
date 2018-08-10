@@ -1,25 +1,54 @@
 import { Injectable } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-
 import { QuestionBase } from "./models/question-base";
+import { FormGroupService } from "./services/form-group.service";
+import { HttpClient } from "@angular/common/http";
+import { QuestionCreatorService } from "./services/question-creator.service";
 
 @Injectable()
 export class QuestionControlService {
-  constructor() {}
+  constructor(
+    private _formGroupService: FormGroupService,
+    private _http: HttpClient,
+    private _creator: QuestionCreatorService
+  ) {}
 
   loadFromExternal(url: string) {}
 
-  toFormGroup(questions: QuestionBase<any>[]) {
-    let group: any = {};
-    if (!questions) {
-      return new FormGroup(group);
-    }
-    questions.forEach(question => {
-      group[question.key] = new FormControl(
-        question.value || "",
-        question.getValidators()
+  loadFromJson(question: QuestionBase<any>[]): QuestionBase<any>[] {
+    let toReturn: QuestionBase<any>[] = [];
+    for (let q of question) {
+      let x = q.controlType;
+      let a: QuestionBase<any> = this._creator.createQuestionFromControlType(
+        x,
+        q
       );
+      toReturn.push(a);
+    }
+    return toReturn;
+  }
+
+  async loadFromUrl(url: string): Promise<QuestionBase<any>[]> {
+    let result: QuestionBase<any>[] = await this.loadJsonFromUrl(url);
+    return new Promise<QuestionBase<any>[]>(resolve => {
+      let toReturn = this.loadFromJson(result);
+      resolve(toReturn);
     });
-    return new FormGroup(group);
+  }
+
+  toFormGroup(questions: QuestionBase<any>[]): FormGroup {
+    return this._formGroupService.InitializeGroup(questions);
+  }
+
+  createQuestionOfType(controlType: string) {
+    switch (controlType) {
+    }
+  }
+  private async loadJsonFromUrl(url: string): Promise<QuestionBase<any>[]> {
+    return new Promise<QuestionBase<any>[]>(resolve => {
+      this._http.get(url).subscribe((x: QuestionBase<any>[]) => {
+        resolve(x);
+      });
+    });
   }
 }

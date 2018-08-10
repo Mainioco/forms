@@ -1,7 +1,8 @@
 import { Action } from "@ngrx/store";
 
 import { QuestionBase } from "../../models/question-base";
-import { Form, QuestionGroup } from "../../models/form";
+import { Form } from "../../models/form";
+import { QuestionGroup } from "../../models/question-group";
 import { FormGroup } from "@angular/forms";
 
 export enum MainioLifecycleActionTypes {
@@ -9,7 +10,9 @@ export enum MainioLifecycleActionTypes {
   Destroyed = "[MainioForm][Lifecycle] Destroyed",
   QuestionsUpdated = "[MainioForm][Lifecycle] QuestionsUpdated",
   FormGroupCreated = "[MainioForm][Actions] FormGroupCreated",
-  FormGroupDeleted = "[MainioForm][Actions] FormGroupDeleted"
+  FormGroupDeleted = "[MainioForm][Actions] FormGroupDeleted",
+  ValueChanges = "[MainioForm][Actions] ValueChanged",
+  ValueReset = "[MainioForm][Actions] ValueReset"
 }
 
 export class Created implements Action {
@@ -42,9 +45,24 @@ export class FormGroupDeleted implements Action {
   readonly type = MainioLifecycleActionTypes.FormGroupDeleted;
   constructor(public payload: { form: Form; formGroup: QuestionGroup }) {}
 }
+
+export class ValueChanged implements Action {
+  readonly type = MainioLifecycleActionTypes.ValueChanges;
+
+  constructor(public payload: { formId: string; newValues: any }) {}
+}
+
+export class ValueReset implements Action {
+  readonly type = MainioLifecycleActionTypes.ValueReset;
+
+  constructor(public payload: { form: Form }) {}
+}
+
 export type LifecycleActions =
   | Created
   | Destroyed
   | QuestionsUpdated
   | FormGroupCreated
-  | FormGroupDeleted;
+  | FormGroupDeleted
+  | ValueChanged
+  | ValueReset;

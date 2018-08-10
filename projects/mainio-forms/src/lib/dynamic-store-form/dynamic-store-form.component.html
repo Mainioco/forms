@@ -1,9 +1,10 @@
-<div *ngIf="form" class="mainio-form-container">
+<div class="mainio-form-container" *ngIf="form">
 
   <form (ngSubmit)="onSubmitActions()" [formGroup]="form" id="m_form" novalidate="novalidate" [ngClass]="!useOneRowLayout ? 'container m-form m-form--label-align-left- m-form--state-' : 'container m-form m-form--label-align-left- m-form--state- align-items-center'">
     <div class="" [ngClass]="!useOneRowLayout ? 'm-form__section' : 'm-form__section row align-items-center'" *ngIf="questions">
-      <div *ngFor="let question of questions">
-        <app-question [question]="question" [form]="form" [ngClass]="!useOneRowLayout ? 'form-group m-form__group row' : ''" [compactStyle]="useOneRowLayout"></app-question>
+      <div *ngFor="let question of displayQuestions">
+        <mainio-form-question [question]="question" [form]="form" [ngClass]="!useOneRowLayout ? 'form-group m-form__group row' : ''"
+          [compactStyle]="useOneRowLayout"></mainio-form-question>
       </div>
       <div [ngClass]="!useOneRowLayout ? 'm-portlet__foot m-portlet__foot--fit m--margin-top-40' : ''" *ngIf="submitButtonTitle">
         <div [ngClass]="!useOneRowLayout ? 'm-form__actions' : ''">
