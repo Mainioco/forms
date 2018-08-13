@@ -35,12 +35,14 @@ export class StoreService {
     this.store.dispatch(new lifecycleActions.Created(form));
   }
 
-  formValuesChanged(id: string, formGroup: FormGroup) {
+  formValuesChanged(id: string, formGroup: FormGroup, groupId: string) {
+    console.log("AA", formGroup.invalid);
     this.store.dispatch(
       new lifecycleActions.ValueChanged({
         formId: id,
         newValues: formGroup.value,
-        groupIsValid: !formGroup.invalid
+        groupIsValid: !formGroup.invalid,
+        groupId: groupId
       })
     );
   }

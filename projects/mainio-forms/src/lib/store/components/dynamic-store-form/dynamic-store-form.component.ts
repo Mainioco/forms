@@ -19,15 +19,24 @@ import { QuestionGroup } from "../../../models/question-group";
   styleUrls: ["./dynamic-store-form.component.css"]
 })
 export class DynamicStoreFormComponent implements OnChanges {
-  @Input() useOneRowLayout: boolean;
-  @Input() questionsUrl: string;
-  @Input() id: string;
-  @Input() limitToGroup: string;
-  @Input() questions: QuestionBase<any>[] = [];
-  @Input() submitButtonTitle: string;
-  @Input() dontShowDefaultActions: boolean = false;
-  @Output() onStatusChage: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onSubmit: EventEmitter<any> = new EventEmitter<any>();
+  @Input()
+  useOneRowLayout: boolean;
+  @Input()
+  questionsUrl: string;
+  @Input()
+  id: string;
+  @Input()
+  limitToGroup: string;
+  @Input()
+  questions: QuestionBase<any>[] = [];
+  @Input()
+  submitButtonTitle: string;
+  @Input()
+  dontShowDefaultActions: boolean = false;
+  @Output()
+  onStatusChage: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  onSubmit: EventEmitter<any> = new EventEmitter<any>();
   displayQuestions: QuestionBase<any>[] = [];
   private initalized: boolean = false;
 
@@ -69,7 +78,11 @@ export class DynamicStoreFormComponent implements OnChanges {
       this.displayQuestions = group;
       if (this.form) {
         this.form.valueChanges.subscribe(x => {
-          this._storeService.formValuesChanged(this.id, this.form);
+          this._storeService.formValuesChanged(
+            this.id,
+            this.form,
+            this.limitToGroup
+          );
         });
       }
     }

@@ -50,7 +50,12 @@ export class ValueChanged implements Action {
   readonly type = MainioLifecycleActionTypes.ValueChanges;
 
   constructor(
-    public payload: { formId: string; newValues: any; groupIsValid: boolean }
+    public payload: {
+      formId: string;
+      newValues: any;
+      groupIsValid: boolean;
+      groupId: string;
+    }
   ) {}
 }
 

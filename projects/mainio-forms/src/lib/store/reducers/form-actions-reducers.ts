@@ -17,12 +17,28 @@ export function formActionsReducer(
       if (!hasFormId(action.payload.formId, state)) {
         break;
       }
-      let x = {
+      let g: QuestionGroup = Object.assign(
+        {},
+        state.forms[action.payload.formId].questionGroups[
+          action.payload.groupId
+        ]
+      );
+
+      if (action.payload.groupId) {
+        g.isValid = action.payload.groupIsValid;
+        console.log("G is ", g);
+      }
+      let x: Form = {
         ...state.forms[action.payload.formId],
         values: {
+          ...state.forms[action.payload.formId].values,
           ...action.payload.newValues
+        },
+        questionGroups: {
+          ...state.forms[action.payload.formId].questionGroups
         }
       };
+      x.questionGroups[action.payload.groupId] = g;
       return {
         ...state,
         forms: {
