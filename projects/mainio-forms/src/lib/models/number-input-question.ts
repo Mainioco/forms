@@ -1,18 +1,18 @@
 import { QuestionBase } from "./question-base";
 import * as Forms from "@angular/forms";
-import { IInputQuestionOptions } from "../interfaces/i-input-question-options";
 import { ControlType } from "./control-type.enum";
+import { INumberInputQuestionOptions } from "../interfaces/i-number-input-question-options";
 
-export class InputQuestion extends QuestionBase<string> {
+export class InputQuestion extends QuestionBase<number> {
   controlType = ControlType.Input;
   type: string;
   minLength: number = -1;
   maxLength: number = -1;
   suffix: string;
 
-  constructor(options: IInputQuestionOptions = {}) {
+  constructor(options: INumberInputQuestionOptions = {}) {
     super(options);
-    this.type = options.type || "";
+    this.type = "number";
     this.minLength = options.minLength || -1;
     this.maxLength = options.maxLength || -1;
     this.suffix = options.suffix || "";
