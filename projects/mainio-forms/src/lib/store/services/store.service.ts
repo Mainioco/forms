@@ -36,7 +36,6 @@ export class StoreService {
   }
 
   formValuesChanged(id: string, formGroup: FormGroup, groupId: string) {
-    console.log("AA", formGroup.invalid);
     this.store.dispatch(
       new lifecycleActions.ValueChanged({
         formId: id,
@@ -51,16 +50,13 @@ export class StoreService {
     questions: QuestionBase<any>[],
     limitToGroup: string = undefined
   ): QuestionBase<any>[] {
+    console.log("HI");
     let f: Form = new Form();
     f.id = id;
     f.questions = [];
     f.values = undefined;
-    f.questionGroups;
     for (let q of questions) {
       f.questions.push(q);
-      if (limitToGroup && q.group !== limitToGroup) {
-        continue;
-      }
       if (!q.group) {
         continue;
       }
@@ -80,14 +76,13 @@ export class StoreService {
       }
       g.questionsIds.push(q.key);
     }
+    console.log("FF ", f);
     this.createForm(f);
 
     return limitToGroup
       ? f.questions.filter(x => x.group === limitToGroup)
       : f.questions;
   }
-
-  createFromGroup(form: Form) {}
 
   private getStore() {
     if (!this.config) {

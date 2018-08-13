@@ -10,6 +10,8 @@ export class QuestionBase<T> {
   order: number;
   controlType: ControlType;
   group: string;
+  disabled:boolean;
+
   constructor(options: IQuestionBaseOptions = {}) {
     this.value = options.value;
     this.key = options.key || "";
@@ -17,7 +19,8 @@ export class QuestionBase<T> {
     this.required = !!options.required;
     this.order = options.order === undefined ? 1 : options.order;
     this.controlType = options.controlType || ControlType.Default;
-    this.group = options.group;
+    this.group = options.group || "";
+    this.disabled = options.disabled;
   }
 
   getValidators(): ((

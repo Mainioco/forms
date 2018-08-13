@@ -8,4 +8,5 @@ export interface IQuestionBaseOptions {
   order?: number;
   controlType?: ControlType;
   group?: string;
+  disabled?: boolean;
 }

@@ -17,7 +17,6 @@
       "required": true,
       "order": 2,
       "controlType": "[Mainio][DynamicForm][ControlType]Input",
-      "minLength": -1,
       "maxLength": 200,
       "type": "input"
     },
@@ -28,7 +27,6 @@
       "order": 2,
       "controlType": "[Mainio][DynamicForm][ControlType]Input",
       "minLength": 5,
-      "maxLength": -1,
       "type": "input"
     },
     {
@@ -37,8 +35,6 @@
       "required": true,
       "order": 2,
       "controlType": "[Mainio][DynamicForm][ControlType]Input",
-      "minLength": -1,
-      "maxLength": -1,
       "type": "input"
     },
     {
@@ -47,8 +43,6 @@
       "required": true,
       "order": 2,
       "controlType": "[Mainio][DynamicForm][ControlType]Input",
-      "minLength": -1,
-      "maxLength": -1,
       "type": "number"
     }
   ]

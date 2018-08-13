@@ -15,16 +15,34 @@ export function lifecycleReducer(
 ): LifecycleState {
   switch (action.type) {
     case MainioLifecycleActionTypes.Created: {
+      console.log("AcA");
       let x = action.payload;
-      if (hasForm(action.payload, state)) {
-        x = {
-          ...state.forms[action.payload.id],
-          questionGroups:{
-            ...state.forms[action.payload.id].questionGroups,
-            ...action.payload.questionGroups
+      if (state.forms) {
+        if (state.forms[action.payload.id]) {
+          x = {
+            ...state.forms[action.payload.id]
+          };
+          if (action.payload.questionGroups) {
+            if (state.forms[action.payload.id].questionGroups) {
+              x.questionGroups = {
+                ...state.forms[action.payload.id].questionGroups,
+                ...action.payload.questionGroups
+              };
+            } else {
+              x.questionGroups = {
+                ...action.payload.questionGroups
+              };
+            }
           }
-        };
-        console.log("AA", x, state.forms[action.payload.id]);
+          if (state.forms[action.payload.id].questions) {
+            x.questions = [
+              ...state.forms[action.payload.id].questions,
+              ...action.payload.questions
+            ];
+          } else {
+            x.questions = [...action.payload.questions];
+          }
+        }
       }
       return {
         ...state,

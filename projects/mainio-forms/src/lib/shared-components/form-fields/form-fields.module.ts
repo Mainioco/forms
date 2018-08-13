@@ -9,8 +9,19 @@ import {
   MatInputModule,
   MatOptionModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatCheckboxModule
 } from "@angular/material";
+import { NumberInputComponent } from "./number-input/number-input.component";
+import { CheckboxComponent } from "./checkbox/checkbox.component";
+import { FormFieldBaseComponent } from "./form-field-base/form-field-base.component";
+const COMPONENTS = [
+  SingleLineInputComponent,
+  DropdownInputComponent,
+  DropdownInputSearchComponent,
+  NumberInputComponent,
+  CheckboxComponent
+];
 @NgModule({
   imports: [
     CommonModule,
@@ -21,17 +32,10 @@ import {
     MatOptionModule,
     FormsModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ],
-  declarations: [
-    SingleLineInputComponent,
-    DropdownInputComponent,
-    DropdownInputSearchComponent
-  ],
-  exports: [
-    SingleLineInputComponent,
-    DropdownInputComponent,
-    DropdownInputSearchComponent
-  ]
+  declarations: [...COMPONENTS],
+  exports: [...COMPONENTS]
 })
 export class FormFieldsModule {}

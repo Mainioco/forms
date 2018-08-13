@@ -15,7 +15,6 @@
     {
       "key": "x2",
       "label": "Input with only max length",
-      "required": true,
       "order": 2,
       "controlType": "[Mainio][DynamicForm][ControlType]Input",
       "minLength": -1,

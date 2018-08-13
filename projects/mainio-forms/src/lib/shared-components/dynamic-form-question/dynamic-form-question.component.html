@@ -1,7 +1,9 @@
 <div [formGroup]="form" [ngClass]="compactStyle ? 'col' : 'row col'" *ngIf="question">
   <div [ngSwitch]="controlTypeString">
     <mainio-form-single-line-input [formGroup]="form" [question]="question" class="form-control m-input" *ngSwitchCase="'input'"></mainio-form-single-line-input>
+    <mainio-form-number-input [formGroup]="form" [question]="question" class="form-control m-input" *ngSwitchCase="'input-number'"></mainio-form-number-input>
     <mainio-form-dropdown-input [formGroup]="form" [question]="question" class="form-control m-input" *ngSwitchCase="'dropdown'"></mainio-form-dropdown-input>
     <mainio-form-dropdown-input-search [formGroup]="form" [question]="question" class="form-control m-input" *ngSwitchCase="'dropdown-search'"></mainio-form-dropdown-input-search>
+    <mainio-form-checkbox [formGroup]="form" [question]="question" class="form-control m-input" *ngSwitchCase="'checkbox'"></mainio-form-checkbox>
   </div>
 </div>

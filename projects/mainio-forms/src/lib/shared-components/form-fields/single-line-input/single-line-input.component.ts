@@ -8,43 +8,50 @@ import {
 import { FormGroup } from "@angular/forms";
 
 import { InputQuestion } from "../../../models/input-question";
+import { FormFieldBaseComponent } from "../form-field-base/form-field-base.component";
 
 @Component({
   selector: "mainio-form-single-line-input",
   templateUrl: "./single-line-input.component.html",
   styleUrls: ["./single-line-input.component.css"]
 })
-export class SingleLineInputComponent implements AfterContentInit, OnChanges {
+export class SingleLineInputComponent extends FormFieldBaseComponent {
   @Input()
   question: InputQuestion;
-  @Input()
-  formGroup: FormGroup;
+
   minLength: number = 0;
   maxLength: number = 0;
   inputHint: string = "";
 
   private isInitialized: boolean = false;
 
-  constructor() {}
+  constructor() {
+    super();
+  }
 
+  ngOnChanges() {
+    super.ngOnChanges();
+    this.suffix = this.question.suffix;
+    this.prefix = this.question.prefix;
+    this.inputHint = this.lengthDisplayers;
+  }
   get currentValueLength(): number {
     if (!this.question || !this.question.value) {
       return 0;
     }
     return this.question.value.length;
   }
-  ngAfterContentInit() {}
-  increaseMin() {
-    this.minLength += 1;
-  }
-  ngOnChanges() {}
 
   get lengthDisplayers() {
-    this.minLength = this.question.minLength > 0 ? this.question.minLength : -1;
+    this.minLength =
+      this.getQuestion<InputQuestion>().minLength > 0
+        ? this.getQuestion<InputQuestion>().minLength
+        : -1;
     this.maxLength =
-      this.question.maxLength >= this.question.minLength
-        ? this.question.maxLength
-        : this.question.minLength;
+      this.getQuestion<InputQuestion>().maxLength >=
+      this.getQuestion<InputQuestion>().minLength
+        ? this.getQuestion<InputQuestion>().maxLength
+        : this.getQuestion<InputQuestion>().minLength;
     if (this.maxLength <= 0) {
       this.maxLength = -1;
     }

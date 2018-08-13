@@ -40,10 +40,6 @@ export class QuestionControlService {
     return this._formGroupService.InitializeGroup(questions);
   }
 
-  createQuestionOfType(controlType: string) {
-    switch (controlType) {
-    }
-  }
   private async loadJsonFromUrl(url: string): Promise<QuestionBase<any>[]> {
     return new Promise<QuestionBase<any>[]>(resolve => {
       this._http.get(url).subscribe((x: QuestionBase<any>[]) => {

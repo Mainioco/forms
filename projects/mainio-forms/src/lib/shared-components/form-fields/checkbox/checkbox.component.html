@@ -1,0 +1,7 @@
+<mat-form-field [formGroup]="formGroup">
+  <mat-checkbox class="example-margin" [checked]="question.enabled" [disabled]="question.disabled">
+
+  </mat-checkbox>
+  <span matPrefix *ngIf="prefix">{{prefix}}</span>
+  <span matSuffix *ngIf="suffix">{{suffix}}</span>
+</mat-form-field>

@@ -12,6 +12,8 @@ import { FormGroup } from "@angular/forms";
 import { StoreService } from "../../services/store.service";
 import { QuestionControlService } from "../../../services/question-control.service";
 import { QuestionGroup } from "../../../models/question-group";
+import { FormLayout } from "../../../models";
+import { IDisplayGroup } from "../../../interfaces/i-display-group";
 
 @Component({
   selector: "mainio-form-dynamic-store-form",
@@ -20,7 +22,7 @@ import { QuestionGroup } from "../../../models/question-group";
 })
 export class DynamicStoreFormComponent implements OnChanges {
   @Input()
-  useOneRowLayout: boolean;
+  formLayout: FormLayout;
   @Input()
   questionsUrl: string;
   @Input()
@@ -39,7 +41,7 @@ export class DynamicStoreFormComponent implements OnChanges {
   onSubmit: EventEmitter<any> = new EventEmitter<any>();
   displayQuestions: QuestionBase<any>[] = [];
   private initalized: boolean = false;
-
+  displayGroups: IDisplayGroup[] = [];
   form: FormGroup;
   payLoad = "";
 
@@ -48,10 +50,16 @@ export class DynamicStoreFormComponent implements OnChanges {
     private qcs: QuestionControlService
   ) {}
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.initalized) {
-      return;
+  get formClass(): string {
+    switch (this.formLayout) {
+      case FormLayout.Col_1:
+      case FormLayout.Col_2:
+        return "column-form";
+      default:
+        return "row-form";
     }
+  }
+  ngOnChanges(changes: SimpleChanges) {
     this.initialize();
   }
 
@@ -75,7 +83,33 @@ export class DynamicStoreFormComponent implements OnChanges {
         this.limitToGroup
       );
       this.form = this.qcs.toFormGroup(group);
+      console.log("group is ", group, this.limitToGroup);
       this.displayQuestions = group;
+      this.displayGroups = [];
+      let max = 1;
+      switch (this.formLayout) {
+        case FormLayout.Col_2:
+          max = 2;
+          break;
+        case FormLayout.OneRow:
+          max = 0;
+          break;
+      }
+      let curAmount = 0;
+      let groups = 0;
+      for (let q of this.displayQuestions) {
+        if (curAmount === 0) {
+          this.displayGroups.push({
+            questions: []
+          });
+          groups++;
+        }
+        this.displayGroups[groups - 1].questions.push(q);
+        curAmount++;
+        if (curAmount >= max && max > 0) {
+          curAmount = 0;
+        }
+      }
       if (this.form) {
         this.form.valueChanges.subscribe(x => {
           this._storeService.formValuesChanged(

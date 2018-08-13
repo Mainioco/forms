@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { QuestionBase } from "mainio-forms";
-import { InputQuestion } from "mainio-forms";
+import { QuestionBase } from "mainio-forms/mainio-forms";
+import { InputQuestion } from "mainio-forms/mainio-forms";
 import { Router } from "@angular/router";
 
 interface TabChangeEvent {

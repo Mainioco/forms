@@ -24,9 +24,12 @@ import { ControlType } from "../../models/control-type.enum";
   templateUrl: "./dynamic-form-question.component.html"
 })
 export class DynamicFormQuestionComponent {
-  @Input() compactStyle: boolean;
-  @Input() question: QuestionBase<any>;
-  @Input() form: FormGroup;
+  @Input()
+  compactStyle: boolean;
+  @Input()
+  question: QuestionBase<any>;
+  @Input()
+  form: FormGroup;
 
   get controlTypeString() {
     switch (this.question.controlType) {
@@ -34,6 +37,10 @@ export class DynamicFormQuestionComponent {
         return "dropdown";
       case ControlType.DropdownSearch:
         return "dropdown-search";
+      case ControlType.NumberInput:
+        return "input-number";
+      case ControlType.CheckBox:
+        return "checkbox";
       default:
         return "input";
     }

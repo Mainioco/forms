@@ -1,9 +1,12 @@
+<div style="justify-content:start;display:flex;width: calc(100% - 40px);margin-top:20px;background:white;padding:20px;border-radius:5px;flex-grow: 1">
+  <mainio-form-dynamic-store-form [id]="idToPass" [questions]="questionsToPass" limitToGroup="question_set"></mainio-form-dynamic-store-form>
+</div>
 <div style="justify-content:start;display:flex;width: 100%">
-  <div style="max-width: 300px;background:grey;margin-right: 10px">
-    <mainio-form-dynamic-store-form [id]="idToPass" [questions]="questionsToPass" limitToGroup="secondary"></mainio-form-dynamic-store-form>
+  <div style="background:white;padding:20px;border-radius:5px;flex-grow: 1;width:300px">
+    <mainio-form-dynamic-store-form [id]="idToPass" [questions]="questionsToPass" limitToGroup="bg_secondary"></mainio-form-dynamic-store-form>
   </div>
-  <div style="background:white;padding:20px;border-radius:5px;flex-grow: 1">
-    <mainio-form-dynamic-store-form [id]="idToPass" [questions]="questionsToPass" limitToGroup="main"></mainio-form-dynamic-store-form>
+  <div style="background:white;padding:20px;border-radius:5px;flex-grow: 1;">
+    <mainio-form-dynamic-store-form [id]="idToPass" [questions]="questionsToPass" limitToGroup="bg_main" formLayout="OneRow"></mainio-form-dynamic-store-form>
   </div>
 </div>
 <div style="justify-content:start;display:flex;width: calc(100% - 40px);margin-top:20px;background:white;padding:20px;border-radius:5px;flex-grow: 1">

@@ -6,9 +6,10 @@ import { ControlType } from "./control-type.enum";
 export class InputQuestion extends QuestionBase<string> {
   controlType = ControlType.Input;
   type: string;
-  minLength: number = -1;
-  maxLength: number = -1;
+  minLength: number = undefined;
+  maxLength: number = undefined;
   suffix: string;
+  prefix: string;
 
   constructor(options: IInputQuestionOptions = {}) {
     super(options);
@@ -16,6 +17,7 @@ export class InputQuestion extends QuestionBase<string> {
     this.minLength = options.minLength || -1;
     this.maxLength = options.maxLength || -1;
     this.suffix = options.suffix || "";
+    this.prefix = options.prefix || "";
   }
 
   getValidators() {

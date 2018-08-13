@@ -9,10 +9,11 @@ import { HttpClient } from "@angular/common/http";
   styleUrls: ["./split-store-form.component.css"]
 })
 export class SplitStoreFormComponent implements OnInit {
-  questionsToPass: QuestionBase<any>[];
+  questionsToPass: QuestionBase<any>[] = [];
   idToPass: string;
   questionsToPass2: QuestionBase<any>[];
   idToPass2: string;
+
   constructor(
     private _http: HttpClient,
     private qcs: QuestionControlService,
@@ -20,19 +21,25 @@ export class SplitStoreFormComponent implements OnInit {
     private _creator: QuestionCreatorService
   ) {}
   async ngOnInit() {
+    this.loadSubTemplates("background-questions");
+    this.loadSubTemplates("main-questions");
+  }
+
+  loadSubTemplates(name: string) {
     this._http
-      .get("/assets/examples/store-form-split.json")
+      .get("/assets/examples/store-split/" + name + ".json")
       .subscribe((x: Form) => {
         this.idToPass = x.id;
-        this.questionsToPass = x.questions.map(q => {
-          return this._creator.createQuestionFromControlType(q.controlType, q);
-        });
+        console.log("loaded ", x);
+        this.questionsToPass = [
+          ...this.questionsToPass,
+          ...x.questions.map(q => {
+            return this._creator.createQuestionFromControlType(
+              q.controlType,
+              q
+            );
+          })
+        ];
       });
-    this._http.get("/assets/examples/store-form.json").subscribe((x: Form) => {
-      this.idToPass2 = x.id;
-      this.questionsToPass2 = x.questions.map(q => {
-        return this._creator.createQuestionFromControlType(q.controlType, q);
-      });
-    });
   }
 }

@@ -5,6 +5,7 @@ import { DropdownSearchQuestion } from "../models/drop-down-search";
 import { QuestionBase } from "../models/question-base";
 import { InputQuestion } from "../models/input-question";
 import { DropdownQuestion } from "../models/dropdown-question";
+import { CheckboxQuestion, NumberInputQuestion } from "../models";
 @Injectable({
   providedIn: "root"
 })
@@ -22,6 +23,10 @@ export class QuestionCreatorService {
         return new DropdownSearchQuestion(data);
       case ControlType.Input:
         return new InputQuestion(data);
+      case ControlType.CheckBox:
+        return new CheckboxQuestion(data);
+      case ControlType.NumberInput:
+        return new NumberInputQuestion(data);
     }
     return new InputQuestion(data);
   }

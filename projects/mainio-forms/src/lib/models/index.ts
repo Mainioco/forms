@@ -5,3 +5,6 @@ export * from "./form";
 export * from "./input-question";
 export * from "./question-base";
 export * from "./question-group";
+export * from "./number-input-question";
+export * from "./checkbox-question";
+export * from "./form-layout.enum";
