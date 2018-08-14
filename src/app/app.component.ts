@@ -28,6 +28,9 @@ export class AppComponent {
       case 2:
         url = "/store-split";
         break;
+      case 3:
+        url = "/chat-send";
+        break;
       default:
         break;
     }

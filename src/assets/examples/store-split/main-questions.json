@@ -3,7 +3,7 @@
   "questions": [
     {
       "key": "enabled",
-      "label": "Is enabled",
+      "suffix": "Is enabled",
       "required": true,
       "order": 2,
       "controlType": "[Mainio][DynamicForm][ControlType]Checkbox",
@@ -14,7 +14,7 @@
       "key": "title",
       "label": "Question Set Title",
       "order": 2,
-      "controlType": "[Mainio][DynamicForm][ControlType]Checkbox",
+      "controlType": "[Mainio][DynamicForm][ControlType]Input",
       "group": "question_set"
     }
   ]

@@ -4,7 +4,7 @@ import { ControlType } from "./control-type.enum";
 import { INumberInputQuestionOptions } from "../interfaces/i-number-input-question-options";
 
 export class NumberInputQuestion extends QuestionBase<number> {
-  controlType = ControlType.Input;
+  controlType = ControlType.NumberInput;
   type: string;
   minLength: number = -1;
   maxLength: number = -1;

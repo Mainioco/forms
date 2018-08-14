@@ -3,7 +3,7 @@
   "questions": [
     {
       "key": "bg_enabled",
-      "label": "Is enabled",
+      "prefix": "Is enabled",
       "required": true,
       "order": 2,
       "controlType": "[Mainio][DynamicForm][ControlType]Checkbox",
@@ -12,14 +12,14 @@
     },
     {
       "key": "bg_first",
-      "label": "Ask at the beginning",
+      "prefix": "Ask at the beginning",
       "order": 2,
       "controlType": "[Mainio][DynamicForm][ControlType]Checkbox",
       "group": "bg_secondary"
     },
     {
       "key": "bg_pass",
-      "label": "Pass answer to following questions",
+      "prefix": "Pass answer to following questions",
       "order": 2,
       "controlType": "[Mainio][DynamicForm][ControlType]Checkbox",
       "group": "bg_secondary"

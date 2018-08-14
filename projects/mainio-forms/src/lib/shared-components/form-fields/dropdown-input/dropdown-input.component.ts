@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, OnChanges } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  ChangeDetectionStrategy
+} from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 import { QuestionBase } from "../../../models/question-base";
@@ -8,7 +14,8 @@ import { ControlType } from "../../../models/control-type.enum";
 @Component({
   selector: "mainio-form-dropdown-input",
   templateUrl: "./dropdown-input.component.html",
-  styleUrls: ["./dropdown-input.component.css"]
+  styleUrls: ["./dropdown-input.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownInputComponent implements OnInit, OnChanges {
   @Input()

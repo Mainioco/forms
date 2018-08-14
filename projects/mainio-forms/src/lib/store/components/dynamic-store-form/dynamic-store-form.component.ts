@@ -5,7 +5,8 @@ import {
   Output,
   EventEmitter,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { QuestionBase } from "../../../models/question-base";
 import { FormGroup } from "@angular/forms";
@@ -18,7 +19,8 @@ import { IDisplayGroup } from "../../../interfaces/i-display-group";
 @Component({
   selector: "mainio-form-dynamic-store-form",
   templateUrl: "./dynamic-store-form.component.html",
-  styleUrls: ["./dynamic-store-form.component.css"]
+  styleUrls: ["./dynamic-store-form.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicStoreFormComponent implements OnChanges {
   @Input()

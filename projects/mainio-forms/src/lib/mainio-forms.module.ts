@@ -9,7 +9,8 @@ import {
   MatInputModule,
   MatOptionModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatButtonModule
 } from "@angular/material";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
@@ -20,6 +21,7 @@ import { HttpClientModule } from "@angular/common/http";
     MatAutocompleteModule,
     MatInputModule,
     MatOptionModule,
+    MatButtonModule,
     FormsModule,
     MatFormFieldModule,
     SharedComponentsModule,

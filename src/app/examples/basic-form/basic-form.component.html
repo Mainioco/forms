@@ -1,3 +1,4 @@
-<mainio-dynamic-form [questions]="questions" style="max-width:600px"></mainio-dynamic-form>
-
-{{questions | json}}
+<div style="background:white;">
+    <mainio-dynamic-form [questions]="questions" (onStatusChage)="updateJson($event)"></mainio-dynamic-form>
+    <div *ngIf="payload"> {{payload | json}}</div>
+</div>

@@ -5,7 +5,7 @@ import { INumberInputQuestionOptions } from "../interfaces/i-number-input-questi
 import { ICheckboxOptions } from "../interfaces/i-checkbox-options";
 
 export class CheckboxQuestion extends QuestionBase<boolean> {
-  controlType = ControlType.Input;
+  controlType = ControlType.CheckBox;
   enabled: boolean;
   suffix: string;
   prefix: string;

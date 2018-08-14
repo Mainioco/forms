@@ -10,11 +10,16 @@ import { QuestionControlService } from "mainio-forms";
 })
 export class BasicFormComponent implements OnInit {
   questions: QuestionBase<any>[] = [];
+  payload: any;
   constructor(private _http: HttpClient, private qcs: QuestionControlService) {}
 
   async ngOnInit() {
     this.questions = await this.qcs.loadFromUrl(
       "/assets/examples/basic-form.json"
     );
+  }
+
+  updateJson(event) {
+    this.payload = event;
   }
 }

@@ -14,11 +14,18 @@ import { reducers, metaReducers } from "./store/reducers";
 import { environment } from "../../environments/environment";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { SplitStoreFormComponent } from "./split-store-form/split-store-form.component";
+import { ChatSendComponent } from "./chat-send/chat-send.component";
+import {
+  MatInputModule,
+  MatButtonModule
+} from "../../../node_modules/@angular/material";
 @NgModule({
   imports: [
     CommonModule,
     MainioFormsModule,
     HttpClientModule,
+    MatInputModule,
+    MatButtonModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 5
@@ -30,7 +37,8 @@ import { SplitStoreFormComponent } from "./split-store-form/split-store-form.com
   declarations: [
     StoreFormComponent,
     BasicFormComponent,
-    SplitStoreFormComponent
+    SplitStoreFormComponent,
+    ChatSendComponent
   ],
   exports: [BasicFormComponent, StoreFormComponent]
 })

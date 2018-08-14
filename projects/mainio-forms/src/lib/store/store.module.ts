@@ -8,7 +8,8 @@ import {
   MatInputModule,
   MatOptionModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatButtonModule
 } from "@angular/material";
 import { MainioFormsStoreConfig } from "./interfaces/store-config";
 import { MainioFormStoreServiceConfig } from "./tokens/service-config";
@@ -22,6 +23,7 @@ import { MainioFormStoreServiceConfig } from "./tokens/service-config";
     MatFormFieldModule,
     SharedComponentsModule,
     MatSelectModule,
+    MatButtonModule,
     ReactiveFormsModule,
     FormsModule
   ],

@@ -20,6 +20,7 @@ import { BasicFormComponent } from "./examples/basic-form/basic-form.component";
 import { StoreFormComponent } from "./examples/store-form/store-form.component";
 import { ExamplesModule } from "./examples/examples.module";
 import { SplitStoreFormComponent } from "./examples/split-store-form/split-store-form.component";
+import { ChatSendComponent } from "./examples/chat-send/chat-send.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,6 +48,10 @@ import { SplitStoreFormComponent } from "./examples/split-store-form/split-store
       {
         path: "store-split",
         component: SplitStoreFormComponent
+      },
+      {
+        path: "chat-send",
+        component: ChatSendComponent
       },
       {
         path: "**",

@@ -1,7 +1,5 @@
-<mat-form-field [formGroup]="formGroup">
-  <mat-checkbox class="example-margin" [checked]="question.enabled" [disabled]="question.disabled">
-
+<div [formGroup]="formGroup" [ngClass]="question.suffix ? 'checkbox-container-start' : 'checkbox-container-end'">
+  <mat-checkbox matInput [checked]="question.enabled" [formControlName]="question.key" [id]="question.key" [labelPosition]="question.suffix ? 'after' : 'before'">
+    {{question.suffix ? question.suffix : question.prefix}}
   </mat-checkbox>
-  <span matPrefix *ngIf="prefix">{{prefix}}</span>
-  <span matSuffix *ngIf="suffix">{{suffix}}</span>
-</mat-form-field>
+</div>

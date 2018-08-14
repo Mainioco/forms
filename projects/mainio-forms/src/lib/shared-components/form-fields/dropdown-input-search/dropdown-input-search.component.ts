@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, OnChanges } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  ChangeDetectionStrategy
+} from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 import { QuestionBase } from "../../../models/question-base";
@@ -21,7 +27,8 @@ export const _filter = (opt: any[], value: IOptions | string): IOptions[] => {
 @Component({
   selector: "mainio-form-dropdown-input-search",
   templateUrl: "./dropdown-input-search.component.html",
-  styleUrls: ["./dropdown-input-search.component.css"]
+  styleUrls: ["./dropdown-input-search.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownInputSearchComponent implements OnInit, OnChanges {
   @Input()

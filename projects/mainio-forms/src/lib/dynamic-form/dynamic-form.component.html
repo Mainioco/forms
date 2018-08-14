@@ -1,5 +1,4 @@
 <div *ngIf="form" class="mainio-form-container">
-
   <form (ngSubmit)="onSubmitActions()" [formGroup]="form" id="m_form" novalidate="novalidate" [ngClass]="!useOneRowLayout ? 'container m-form m-form--label-align-left- m-form--state-' : 'container m-form m-form--label-align-left- m-form--state- align-items-center'">
     <div class="" [ngClass]="!useOneRowLayout ? 'm-form__section' : 'm-form__section row align-items-center'" *ngIf="questions">
       <div *ngFor="let question of questions">
@@ -8,7 +7,7 @@
       </div>
       <div [ngClass]="!useOneRowLayout ? 'm-portlet__foot m-portlet__foot--fit m--margin-top-40' : ''" *ngIf="submitButtonTitle">
         <div [ngClass]="!useOneRowLayout ? 'm-form__actions' : ''">
-          <button type="submit" [disabled]="!form.valid" class="btn btn-success m-btn m-btn--custom m-btn--icon">{{submitButtonTitle}}</button>
+          <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid" class="btn btn-success m-btn m-btn--custom m-btn--icon">{{submitButtonTitle}}</button>
         </div>
       </div>
       <ng-content></ng-content>
