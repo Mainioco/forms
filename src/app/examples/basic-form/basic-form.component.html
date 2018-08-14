@@ -1,0 +1,4 @@
+<div style="background:white;">
+    <mainio-dynamic-form [questions]="questions" (onStatusChage)="updateJson($event)"></mainio-dynamic-form>
+    <div *ngIf="payload"> {{payload | json}}</div>
+</div>

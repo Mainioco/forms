@@ -1,0 +1,16 @@
+.column-form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.row-form {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.question-group-container {
+  flex-grow: 1;
+  padding: 0 5px;
+}

@@ -1,5 +1,6 @@
 import * as Forms from "@angular/forms";
 import { IQuestionBaseOptions } from "../interfaces/i-question-base-options";
+import { ControlType } from "./control-type.enum";
 
 export class QuestionBase<T> {
   value: T;
@@ -7,15 +8,19 @@ export class QuestionBase<T> {
   label: string;
   required: boolean;
   order: number;
-  controlType: string;
-  validators: ((control: Forms.AbstractControl) => Forms.ValidationErrors)[];
+  controlType: ControlType;
+  group: string;
+  disabled:boolean;
+
   constructor(options: IQuestionBaseOptions = {}) {
     this.value = options.value;
     this.key = options.key || "";
     this.label = options.label || "";
     this.required = !!options.required;
     this.order = options.order === undefined ? 1 : options.order;
-    this.controlType = options.controlType || "";
+    this.controlType = options.controlType || ControlType.Default;
+    this.group = options.group || "";
+    this.disabled = options.disabled;
   }
 
   getValidators(): ((

@@ -4,4 +4,6 @@ export interface IInputQuestionOptions extends IQuestionBaseOptions {
   type?: string;
   minLength?: number;
   maxLength?: number;
+  suffix?: string;
+  prefix?: string;
 }

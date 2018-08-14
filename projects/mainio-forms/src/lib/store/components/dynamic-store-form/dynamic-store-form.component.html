@@ -1,0 +1,11 @@
+<div class="mainio-form-container" *ngIf="form && displayGroups">
+
+  <form (ngSubmit)="onSubmitActions()" [formGroup]="form" novalidate="novalidate" [ngClass]="formClass">
+    <div class="question-group-container" *ngFor="let group of displayGroups">
+      <mainio-form-question [question]="question" [form]="form" *ngFor="let question of group.questions"></mainio-form-question>
+    </div>
+    <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid" class="btn btn-success m-btn m-btn--custom m-btn--icon"
+      *ngIf="submitButtonTitle">{{submitButtonTitle}}</button>
+  </form>
+  <ng-content></ng-content>
+</div>

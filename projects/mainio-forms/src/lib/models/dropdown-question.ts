@@ -1,17 +1,14 @@
 import { QuestionBase } from "./question-base";
 import { IOptionGroup, IOptions } from "./drop-down-search";
-import { IDropdownOptions } from "../interfaces/i-dropdown-options";
-
+import { ControlType } from "./control-type.enum";
 export class DropdownQuestion extends QuestionBase<string> {
-  controlType = "dropdown";
+  controlType = ControlType.Dropdown;
   public _selection: string;
   options: Array<IOptions> = [];
   groups: Array<IOptionGroup>;
-
-  constructor(options: IDropdownOptions = {}) {
+  constructor(options: {} = {}) {
     super(options);
-    this.options = options.options || [];
-    this.groups = options.groups || [];
+    this.options = options["options"] || [];
   }
 
   getSelected(): IOptions {

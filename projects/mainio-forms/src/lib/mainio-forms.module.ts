@@ -1,18 +1,19 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { QuestionControlService } from "./question-control.service";
+import { QuestionControlService } from "./services/question-control.service";
 import { DynamicFormComponent } from "./dynamic-form/dynamic-form.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { DynamicFormQuestionComponent } from "./dynamic-form-question/dynamic-form-question.component";
+import { SharedComponentsModule } from "./shared-components/shared-components.module";
 import {
   MatAutocompleteModule,
   MatInputModule,
   MatOptionModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatButtonModule
 } from "@angular/material";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { FormFieldsModule } from "./form-fields/form-fields.module";
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   imports: [
     CommonModule,
@@ -20,13 +21,15 @@ import { FormFieldsModule } from "./form-fields/form-fields.module";
     MatAutocompleteModule,
     MatInputModule,
     MatOptionModule,
+    MatButtonModule,
     FormsModule,
     MatFormFieldModule,
+    SharedComponentsModule,
     MatSelectModule,
-    FormFieldsModule
+    HttpClientModule
   ],
-  declarations: [DynamicFormComponent, DynamicFormQuestionComponent],
+  declarations: [DynamicFormComponent],
   providers: [QuestionControlService],
-  exports: [DynamicFormComponent, DynamicFormQuestionComponent]
+  exports: [DynamicFormComponent]
 })
 export class MainioFormsModule {}

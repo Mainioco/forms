@@ -1,5 +1,5 @@
 import { QuestionBase } from "./question-base";
-import { IDropdownSearchOptions } from "../interfaces/i-dropdown-search-options";
+import { ControlType } from "./control-type.enum";
 
 export interface IOptions {
   key: string;
@@ -14,14 +14,14 @@ export interface IOptionGroup {
 }
 
 export class DropdownSearchQuestion extends QuestionBase<string> {
-  controlType = "dropdown-search";
-  options: Array<IOptionGroup>;
+  controlType = ControlType.DropdownSearch;
   private _selection: string;
   private _searchFilter: string;
+  options: Array<IOptionGroup>;
 
-  constructor(options: IDropdownSearchOptions = {}) {
+  constructor(options: {} = {}) {
     super(options);
-    this.options = options.options || [];
+    this.options = options["options"] || [];
   }
 
   get selected() {

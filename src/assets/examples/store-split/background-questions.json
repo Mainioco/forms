@@ -1,0 +1,67 @@
+{
+  "id": "split-form",
+  "questions": [
+    {
+      "key": "bg_enabled",
+      "prefix": "Is enabled",
+      "required": true,
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]Checkbox",
+      "group": "bg_secondary",
+      "enabled": true
+    },
+    {
+      "key": "bg_first",
+      "prefix": "Ask at the beginning",
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]Checkbox",
+      "group": "bg_secondary"
+    },
+    {
+      "key": "bg_pass",
+      "prefix": "Pass answer to following questions",
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]Checkbox",
+      "group": "bg_secondary"
+    },
+    {
+      "key": "bg_limit",
+      "label": "Limit answers to",
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]NumberInput",
+      "group": "bg_secondary",
+      "min": 0,
+      "max": 1000
+    },
+    {
+      "key": "bg_pass_name",
+      "label": "Pass as",
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]Input",
+      "minLength": -1,
+      "maxLength": 200,
+      "type": "input",
+      "group": "bg_secondary_pass"
+    },
+    {
+      "key": "bg_title",
+      "label": "Question title",
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]Input",
+      "minLength": 5,
+      "maxLength": 200,
+      "type": "input",
+      "group": "bg_main"
+    },
+    {
+      "key": "bg_choices",
+      "label": "Choices",
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]CycleInput",
+      "minLength": 5,
+      "maxLength": 200,
+      "type": "input",
+      "group": "bg_main"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+<div style="display:flex;background: white">
+  <mainio-dynamic-form [questions]="questions" style="flex-grow: 1" (onStatusChage)="updateJson($event)"></mainio-dynamic-form>
+  <button mat-flat-button color="primary" type="submit" [disabled]="!inputIsValid " style="margin-left:10px">Send</button>
+</div>

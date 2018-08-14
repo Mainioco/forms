@@ -7,13 +7,21 @@ import {
   DropdownQuestion,
   InputQuestion
 } from "mainio-forms";
+import { RouterModule } from "@angular/router";
 import {
   MatAutocompleteModule,
   MatInputModule,
   MatOptionModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTabsModule
 } from "@angular/material";
+import { BasicFormComponent } from "./examples/basic-form/basic-form.component";
+import { StoreFormComponent } from "./examples/store-form/store-form.component";
+import { ExamplesModule } from "./examples/examples.module";
+import { SplitStoreFormComponent } from "./examples/split-store-form/split-store-form.component";
+import { ChatSendComponent } from "./examples/chat-send/chat-send.component";
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -22,9 +30,35 @@ import {
     MainioFormsModule,
     MatAutocompleteModule,
     MatInputModule,
+    MatTabsModule,
     MatOptionModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    ExamplesModule,
+    RouterModule.forRoot([
+      {
+        path: "basic",
+        component: BasicFormComponent,
+        children: []
+      },
+      {
+        path: "store",
+        component: StoreFormComponent
+      },
+      {
+        path: "store-split",
+        component: SplitStoreFormComponent
+      },
+      {
+        path: "chat-send",
+        component: ChatSendComponent
+      },
+      {
+        path: "**",
+        redirectTo: "basic",
+        pathMatch: "full"
+      }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

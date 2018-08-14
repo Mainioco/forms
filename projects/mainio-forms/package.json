@@ -1,6 +1,6 @@
 {
   "name": "mainio-forms",
-  "version": "0.4.5",
+  "version": "1.0.0-alpha.1",
   "author": {
     "name": "Juha Möttönen",
     "email": "juha.mottonen@mainio.co",
@@ -23,16 +23,17 @@
     "type": "git",
     "url": "https://github.com/Mainioco/forms.git"
   },
-  "files": [],
   "private": false,
-  "peerDependencies": {},
+  "peerDependencies": {
+    "@angular/cdk": "6.3.1",
+    "@ngrx/store": "6.1.0"
+  },
   "dependencies": {
     "tslib": "^1.9.0",
     "@angular/common": "^6.0.0",
     "@angular/core": "^6.0.0",
     "@angular/forms": "6.0.0",
     "@angular/material": "6.3.1",
-    "@angular/cdk": "6.3.1",
     "rxjs": "^6.0.0"
   }
 }
