@@ -21,5 +21,9 @@ export class NumberInputComponent extends FormFieldBaseComponent {
     super();
   }
 
-  ngOnInit() {}
+  ngOnChanges() {
+    if (!this.question) return;
+    this.suffix = this.question.suffix;
+    this.prefix = this.question.prefix;
+  }
 }

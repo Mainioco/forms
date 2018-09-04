@@ -14,14 +14,17 @@ import {
 } from "@angular/material";
 import { NumberInputComponent } from "./number-input/number-input.component";
 import { CheckboxComponent } from "./checkbox/checkbox.component";
-import { FormFieldBaseComponent } from "./form-field-base/form-field-base.component";
+import { RepeatInputComponent } from "./repeat-input/repeat-input.component";
+
 const COMPONENTS = [
   SingleLineInputComponent,
   DropdownInputComponent,
   DropdownInputSearchComponent,
   NumberInputComponent,
-  CheckboxComponent
+  CheckboxComponent,
+  RepeatInputComponent
 ];
+
 @NgModule({
   imports: [
     CommonModule,

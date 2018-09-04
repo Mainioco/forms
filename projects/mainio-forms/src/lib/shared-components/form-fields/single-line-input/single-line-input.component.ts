@@ -3,7 +3,8 @@ import {
   Input,
   AfterContentInit,
   OnChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  SimpleChanges
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
@@ -30,8 +31,8 @@ export class SingleLineInputComponent extends FormFieldBaseComponent {
     super();
   }
 
-  ngOnChanges() {
-    super.ngOnChanges();
+  ngOnChanges(changes: SimpleChanges) {
+    super.ngOnChanges(changes);
     this.suffix = this.question.suffix;
     this.prefix = this.question.prefix;
     this.inputHint = this.lengthDisplayers;

@@ -1,0 +1,12 @@
+<div class="mainio-nested-form-container" *ngIf="nestedForm">
+
+  <form [formGroup]="nestedForm" novalidate="novalidate">
+    <div class="question-group-container">
+      <div>
+        <mainio-form-single-line-input [question]="q" [formGroup]="nestedForm" *ngFor="let q of repeatFields" class="form-control m-input">
+        </mainio-form-single-line-input>
+      </div>
+
+    </div>
+  </form>
+</div>

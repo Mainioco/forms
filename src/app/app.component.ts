@@ -31,6 +31,9 @@ export class AppComponent {
       case 3:
         url = "/chat-send";
         break;
+      case 4:
+        url = "/json";
+        break;
       default:
         break;
     }

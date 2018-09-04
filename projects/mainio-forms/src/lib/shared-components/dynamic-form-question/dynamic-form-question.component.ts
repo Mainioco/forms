@@ -18,6 +18,8 @@ import { Observable, Subject } from "rxjs";
 import { startWith, map } from "rxjs/operators";
 import { DropdownQuestion } from "../../models/dropdown-question";
 import { ControlType } from "../../models/control-type.enum";
+import { RepeatInput } from "../../models/repeat-input";
+import { ILoadedValues } from "../../interfaces";
 
 @Component({
   selector: "mainio-form-question",
@@ -32,6 +34,8 @@ export class DynamicFormQuestionComponent {
   question: QuestionBase<any>;
   @Input()
   form: FormGroup;
+  @Input()
+  values: Observable<ILoadedValues> | ILoadedValues;
 
   get controlTypeString() {
     switch (this.question.controlType.toString()) {
@@ -43,8 +47,23 @@ export class DynamicFormQuestionComponent {
         return "input-number";
       case ControlType.CheckBox:
         return "checkbox";
+      case ControlType.RepeatInput:
+        return "repeat-input";
       default:
         return "input";
     }
+  }
+
+  onRepeatValuesChanged(event: FormGroup) {
+    let stringArr = [];
+    for (let control of Object.keys(event.controls)) {
+      stringArr.push(event.controls[control].value);
+    }
+    let obs = {};
+    obs[this.question.key] = JSON.stringify(stringArr);
+    this.form.controls[this.question.key].setValue(obs, {
+      onlySelf: false,
+      emitEvent: true
+    });
   }
 }

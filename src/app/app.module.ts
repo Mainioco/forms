@@ -21,6 +21,7 @@ import { StoreFormComponent } from "./examples/store-form/store-form.component";
 import { ExamplesModule } from "./examples/examples.module";
 import { SplitStoreFormComponent } from "./examples/split-store-form/split-store-form.component";
 import { ChatSendComponent } from "./examples/chat-send/chat-send.component";
+import { JsonCreatorComponent } from "./examples/json-creator/json-creator.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -52,6 +53,10 @@ import { ChatSendComponent } from "./examples/chat-send/chat-send.component";
       {
         path: "chat-send",
         component: ChatSendComponent
+      },
+      {
+        path: "json",
+        component: JsonCreatorComponent
       },
       {
         path: "**",

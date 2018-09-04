@@ -1,4 +1,5 @@
 import { ControlType } from "../models/control-type.enum";
+import * as Forms from "@angular/forms";
 
 export interface IQuestionBaseOptions {
   value?: any;
@@ -9,4 +10,8 @@ export interface IQuestionBaseOptions {
   controlType?: ControlType;
   group?: string;
   disabled?: boolean;
+  hidden?: boolean;
+  customValidators?: ((
+    control: Forms.AbstractControl
+  ) => Forms.ValidationErrors)[];
 }

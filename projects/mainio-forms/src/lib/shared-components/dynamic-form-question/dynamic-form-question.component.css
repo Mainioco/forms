@@ -1,5 +1,18 @@
 .form-control {
-    border: 0;
-    font-size: 1em;
-    width:100%;
+  border: 0;
+  font-size: 1em;
+  width: 100%;
+}
+
+.mainio-input-hidden {
+  height: 0px;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  overflow: hidden;
+}
+
+.mainio-input {
+  height: auto;
+  transform: 1s height ease;
 }

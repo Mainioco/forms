@@ -19,6 +19,7 @@ import {
   MatInputModule,
   MatButtonModule
 } from "../../../node_modules/@angular/material";
+import { JsonCreatorComponent } from './json-creator/json-creator.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -38,7 +39,8 @@ import {
     StoreFormComponent,
     BasicFormComponent,
     SplitStoreFormComponent,
-    ChatSendComponent
+    ChatSendComponent,
+    JsonCreatorComponent
   ],
   exports: [BasicFormComponent, StoreFormComponent]
 })

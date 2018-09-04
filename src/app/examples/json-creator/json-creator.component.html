@@ -1,0 +1,27 @@
+<div style="display:flex;max-width: 50%">
+  <button (click)="setMode(1)">Builder</button>
+  <button (click)="setMode(2)">Preview</button>
+  <button (click)="setMode(3)">JSON</button>
+</div>
+
+<div *ngIf="mode === 1">
+  <div style="justify-content:start;display:flex;width: calc(100% - 40px);margin-top:20px;background:white;padding:20px;flex-grow: 1;border-bottom:1px solid black;">
+    <mainio-dynamic-form [questions]="newQuestions" submitButtonTitle="Add" (onSubmit)="onSubmit($event)" style="flex-grow:1"></mainio-dynamic-form>
+  </div>
+  <div style="justify-content:start;display:flex;width: calc(100% - 40px);margin-top:20px;background:white;padding:20px;flex-grow: 1;border-bottom:1px solid black;">
+    <mainio-dynamic-form [questions]="x.questions" *ngFor="let x of editQuestions" formLayout="[Mainio][DynamicForm][ControlType]Col_2"
+      style="flex-grow:1"></mainio-dynamic-form>
+  </div>
+</div>
+<div *ngIf="mode === 2">
+  <div style="justify-content:start;display:flex;width: calc(100% - 40px);margin-top:20px;background:white;padding:20px;flex-grow: 1;border-bottom:1px solid black;">
+    <mainio-dynamic-form [questions]="previewQuestions" formLayout="[Mainio][DynamicForm][ControlType]Col_2"></mainio-dynamic-form>
+  </div>
+</div>
+
+<div *ngIf="mode === 3">
+  <div style="justify-content:start;display:flex;width: calc(100% - 40px);margin-top:20px;background:white;padding:20px;flex-grow: 1;border-bottom:1px solid black;">
+    <pre>{{previewJsonObject | json}}</pre>
+    <pre>{{previewJson}}</pre>
+  </div>
+</div>

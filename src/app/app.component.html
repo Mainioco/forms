@@ -1,18 +1,23 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="./assets/mainio.jpg">
-</div>
-<mat-tab-group (selectedTabChange)="navigate($event)">
-  <mat-tab label="Basic"></mat-tab>
-  <mat-tab label="Store"> </mat-tab>
-  <mat-tab label="Splitted Store"></mat-tab>
-  <mat-tab label="Chat send"></mat-tab>
-</mat-tab-group>
-<div style="width: 100%;background: rgb(51,0,114);padding:10px;">
-  <div style="max-width:calc(100% - 20px)">
-    <router-outlet></router-outlet>
+<div style="min-height: 100vh;display: flex;flex-direction: column;justify-content: space-between">
+  <div style="width: 100%;padding:20px">
+    <h1 class="mat-display-1" style="padding:20px 0">Mainio Dynamic Forms Demonstration</h1>
+    <mat-tab-group (selectedTabChange)="navigate($event)">
+      <mat-tab label="Basic"></mat-tab>
+      <mat-tab label="Store"> </mat-tab>
+      <mat-tab label="Splitted Store"></mat-tab>
+      <mat-tab label="Chat send"></mat-tab>
+      <mat-tab label="JSON creator"></mat-tab>
+    </mat-tab-group>
+  </div>
+  <div style="width: 100%;background: rgb(51,0,114);padding:50px">
+    <div style="max-width:calc(100% - 100px)">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div style="margin-top:20px;min-height:200px;justify-self: flex-end">
+    <div style="display:flex;flex-grow: 1;justify-content: flex-end;padding: 0 20px">
+      <img width="200" alt="Angular Logo" src="./assets/mainio-co-footer-element.png">
+    </div>
+    <div style="min-height:200px;background:#00263e"></div>
   </div>
 </div>

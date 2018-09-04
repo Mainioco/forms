@@ -13,7 +13,7 @@ export class SplitStoreFormComponent implements OnInit {
   idToPass: string;
   questionsToPass2: QuestionBase<any>[];
   idToPass2: string;
-
+  results;
   constructor(
     private _http: HttpClient,
     private qcs: QuestionControlService,
@@ -30,7 +30,6 @@ export class SplitStoreFormComponent implements OnInit {
       .get("/assets/examples/store-split/" + name + ".json")
       .subscribe((x: Form) => {
         this.idToPass = x.id;
-        console.log("loaded ", x);
         this.questionsToPass = [
           ...this.questionsToPass,
           ...x.questions.map(q => {
@@ -41,5 +40,11 @@ export class SplitStoreFormComponent implements OnInit {
           })
         ];
       });
+  }
+
+  loadExternalValues() {
+    this._http.get("/assets/examples/store-split/values.json").subscribe(x => {
+      this.results = x;
+    });
   }
 }

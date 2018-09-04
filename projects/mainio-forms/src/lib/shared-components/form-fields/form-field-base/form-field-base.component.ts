@@ -4,7 +4,8 @@ import {
   Input,
   OnChanges,
   Output,
-  EventEmitter
+  EventEmitter,
+  SimpleChanges
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { QuestionBase } from "../../../models";
@@ -27,7 +28,7 @@ export class FormFieldBaseComponent implements OnChanges {
     return this.question as T;
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
     this.onFieldChanged.emit(this.question);
   }
 }

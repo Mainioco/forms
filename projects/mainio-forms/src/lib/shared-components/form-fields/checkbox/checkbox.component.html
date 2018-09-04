@@ -1,5 +1,6 @@
 <div [formGroup]="formGroup" [ngClass]="question.suffix ? 'checkbox-container-start' : 'checkbox-container-end'">
-  <mat-checkbox matInput [checked]="question.enabled" [formControlName]="question.key" [id]="question.key" [labelPosition]="question.suffix ? 'after' : 'before'">
+  <mat-checkbox matInput [checked]="question.enabled" [formControlName]="question.key" [id]="'mainio-checkbox'+question.key"
+    [labelPosition]="question.suffix ? 'after' : 'before'">
     {{question.suffix ? question.suffix : question.prefix}}
   </mat-checkbox>
 </div>

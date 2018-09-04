@@ -15,7 +15,6 @@ export function lifecycleReducer(
 ): LifecycleState {
   switch (action.type) {
     case MainioLifecycleActionTypes.Created: {
-      console.log("AcA");
       let x = action.payload;
       if (state.forms) {
         if (state.forms[action.payload.id]) {
