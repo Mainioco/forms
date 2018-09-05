@@ -10,4 +10,5 @@ export interface IRepeatInputOptions extends IQuestionBaseOptions {
   prefix?: string;
   repeatTimes?: number;
   placeholders?: string | string[];
+  allowSameValues?: boolean;
 }

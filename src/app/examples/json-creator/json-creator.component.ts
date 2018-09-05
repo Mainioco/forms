@@ -8,6 +8,7 @@ import {
   IQuestionBaseOptions
 } from "mainio-forms";
 import { FormGroup } from "@angular/forms";
+import { QuestionJsonParserService } from "projects/mainio-forms/src/lib/services/question-json-parser.service";
 
 interface IObject {
   key: string;
@@ -43,7 +44,10 @@ export class JsonCreatorComponent implements OnInit {
   previewQuestions: QuestionBase<any>[] = [];
   previewJson: string;
   previewJsonObject;
-  constructor(private _creator: QuestionCreatorService) {}
+  constructor(
+    private _creator: QuestionCreatorService,
+    private _json: QuestionJsonParserService
+  ) {}
 
   ngOnInit() {
     this.d.options = [];
@@ -57,11 +61,18 @@ export class JsonCreatorComponent implements OnInit {
     this.newQuestions = [this.t, this.d];
   }
 
+  setObject(obj: Object, key: string, value: any) {
+    try {
+      obj[key] = JSON.parse(value);
+    } catch (ex) {
+      obj[key] = value;
+    }
+  }
   setMode(index: number) {
     this.previewQuestions = [];
     for (let x of this.editQuestions) {
       let object: IQuestionBaseOptions = {};
-      x.questions.forEach(item => (object[item.key] = item.value));
+      x.questions.forEach(item => this.setObject(object, item.key, item.value));
       this.previewQuestions.push(
         this._creator.createQuestionFromControlType(ControlType[x.type], object)
       );
@@ -69,11 +80,11 @@ export class JsonCreatorComponent implements OnInit {
     this.previewJson = "[";
     this.previewQuestions.forEach(
       (x: QuestionBase<any>, index: number) =>
-        (this.previewJson += x.toJsonString() + ",")
+        (this.previewJson += this._json.stringifyQuestion(x) + ",")
     );
     this.previewJson =
       this.previewJson.substring(0, this.previewJson.length - 1) + "]";
-    this.previewJsonObject = JSON.parse(this.previewJson);
+    this.previewJsonObject = this._json.parseQuestion(this.previewJson);
     this.mode = index;
   }
 

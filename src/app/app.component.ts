@@ -1,7 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { QuestionBase } from "mainio-forms/mainio-forms";
 import { InputQuestion } from "mainio-forms/mainio-forms";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 interface TabChangeEvent {
   index: number;
@@ -11,28 +11,34 @@ interface TabChangeEvent {
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = "Mainioco Forms demo";
+  index: number = 0;
+  constructor(private _router: Router, private route: ActivatedRoute) {}
 
-  constructor(private _router: Router) {}
-
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.index = +params["index"];
+    });
+  }
   navigate(index: TabChangeEvent) {
     let url: string = "";
+    this.index = index.index;
     switch (index.index) {
       case 0:
-        url = "/basic";
+        url = "/basic?index=0";
         break;
       case 1:
-        url = "/store";
+        url = "/store?index=1";
         break;
       case 2:
-        url = "/store-split";
+        url = "/store-split?index=2";
         break;
       case 3:
-        url = "/chat-send";
+        url = "/chat-send?index=3";
         break;
       case 4:
-        url = "/json";
+        url = "/json?index=4";
         break;
       default:
         break;

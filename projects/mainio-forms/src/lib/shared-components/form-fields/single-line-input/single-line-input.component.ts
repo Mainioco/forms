@@ -14,8 +14,7 @@ import { FormFieldBaseComponent } from "../form-field-base/form-field-base.compo
 @Component({
   selector: "mainio-form-single-line-input",
   templateUrl: "./single-line-input.component.html",
-  styleUrls: ["./single-line-input.component.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ["./single-line-input.component.css"]
 })
 export class SingleLineInputComponent extends FormFieldBaseComponent {
   @Input()

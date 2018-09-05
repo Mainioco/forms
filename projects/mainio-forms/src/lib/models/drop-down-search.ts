@@ -1,5 +1,6 @@
 import { QuestionBase } from "./question-base";
 import { ControlType } from "./control-type.enum";
+import { IDropdownSearchOptions } from "mainio-forms/public_api";
 
 export interface IOptions {
   key: string;
@@ -17,11 +18,11 @@ export class DropdownSearchQuestion extends QuestionBase<string> {
   controlType = ControlType.DropdownSearch;
   private _selection: string;
   private _searchFilter: string;
-  options: Array<IOptionGroup>;
+  options: IOptionGroup[];
 
-  constructor(options: {} = {}) {
+  constructor(options: IDropdownSearchOptions = {}) {
     super(options);
-    this.options = options["options"] || [];
+    this.options = options.options || [];
   }
 
   get selected() {

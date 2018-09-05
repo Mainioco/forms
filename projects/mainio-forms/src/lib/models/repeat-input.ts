@@ -3,6 +3,8 @@ import { InputQuestion } from "./input-question";
 import { ControlType } from "./control-type.enum";
 import { QuestionBase } from "./question-base";
 import * as Forms from "@angular/forms";
+import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { validateNoSameValuesValidator } from "../validators/validator-no-same-values";
 
 export class RepeatInput extends QuestionBase<string> {
   controlType = ControlType.RepeatInput;
@@ -12,6 +14,7 @@ export class RepeatInput extends QuestionBase<string> {
   suffix: string;
   prefix: string;
   repeatTimes: number;
+  allowSameValues: boolean;
   _placeholders: string[];
   _value: string[];
 
@@ -24,7 +27,8 @@ export class RepeatInput extends QuestionBase<string> {
     this.suffix = options.suffix || "";
     this.prefix = options.prefix || "";
     this.repeatTimes = options.repeatTimes || 1;
-    this.placeholders = options.placeholders || [options.label];
+    this.placeholders = options.placeholders || [options.label || ""];
+    this.allowSameValues = options.allowSameValues;
   }
 
   get value(): string | string[] {
@@ -83,6 +87,9 @@ export class RepeatInput extends QuestionBase<string> {
     if (this.type === "number") {
       var re = new RegExp("^-?\\d{1,9}");
       exist.push(Forms.Validators.pattern(re));
+    }
+    if (!this.allowSameValues && this.repeatTimes > 1) {
+      exist.push(validateNoSameValuesValidator);
     }
     return exist;
   }

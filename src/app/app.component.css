@@ -1,0 +1,12 @@
+.example-card {
+  width: 100%;
+  padding: 50px;
+  padding: 50px;
+  width: 1024px;
+  margin: 0 20px 0 auto;
+  max-width: 100%;
+}
+
+.info-text {
+  font: 200 24px/30px Roboto, "Helvetica Neue", sans-serif;
+}
