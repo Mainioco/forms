@@ -1,11 +1,17 @@
 <div style="min-height: 100vh;display: flex;flex-direction: column;justify-content: space-between">
   <div style="display: flex;flex-direction: column;">
-    <div style="width: calc(100% - 40px);padding:20px">
-      <h1 class="mat-display-1" style="padding:20px 0;margin:0;margin-top:20px">Mainio Dynamic Forms Demonstration</h1>
+    <div style="position:relative;width: calc(100% - 40px);padding:20px;background: url('https://mainio.co/wp-content/uploads/2018/05/asiakasymmarrys-ratkaisee-mainio-co.jpg?id=10715');background-size: cover;min-height: 200px;">
 
+
+      <div style="position:absolute;height:100%;width: 100%;left:0;top:0;background-color: rgba(51, 0, 114,0.5);display:flex;justify-content: end;flex-direction: column">
+        <h1 class="mat-display-1" style="color:white;padding:20px;margin:0;margin-top:20px;z-index:2">Mainio Forms
+        </h1>
+        <h2 style="color:white;padding:20px 50;margin:0 0 20px 20px;z-index:2">Angular 6 Forms made simple
+        </h2>
+      </div>
     </div>
-    <div style="display:flex;flex-direction: row;flex-wrap: wrap">
-      <div style="width:400px;margin:0 auto">
+    <div style="display:flex;flex-direction: row;flex-wrap: wrap;margin-top:20px">
+      <div style="width:400px;margin:0 auto;flex-grow: 1;padding:40px">
         <mainio-form-basic *ngIf="index === 0"></mainio-form-basic>
         <mainio-form-chat *ngIf="index === 3"></mainio-form-chat>
         <mainio-form-store *ngIf="index === 1"></mainio-form-store>
