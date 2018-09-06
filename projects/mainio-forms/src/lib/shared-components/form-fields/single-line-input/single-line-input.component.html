@@ -1,5 +1,5 @@
-<mat-form-field [formGroup]="formGroup" *ngIf="question">
-  <input matInput [placeholder]="question.label" [formControlName]="question.key" [id]="question.key" [type]="question.type"
+<mat-form-field [formGroup]="formGroup" *ngIf="question" class="form-field">
+  <input matInput [placeholder]="question.label" [formControlName]="question.key" [id]="'mainio-input'+question.key" [type]="question.type"
     [required]="question.required">
   <mat-hint align="end">
     {{inputHint}}

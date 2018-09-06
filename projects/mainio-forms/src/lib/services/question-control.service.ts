@@ -4,16 +4,21 @@ import { QuestionBase } from "../models/question-base";
 import { FormGroupService } from "./form-group.service";
 import { HttpClient } from "@angular/common/http";
 import { QuestionCreatorService } from "./question-creator.service";
+import {
+  IFormGroupCreator,
+  IFormCreationOptions,
+  IFormGroupCreatedResult
+} from "../interfaces";
 
 @Injectable()
-export class QuestionControlService {
+export class QuestionControlService extends IFormGroupCreator {
   constructor(
     private _formGroupService: FormGroupService,
     private _http: HttpClient,
     private _creator: QuestionCreatorService
-  ) {}
-
-  loadFromExternal(url: string) {}
+  ) {
+    super();
+  }
 
   loadFromJson(question: QuestionBase<any>[]): QuestionBase<any>[] {
     let toReturn: QuestionBase<any>[] = [];
@@ -36,8 +41,26 @@ export class QuestionControlService {
     });
   }
 
-  toFormGroup(questions: QuestionBase<any>[]): FormGroup {
-    return this._formGroupService.InitializeGroup(questions);
+  public createFormGroupFromQuestions(
+    questions: QuestionBase<any>[],
+    data: IFormCreationOptions = undefined
+  ): IFormGroupCreatedResult {
+    if (!data) {
+      return {
+        questionsUsed: questions,
+        formGroup: this._formGroupService.InitializeGroup(questions, undefined)
+      };
+    }
+    let res = data.limitToGroup
+      ? questions.filter(x => x.group === data.limitToGroup)
+      : questions;
+    return {
+      questionsUsed: res,
+      formGroup: this._formGroupService.InitializeGroup(
+        res,
+        data ? data.values : undefined
+      )
+    };
   }
 
   private async loadJsonFromUrl(url: string): Promise<QuestionBase<any>[]> {

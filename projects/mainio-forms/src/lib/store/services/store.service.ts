@@ -11,11 +11,16 @@ import { QuestionGroup } from "../../models/question-group";
 import { LifecycleState } from "../states/forms-state";
 import { MainioFormStoreServiceConfig } from "../tokens/service-config";
 import { MainioFormsStoreConfig } from "../interfaces/store-config";
+import {
+  IFormGroupCreator,
+  IFormCreationOptions,
+  IFormGroupCreatedResult
+} from "../../interfaces/i-form-group-creator";
 
 @Injectable({
   providedIn: "root"
 })
-export class StoreService {
+export class StoreService implements IFormGroupCreator {
   constructor(
     private _store: Store<LifecycleState>,
     private _formGroupService: FormGroupService,
@@ -29,6 +34,27 @@ export class StoreService {
 
   set store(val) {
     this._store = val;
+  }
+
+  public createFormGroupFromQuestions(
+    questions: QuestionBase<any>[],
+    data: IFormCreationOptions
+  ): IFormGroupCreatedResult {
+    if (!data.id) {
+      throw new Error("Dynamic store requires formId to be set");
+    }
+    let res = this.createFormFromQuestions(
+      data.id,
+      questions,
+      data.limitToGroup
+    );
+    return {
+      questionsUsed: res,
+      formGroup: this._formGroupService.InitializeGroup(
+        res,
+        data ? data.values : undefined
+      )
+    };
   }
 
   public createForm(form: Form) {
@@ -45,12 +71,12 @@ export class StoreService {
       })
     );
   }
+
   createFormFromQuestions(
     id: string,
     questions: QuestionBase<any>[],
     limitToGroup: string = undefined
   ): QuestionBase<any>[] {
-    console.log("HI");
     let f: Form = new Form();
     f.id = id;
     f.questions = [];
@@ -76,7 +102,6 @@ export class StoreService {
       }
       g.questionsIds.push(q.key);
     }
-    console.log("FF ", f);
     this.createForm(f);
 
     return limitToGroup

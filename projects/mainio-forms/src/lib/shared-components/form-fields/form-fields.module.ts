@@ -10,21 +10,29 @@ import {
   MatOptionModule,
   MatFormFieldModule,
   MatSelectModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from "@angular/material";
 import { NumberInputComponent } from "./number-input/number-input.component";
 import { CheckboxComponent } from "./checkbox/checkbox.component";
-import { FormFieldBaseComponent } from "./form-field-base/form-field-base.component";
+import { RepeatInputComponent } from "./repeat-input/repeat-input.component";
+import { DateInputComponent } from "./date-input/date-input.component";
+import { SliderInputComponent } from "./slider-input/slider-input.component";
+import { SliderModule } from "primeng/slider";
 const COMPONENTS = [
   SingleLineInputComponent,
   DropdownInputComponent,
   DropdownInputSearchComponent,
   NumberInputComponent,
-  CheckboxComponent
+  CheckboxComponent,
+  RepeatInputComponent,
+  SliderInputComponent,
+  DateInputComponent
 ];
+
 @NgModule({
   imports: [
-    CommonModule,
     CommonModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
@@ -32,7 +40,10 @@ const COMPONENTS = [
     MatOptionModule,
     FormsModule,
     MatFormFieldModule,
+    MatDatepickerModule,
     MatSelectModule,
+    SliderModule,
+    MatNativeDateModule,
     MatCheckboxModule
   ],
   declarations: [...COMPONENTS],

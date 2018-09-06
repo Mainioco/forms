@@ -1,0 +1,13 @@
+{
+  "values": {
+    "bg_enabled": true,
+    "bg_first": false,
+    "bg_pass": true,
+    "bg_limit": 10,
+    "bg_pass_name": "Loaded from external",
+    "bg_title": "Loaded Background Question Title",
+    "bg_choices": "[\"Loaded 1\",\"Loaded 2\",\"Loaded 3\",\"Loaded 4\",\"Loaded 5\",\"Loaded 6\"]",
+    "enabled": true,
+    "title": "Loaded Question Set Title"
+  }
+}

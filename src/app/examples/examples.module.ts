@@ -17,8 +17,10 @@ import { SplitStoreFormComponent } from "./split-store-form/split-store-form.com
 import { ChatSendComponent } from "./chat-send/chat-send.component";
 import {
   MatInputModule,
-  MatButtonModule
+  MatButtonModule,
+  MatCardModule
 } from "../../../node_modules/@angular/material";
+import { JsonCreatorComponent } from "./json-creator/json-creator.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -26,6 +28,7 @@ import {
     HttpClientModule,
     MatInputModule,
     MatButtonModule,
+    MatCardModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 5
@@ -38,7 +41,8 @@ import {
     StoreFormComponent,
     BasicFormComponent,
     SplitStoreFormComponent,
-    ChatSendComponent
+    ChatSendComponent,
+    JsonCreatorComponent
   ],
   exports: [BasicFormComponent, StoreFormComponent]
 })

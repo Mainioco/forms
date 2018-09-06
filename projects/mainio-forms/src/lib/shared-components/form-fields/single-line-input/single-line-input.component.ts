@@ -3,23 +3,25 @@ import {
   Input,
   AfterContentInit,
   OnChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  SimpleChanges
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 import { InputQuestion } from "../../../models/input-question";
 import { FormFieldBaseComponent } from "../form-field-base/form-field-base.component";
+import { AbstractControl } from "@angular/forms";
 
 @Component({
   selector: "mainio-form-single-line-input",
   templateUrl: "./single-line-input.component.html",
-  styleUrls: ["./single-line-input.component.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ["./single-line-input.component.css"]
 })
 export class SingleLineInputComponent extends FormFieldBaseComponent {
   @Input()
   question: InputQuestion;
-
+  @Input()
+  controller: AbstractControl;
   minLength: number = 0;
   maxLength: number = 0;
   inputHint: string = "";
@@ -30,8 +32,8 @@ export class SingleLineInputComponent extends FormFieldBaseComponent {
     super();
   }
 
-  ngOnChanges() {
-    super.ngOnChanges();
+  ngOnChanges(changes: SimpleChanges) {
+    super.ngOnChanges(changes);
     this.suffix = this.question.suffix;
     this.prefix = this.question.prefix;
     this.inputHint = this.lengthDisplayers;

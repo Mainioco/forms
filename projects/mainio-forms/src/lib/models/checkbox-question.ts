@@ -6,7 +6,12 @@ import { ICheckboxOptions } from "../interfaces/i-checkbox-options";
 
 export class CheckboxQuestion extends QuestionBase<boolean> {
   controlType = ControlType.CheckBox;
-  enabled: boolean;
+  get enabled(): boolean {
+    return this.value;
+  }
+  set enabled(value) {
+    this.value = !value ? false : true;
+  }
   suffix: string;
   prefix: string;
   constructor(options: ICheckboxOptions = {}) {

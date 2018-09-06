@@ -57,9 +57,11 @@
       "key": "bg_choices",
       "label": "Choices",
       "order": 2,
-      "controlType": "[Mainio][DynamicForm][ControlType]CycleInput",
+      "repeatTimes": 6,
+      "controlType": "[Mainio][DynamicForm][ControlType]RepeatInput",
       "minLength": 5,
       "maxLength": 200,
+      "allowSameValues": false,
       "type": "input",
       "group": "bg_main"
     }

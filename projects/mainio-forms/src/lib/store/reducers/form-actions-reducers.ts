@@ -26,7 +26,6 @@ export function formActionsReducer(
 
       if (action.payload.groupId) {
         g.isValid = action.payload.groupIsValid;
-        console.log("G is ", g);
       }
       let x: Form = {
         ...state.forms[action.payload.formId],

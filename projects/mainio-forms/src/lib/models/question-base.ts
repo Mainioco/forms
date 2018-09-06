@@ -3,15 +3,18 @@ import { IQuestionBaseOptions } from "../interfaces/i-question-base-options";
 import { ControlType } from "./control-type.enum";
 
 export class QuestionBase<T> {
-  value: T;
+  public value: any;
   key: string;
   label: string;
   required: boolean;
   order: number;
   controlType: ControlType;
   group: string;
-  disabled:boolean;
-
+  disabled: boolean;
+  customValidators: ((
+    control: Forms.AbstractControl
+  ) => Forms.ValidationErrors)[];
+  hidden: boolean;
   constructor(options: IQuestionBaseOptions = {}) {
     this.value = options.value;
     this.key = options.key || "";
@@ -21,14 +24,20 @@ export class QuestionBase<T> {
     this.controlType = options.controlType || ControlType.Default;
     this.group = options.group || "";
     this.disabled = options.disabled;
+    this.customValidators = options.customValidators || undefined;
   }
 
   getValidators(): ((
     control: Forms.AbstractControl
   ) => Forms.ValidationErrors)[] {
     if (this.required) {
-      return [Forms.Validators.required];
+      let toAdd = this.customValidators ? this.customValidators : [];
+      return [Forms.Validators.required, ...toAdd];
     }
-    return [];
+    return this.customValidators ? [...this.customValidators] : [];
+  }
+
+  setValue(val: T) {
+    this.value = val;
   }
 }

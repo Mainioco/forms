@@ -12,51 +12,62 @@ import { FormGroup } from "@angular/forms";
 
 import { QuestionBase } from "../models/question-base";
 import { QuestionControlService } from "../services/question-control.service";
+import { Observable, Subscription } from "rxjs";
+import { MainioFormComponentBaseComponent } from "../shared-components/mainio-form-component-base/mainio-form-component-base.component";
+import { ILoadedValues } from "../interfaces";
+import { FormLayout } from "../models/form-layout.enum";
 
 @Component({
   selector: "mainio-dynamic-form",
   templateUrl: "./dynamic-form.component.html",
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [QuestionControlService]
 })
-export class DynamicFormComponent implements OnInit, OnChanges {
-  @Input()
-  useOneRowLayout: boolean;
+export class DynamicFormComponent extends MainioFormComponentBaseComponent
+  implements OnChanges {
   @Input()
   questions: QuestionBase<any>[] = [];
   @Input()
-  submitButtonTitle: string;
+  formLayout: FormLayout;
   @Input()
-  dontShowDefaultActions: boolean = false;
-  @Output()
-  onStatusChage: EventEmitter<any> = new EventEmitter<any>();
+  questionsUrl: string;
+  @Input()
+  formId: string;
+  @Input()
+  limitToGroup: string;
+  @Input()
+  values: Observable<ILoadedValues> | ILoadedValues;
   @Output()
   onSubmit: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  onValueChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output()
+  onStatusChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Input()
+  submitButtonTitle: string;
 
   form: FormGroup;
   payLoad = "";
 
-  constructor(private qcs: QuestionControlService) {}
-
-  ngOnInit() {}
+  constructor(private qcs: QuestionControlService) {
+    super(qcs);
+  }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.form = this.qcs.toFormGroup(this.questions);
-    console.log("Form is", this.form, this.questions);
+    this.initialize({ id: undefined, limitToGroup: this.limitToGroup });
     if (!this.form) {
       return;
     }
-    this.form.valueChanges.subscribe(x => {
-      this.onStatusChage.emit(this.form);
+    this.formValueChanges$ = this.form.valueChanges;
+    if (changes.values) {
+      for (let x of Object.keys(changes.values)) {
+        this.form.controls[x].setValue(changes.values[x]);
+      }
+    }
+    this.formValueChanges$.subscribe(x => {
+      this.onStatusChanges.emit(this.form);
       for (let q of this.questions) {
         q.value = this.form.controls[q.key].value;
       }
     });
-  }
-  onSubmitActions() {
-    if (!this.onSubmit) {
-      return;
-    }
-    this.onSubmit.emit(this.form);
   }
 }

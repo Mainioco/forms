@@ -15,113 +15,68 @@ import { QuestionControlService } from "../../../services/question-control.servi
 import { QuestionGroup } from "../../../models/question-group";
 import { FormLayout } from "../../../models";
 import { IDisplayGroup } from "../../../interfaces/i-display-group";
+import { MainioFormComponentBaseComponent } from "../../../shared-components/mainio-form-component-base/mainio-form-component-base.component";
+import { ILoadedValues } from "../../../interfaces/i-loaded-values";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "mainio-form-dynamic-store-form",
   templateUrl: "./dynamic-store-form.component.html",
-  styleUrls: ["./dynamic-store-form.component.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ["./dynamic-store-form.component.css"]
 })
-export class DynamicStoreFormComponent implements OnChanges {
+export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent {
+  @Input()
+  dontShowDefaultActions: boolean = false;
+  @Input()
+  questions: QuestionBase<any>[] = [];
   @Input()
   formLayout: FormLayout;
   @Input()
   questionsUrl: string;
   @Input()
-  id: string;
+  formId: string;
   @Input()
   limitToGroup: string;
   @Input()
-  questions: QuestionBase<any>[] = [];
-  @Input()
-  submitButtonTitle: string;
-  @Input()
-  dontShowDefaultActions: boolean = false;
-  @Output()
-  onStatusChage: EventEmitter<any> = new EventEmitter<any>();
+  values: Observable<ILoadedValues> | ILoadedValues;
   @Output()
   onSubmit: EventEmitter<any> = new EventEmitter<any>();
-  displayQuestions: QuestionBase<any>[] = [];
-  private initalized: boolean = false;
-  displayGroups: IDisplayGroup[] = [];
-  form: FormGroup;
+  @Output()
+  onValueChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output()
+  onStatusChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Input()
+  submitButtonTitle: string;
+
   payLoad = "";
 
-  constructor(
-    private _storeService: StoreService,
-    private qcs: QuestionControlService
-  ) {}
-
-  get formClass(): string {
-    switch (this.formLayout) {
-      case FormLayout.Col_1:
-      case FormLayout.Col_2:
-        return "column-form";
-      default:
-        return "row-form";
-    }
+  constructor(private _storeService: StoreService) {
+    super(_storeService);
   }
+
   ngOnChanges(changes: SimpleChanges) {
-    this.initialize();
+    if (changes.questions && changes.questions.currentValue) {
+      if (changes.questions.currentValue) {
+        this.initialize({ id: this.formId, limitToGroup: this.limitToGroup });
+      }
+    }
+    if (changes.values && changes.values.currentValue) {
+      this.setValuesFromKeys(changes.values.currentValue.values);
+    }
   }
 
-  onSubmitActions() {
-    if (!this.onSubmit) {
+  protected initialize(data: any) {
+    if (!this.formId) {
       return;
     }
-    this.onSubmit.emit(this.form);
-  }
+    super.initialize({ id: this.formId, limitToGroup: this.limitToGroup });
 
-  private initialize() {
-    if (!this.id) {
-      return;
-    }
-    if (!this.questionsUrl) {
-      let group: QuestionBase<
-        any
-      >[] = this._storeService.createFormFromQuestions(
-        this.id,
-        this.questions,
+    this.formValueChanges$.subscribe(x => {
+      this._storeService.formValuesChanged(
+        this.formId,
+        this.form,
         this.limitToGroup
       );
-      this.form = this.qcs.toFormGroup(group);
-      console.log("group is ", group, this.limitToGroup);
-      this.displayQuestions = group;
-      this.displayGroups = [];
-      let max = 1;
-      switch (this.formLayout) {
-        case FormLayout.Col_2:
-          max = 2;
-          break;
-        case FormLayout.OneRow:
-          max = 0;
-          break;
-      }
-      let curAmount = 0;
-      let groups = 0;
-      for (let q of this.displayQuestions) {
-        if (curAmount === 0) {
-          this.displayGroups.push({
-            questions: []
-          });
-          groups++;
-        }
-        this.displayGroups[groups - 1].questions.push(q);
-        curAmount++;
-        if (curAmount >= max && max > 0) {
-          curAmount = 0;
-        }
-      }
-      if (this.form) {
-        this.form.valueChanges.subscribe(x => {
-          this._storeService.formValuesChanged(
-            this.id,
-            this.form,
-            this.limitToGroup
-          );
-        });
-      }
-    }
-    this.initalized = !!this.form;
+    });
   }
 }

@@ -48,5 +48,35 @@
     "minLength": -1,
     "maxLength": -1,
     "type": "number"
+  },
+  {
+    "key": "x6",
+    "label": "Date",
+    "required": true,
+    "order": 2,
+    "controlType": "[Mainio][DynamicForm][ControlType]Date",
+    "minLength": -1,
+    "maxLength": -1,
+    "type": "number"
+  },
+  {
+    "key": "x7",
+    "label": "Slider Basic",
+    "required": true,
+    "order": 2,
+    "controlType": "[Mainio][DynamicForm][ControlType]Slider",
+    "value": 10,
+    "min": 2,
+    "max": 10
+  },
+  {
+    "key": "x8",
+    "label": "Slider Range",
+    "required": true,
+    "isRange": true,
+    "value": [0, 10],
+    "controlType": "[Mainio][DynamicForm][ControlType]Slider",
+    "min": 0,
+    "max": 100
   }
 ]

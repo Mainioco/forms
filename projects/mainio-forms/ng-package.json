@@ -8,7 +8,8 @@
     "@angular/forms",
     "@angular/material",
     "@angular/cdk",
-    "rxjs"
+    "rxjs",
+    "primeng"
   ],
 
   "lib": {
