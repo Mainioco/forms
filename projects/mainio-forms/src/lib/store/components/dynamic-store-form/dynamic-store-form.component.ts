@@ -16,20 +16,37 @@ import { QuestionGroup } from "../../../models/question-group";
 import { FormLayout } from "../../../models";
 import { IDisplayGroup } from "../../../interfaces/i-display-group";
 import { MainioFormComponentBaseComponent } from "../../../shared-components/mainio-form-component-base/mainio-form-component-base.component";
+import { ILoadedValues } from "../../../interfaces/i-loaded-values";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "mainio-form-dynamic-store-form",
   templateUrl: "./dynamic-store-form.component.html",
-  styleUrls: ["./dynamic-store-form.component.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ["./dynamic-store-form.component.css"]
 })
 export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent {
   @Input()
-  submitButtonTitle: string;
-  @Input()
   dontShowDefaultActions: boolean = false;
+  @Input()
+  questions: QuestionBase<any>[] = [];
+  @Input()
+  formLayout: FormLayout;
+  @Input()
+  questionsUrl: string;
+  @Input()
+  formId: string;
+  @Input()
+  limitToGroup: string;
+  @Input()
+  values: Observable<ILoadedValues> | ILoadedValues;
   @Output()
-  onStatusChage: EventEmitter<any> = new EventEmitter<any>();
+  onSubmit: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  onValueChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output()
+  onStatusChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Input()
+  submitButtonTitle: string;
 
   payLoad = "";
 

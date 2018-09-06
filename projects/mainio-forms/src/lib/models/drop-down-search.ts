@@ -1,6 +1,6 @@
 import { QuestionBase } from "./question-base";
 import { ControlType } from "./control-type.enum";
-import { IDropdownSearchOptions } from "mainio-forms/public_api";
+import { IDropdownSearchOptions } from "../interfaces/i-dropdown-search-options";
 
 export interface IOptions {
   key: string;

@@ -6,6 +6,7 @@ import {
 } from "@angular/core";
 import { FormFieldBaseComponent } from "../form-field-base/form-field-base.component";
 import { NumberInputQuestion } from "../../../models/number-input-question";
+import { AbstractControl } from "@angular/forms";
 
 @Component({
   selector: "mainio-form-number-input",
@@ -16,7 +17,8 @@ import { NumberInputQuestion } from "../../../models/number-input-question";
 export class NumberInputComponent extends FormFieldBaseComponent {
   @Input()
   question: NumberInputQuestion;
-
+  @Input()
+  controller: AbstractControl;
   constructor() {
     super();
   }

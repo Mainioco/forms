@@ -5,5 +5,7 @@ export enum ControlType {
   Input = "[Mainio][DynamicForm][ControlType]Input",
   NumberInput = "[Mainio][DynamicForm][ControlType]NumberInput",
   CheckBox = "[Mainio][DynamicForm][ControlType]Checkbox",
-  RepeatInput = "[Mainio][DynamicForm][ControlType]RepeatInput"
+  RepeatInput = "[Mainio][DynamicForm][ControlType]RepeatInput",
+  Date = "[Mainio][DynamicForm][ControlType]Date",
+  Slider = "[Mainio][DynamicForm][ControlType]Slider"
 }

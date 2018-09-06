@@ -7,7 +7,7 @@ import {
   EventEmitter,
   SimpleChanges
 } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, AbstractControl } from "@angular/forms";
 import { QuestionBase } from "../../../models";
 
 export class FormFieldBaseComponent implements OnChanges {
@@ -19,6 +19,9 @@ export class FormFieldBaseComponent implements OnChanges {
   onFieldChanged: EventEmitter<QuestionBase<any>> = new EventEmitter<
     QuestionBase<any>
   >();
+  @Input()
+  controller: AbstractControl;
+
   suffix: string = "";
   prefix: string = "";
 

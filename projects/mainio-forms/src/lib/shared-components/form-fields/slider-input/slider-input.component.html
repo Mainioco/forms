@@ -1,0 +1,9 @@
+<div class="form-field" *ngIf="visible">
+  <p>{{question.label}} {{!question.isRange ? selectedValue : selectedValues[0] +' - '+selectedValues[1]}}</p>
+  <div class="slider-container">
+    <p-slider [(ngModel)]="selectedValues" class="slider" (onChange)="handleChange($event)" animate="true" name="selectedValue"
+      ngDefaultControl range="true" [min]="question.min" [max]="question.max" [ngClass]="!question.isRange ? 'hidden' : ''"></p-slider>
+    <p-slider [(ngModel)]="selectedValue" class="slider" (onChange)="handleChange($event)" animate="true" name="selectedValue"
+      ngDefaultControl [min]="question.min" [max]="question.max" [ngClass]="question.isRange ? 'hidden' : ''"></p-slider>
+  </div>
+</div>

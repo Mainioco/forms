@@ -6,7 +6,7 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy
 } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, FormControl, AbstractControl } from "@angular/forms";
 
 import { QuestionBase } from "../../models/question-base";
 import {
@@ -24,10 +24,9 @@ import { ILoadedValues } from "../../interfaces";
 @Component({
   selector: "mainio-form-question",
   styleUrls: ["./dynamic-form-question.component.css"],
-  templateUrl: "./dynamic-form-question.component.html",
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: "./dynamic-form-question.component.html"
 })
-export class DynamicFormQuestionComponent {
+export class DynamicFormQuestionComponent implements OnChanges {
   @Input()
   compactStyle: boolean;
   @Input()
@@ -36,6 +35,8 @@ export class DynamicFormQuestionComponent {
   form: FormGroup;
   @Input()
   values: Observable<ILoadedValues> | ILoadedValues;
+
+  controller: AbstractControl;
 
   get controlTypeString() {
     switch (this.question.controlType.toString()) {
@@ -49,6 +50,10 @@ export class DynamicFormQuestionComponent {
         return "checkbox";
       case ControlType.RepeatInput:
         return "repeat-input";
+      case ControlType.Slider:
+        return "slider";
+      case ControlType.Date:
+        return "date";
       default:
         return "input";
     }
@@ -65,5 +70,9 @@ export class DynamicFormQuestionComponent {
       onlySelf: false,
       emitEvent: true
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.controller = this.form.controls[this.question.key];
   }
 }

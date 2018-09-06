@@ -15,27 +15,35 @@ import { QuestionControlService } from "../services/question-control.service";
 import { Observable, Subscription } from "rxjs";
 import { MainioFormComponentBaseComponent } from "../shared-components/mainio-form-component-base/mainio-form-component-base.component";
 import { ILoadedValues } from "../interfaces";
+import { FormLayout } from "../models/form-layout.enum";
 
 @Component({
   selector: "mainio-dynamic-form",
   templateUrl: "./dynamic-form.component.html",
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [QuestionControlService]
 })
 export class DynamicFormComponent extends MainioFormComponentBaseComponent
   implements OnChanges {
   @Input()
-  useOneRowLayout: boolean;
-  @Input()
   questions: QuestionBase<any>[] = [];
   @Input()
-  submitButtonTitle: string;
+  formLayout: FormLayout;
   @Input()
-  dontShowDefaultActions: boolean = false;
-  @Output()
-  onStatusChage: EventEmitter<any> = new EventEmitter<any>();
+  questionsUrl: string;
+  @Input()
+  formId: string;
+  @Input()
+  limitToGroup: string;
+  @Input()
+  values: Observable<ILoadedValues> | ILoadedValues;
   @Output()
   onSubmit: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  onValueChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output()
+  onStatusChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Input()
+  submitButtonTitle: string;
 
   form: FormGroup;
   payLoad = "";
@@ -56,7 +64,7 @@ export class DynamicFormComponent extends MainioFormComponentBaseComponent
       }
     }
     this.formValueChanges$.subscribe(x => {
-      this.onStatusChage.emit(this.form);
+      this.onStatusChanges.emit(this.form);
       for (let q of this.questions) {
         q.value = this.form.controls[q.key].value;
       }

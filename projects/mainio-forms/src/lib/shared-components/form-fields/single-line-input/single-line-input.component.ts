@@ -10,6 +10,7 @@ import { FormGroup } from "@angular/forms";
 
 import { InputQuestion } from "../../../models/input-question";
 import { FormFieldBaseComponent } from "../form-field-base/form-field-base.component";
+import { AbstractControl } from "@angular/forms";
 
 @Component({
   selector: "mainio-form-single-line-input",
@@ -19,7 +20,8 @@ import { FormFieldBaseComponent } from "../form-field-base/form-field-base.compo
 export class SingleLineInputComponent extends FormFieldBaseComponent {
   @Input()
   question: InputQuestion;
-
+  @Input()
+  controller: AbstractControl;
   minLength: number = 0;
   maxLength: number = 0;
   inputHint: string = "";

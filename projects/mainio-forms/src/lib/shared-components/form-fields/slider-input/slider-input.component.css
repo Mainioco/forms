@@ -1,0 +1,24 @@
+.form-field {
+  width: 100%;
+  min-height: 40px;
+  align-items: center;
+  display: flex;
+}
+
+.form-field > p {
+  width: 200px;
+  max-width: 100%;
+}
+
+.slider {
+  width: 100%;
+  display: inline-block;
+}
+
+.slider-container {
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}

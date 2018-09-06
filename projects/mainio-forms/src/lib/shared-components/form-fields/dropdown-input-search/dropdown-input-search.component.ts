@@ -5,7 +5,7 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, AbstractControl } from "@angular/forms";
 
 import { QuestionBase } from "../../../models/question-base";
 import {
@@ -35,6 +35,8 @@ export class DropdownInputSearchComponent implements OnInit, OnChanges {
   question: DropdownSearchQuestion;
   @Input()
   formGroup: FormGroup;
+  @Input()
+  controller: AbstractControl;
   stateGroupOptions: Subject<IOptionGroup[]> = new Subject<IOptionGroup[]>();
   selectedOption: string = "";
   constructor() {}

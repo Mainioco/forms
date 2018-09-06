@@ -16,6 +16,7 @@ import { FormGroup } from "@angular/forms";
 import { IInputQuestionOptions, ILoadedValues } from "../../../interfaces";
 import { Subscription, Observable } from "rxjs";
 import { IRepeatInputOptions } from "../../../interfaces/i-repeat-input-options";
+import { AbstractControl } from "@angular/forms";
 
 @Component({
   selector: "mainio-form-repeat-input",
@@ -31,6 +32,8 @@ export class RepeatInputComponent extends FormFieldBaseComponent
   onChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Input()
   values: Observable<ILoadedValues> | ILoadedValues;
+  @Input()
+  controller: AbstractControl;
   nestedForm: FormGroup;
   minLength: number = 0;
   maxLength: number = 0;

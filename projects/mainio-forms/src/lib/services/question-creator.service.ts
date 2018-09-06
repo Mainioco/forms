@@ -7,6 +7,8 @@ import { InputQuestion } from "../models/input-question";
 import { DropdownQuestion } from "../models/dropdown-question";
 import { CheckboxQuestion, NumberInputQuestion } from "../models";
 import { RepeatInput } from "../models/repeat-input";
+import { DateQuestion } from "../models/date-question";
+import { SliderQuestion } from "../models/slider-question";
 @Injectable({
   providedIn: "root"
 })
@@ -30,6 +32,10 @@ export class QuestionCreatorService {
         return new NumberInputQuestion(data);
       case ControlType.RepeatInput:
         return new RepeatInput(data);
+      case ControlType.Date:
+        return new DateQuestion(data);
+      case ControlType.Slider:
+        return new SliderQuestion(data);
     }
     return new InputQuestion(data);
   }

@@ -1,4 +1,4 @@
-<mat-form-field [formGroup]="formGroup" *ngIf="question">
+<mat-form-field [formGroup]="formGroup" *ngIf="question" class="form-field">
   <input matInput placeholder="{{question.label}}" [formControlName]="question.key" [id]="'mainio-input'+question.key" type="number"
     [minLength]="question.minLength" [maxLength]="question.maxLength" [required]="question.required" *ngIf="question.minLength > 0 && question.maxLength > 0">
   <input matInput placeholder="{{question.label}}" [formControlName]="question.key" [id]="'mainio-input'+question.key" type="number"

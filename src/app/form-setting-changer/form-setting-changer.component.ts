@@ -6,6 +6,7 @@ import {
   QuestionBase
 } from "mainio-forms";
 import { FormGroup } from "@angular/forms";
+import { FormLayoutService } from "../services/form-layout.service";
 
 @Component({
   selector: "mainio-form-form-setting-changer",
@@ -14,12 +15,13 @@ import { FormGroup } from "@angular/forms";
 })
 export class FormSettingChangerComponent implements OnInit {
   questions: QuestionBase<any>[] = [];
-  constructor() {}
+  constructor(private _layoutService: FormLayoutService) {}
 
   ngOnInit() {
     let opts = Object.keys(FormLayout);
     this.questions.push(
       new DropdownQuestion({
+        key: "layout_selector",
         label: "Form layout",
         options: opts.map(x => {
           let i: IOptions = {
@@ -33,5 +35,22 @@ export class FormSettingChangerComponent implements OnInit {
     );
   }
 
-  reportChangeLayout(event: FormGroup) {}
+  reportChangeLayout(event: FormGroup) {
+    if (!event.controls) return;
+
+    switch (event.controls["layout_selector"].value) {
+      case "OneRow":
+        this._layoutService.layout = FormLayout.OneRow;
+        break;
+      case "Col_1":
+        this._layoutService.layout = FormLayout.Col_1;
+        break;
+      case "Col_2":
+        this._layoutService.layout = FormLayout.Col_2;
+        break;
+      default:
+        this._layoutService.layout = FormLayout.Default;
+        break;
+    }
+  }
 }

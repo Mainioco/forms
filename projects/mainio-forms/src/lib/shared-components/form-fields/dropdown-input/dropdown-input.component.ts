@@ -10,7 +10,7 @@ import { FormGroup } from "@angular/forms";
 import { QuestionBase } from "../../../models/question-base";
 import { DropdownQuestion } from "../../../models/dropdown-question";
 import { ControlType } from "../../../models/control-type.enum";
-
+import { AbstractControl } from "@angular/forms";
 @Component({
   selector: "mainio-form-dropdown-input",
   templateUrl: "./dropdown-input.component.html",
@@ -22,6 +22,8 @@ export class DropdownInputComponent implements OnInit, OnChanges {
   question: DropdownQuestion;
   @Input()
   formGroup: FormGroup;
+  @Input()
+  controller: AbstractControl;
   selectedOption: string = "";
 
   constructor() {}
