@@ -25,6 +25,7 @@ export class QuestionBase<T> {
     this.group = options.group || "";
     this.disabled = options.disabled;
     this.customValidators = options.customValidators || undefined;
+    this.hidden = options.hidden;
   }
 
   getValidators(): ((

@@ -38,13 +38,13 @@ export class DropdownQuestion extends QuestionBase<string> {
     };
   }
 
-  set selected(value: IOptions | string) {
-    if (!value && value !== "0") {
+  set selected(value: IOptions | string | number) {
+    if (!value && value !== "0" && value !== 0) {
       this.value = undefined;
       this._selection = undefined;
       return;
     }
-    this._selection = this.getDesignatedSetValue(value);
+    this._selection = this.getDesignatedSetValue(value).toString();
     this.value = this.options.find(
       x => x.key === this.getDesignatedSetValue(value)
     )
@@ -72,10 +72,12 @@ export class DropdownQuestion extends QuestionBase<string> {
     return;
   }
 
-  private getDesignatedSetValue(value: IOptions | string) {
+  private getDesignatedSetValue(value: IOptions | string | number) {
     if (typeof value === "string") {
       return value;
+    } else if (typeof value === "number") {
+      return value;
     }
-    return value.key;
+    return value.key ? value.key : "";
   }
 }

@@ -70,6 +70,7 @@ export abstract class MainioFormComponentBaseComponent {
     }
   }
   protected initialize(data: IFormCreationOptions = undefined) {
+    if (!this.questions) return;
     if (!this.questionsUrl) {
       let result: IFormGroupCreatedResult = this._creator.createFormGroupFromQuestions(
         this.questions,
@@ -105,13 +106,14 @@ export abstract class MainioFormComponentBaseComponent {
       if (this.form) {
         this.formValueChanges$ = this.form.valueChanges;
         this.formValueChanges$.subscribe(x => {
-          this.onValueChanges.emit(x);
+          this.onValueChanges.emit(this.form);
         });
         this.form.statusChanges.subscribe(x => {
-          this.onStatusChanges.emit(x);
+          this.onStatusChanges.emit(this.form);
         });
       }
     }
     this.initalized = !!this.form;
+    console.log(this.form);
   }
 }

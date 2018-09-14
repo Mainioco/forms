@@ -70,6 +70,17 @@
     "max": 10
   },
   {
+    "key": "hidden",
+    "label": "Hidden slider",
+    "required": true,
+    "hidden": true,
+    "order": 2,
+    "controlType": "[Mainio][DynamicForm][ControlType]Slider",
+    "value": 10,
+    "min": 2,
+    "max": 10
+  },
+  {
     "key": "x8",
     "label": "Slider Range",
     "required": true,

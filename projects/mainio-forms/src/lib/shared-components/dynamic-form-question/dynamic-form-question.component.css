@@ -10,9 +10,10 @@
   padding: 0px;
   border: 0px;
   overflow: hidden;
+  transition: height 1s ease;
 }
 
 .mainio-input {
   height: auto;
-  transform: 1s height ease;
+  transition: height 1s ease;
 }

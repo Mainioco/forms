@@ -4,12 +4,12 @@ import { IDropdownSearchOptions } from "../interfaces/i-dropdown-search-options"
 
 export interface IOptions {
   key: string;
-  value: string;
-  label: string;
+  value?: string;
+  label?: string;
 }
 
 export interface IOptionGroup {
-  groupName: string;
+  groupName?: string;
   groupId: string;
   options: Array<IOptions>;
 }
