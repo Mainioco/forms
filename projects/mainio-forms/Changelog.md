@@ -1,5 +1,11 @@
 # Change log
 
+## Version 1.0.0.alpha-5
+
+**Fixes**
+
+- IOptions and IOptionGroup interfaces are exported correctly from library
+
 ## Version 1.0.0.alpha-4
 
 **Fixes**
