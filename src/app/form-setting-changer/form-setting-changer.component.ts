@@ -1,12 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  DropdownQuestion,
-  FormLayout,
-  IOptions,
-  QuestionBase
-} from "mainio-forms";
+import { DropdownQuestion, FormLayout, QuestionBase } from "mainio-forms";
 import { FormGroup } from "@angular/forms";
 import { FormLayoutService } from "../services/form-layout.service";
+import { IOptions } from "mainio-forms/lib/interfaces/i-options";
 
 @Component({
   selector: "mainio-form-form-setting-changer",

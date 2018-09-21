@@ -48,11 +48,12 @@ export abstract class MainioFormComponentBaseComponent {
 
   get formClass(): string {
     switch (this.formLayout) {
-      case FormLayout.Col_1:
       case FormLayout.Col_2:
-        return "column-form";
-      default:
+        return "row-form column-2";
+      case FormLayout.OneRow:
         return "row-form";
+      default:
+        return "column-form column-1";
     }
   }
 
@@ -114,6 +115,5 @@ export abstract class MainioFormComponentBaseComponent {
       }
     }
     this.initalized = !!this.form;
-    console.log(this.form);
   }
 }

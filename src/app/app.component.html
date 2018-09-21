@@ -11,7 +11,7 @@
       </div>
     </div>
     <div style="display:flex;flex-direction: row;flex-wrap: wrap;margin-top:20px">
-      <div style="width:400px;margin:0 auto;flex-grow: 1;padding:40px">
+      <div style="width:400px;margin:0 auto;flex-grow: 1;padding:40px" class="mat-typography">
         <mainio-form-basic *ngIf="!index"></mainio-form-basic>
         <mainio-form-chat *ngIf="index === 3"></mainio-form-chat>
         <mainio-form-store *ngIf="index === 1"></mainio-form-store>
@@ -21,7 +21,8 @@
       </div>
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-tab-group (selectedTabChange)="navigate($event)" class="example-card" style="padding: 0 20px 20px 20px" [selectedIndex]="index">
+          <mat-tab-group (selectedTabChange)="navigate($event)" class="example-card" style="padding: 0 20px 20px 20px"
+            [selectedIndex]="index">
             <mat-tab label="Basic"></mat-tab>
             <mat-tab label="Store"> </mat-tab>
             <mat-tab label="Splitted Store"></mat-tab>

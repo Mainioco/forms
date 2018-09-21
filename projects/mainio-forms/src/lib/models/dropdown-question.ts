@@ -1,7 +1,9 @@
 import { QuestionBase } from "./question-base";
-import { IOptionGroup, IOptions } from "./drop-down-search";
 import { ControlType } from "./control-type.enum";
 import { IDropdownOptions } from "../interfaces";
+import { IOptions } from "../interfaces/i-options";
+import { IOptionGroup } from "../interfaces/i-option-group";
+
 export class DropdownQuestion extends QuestionBase<string> {
   controlType = ControlType.Dropdown;
   public _selection: string;

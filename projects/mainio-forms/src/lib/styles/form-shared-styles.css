@@ -1,0 +1,63 @@
+.mainio-form-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.column-form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.column-form > .mainio-form-question {
+  display: flex;
+  flex-grow: 1;
+}
+
+.column-2 > .mainio-form-question {
+  display: flex;
+  flex-grow: 0.5;
+  width: 40%;
+  margin: 0 10px;
+}
+
+.row-form {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.row-form > .mainio-form-question {
+  margin: 0 10px;
+  display: flex;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.row-form > .mainio-input-hidden-container {
+  height: 0px;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  width: 0;
+  overflow: hidden;
+  display: none;
+  transition: height 1s ease;
+}
+
+.question-group-container {
+  flex-grow: 1;
+  padding: 0 5px;
+}
+
+.mainio-input-hidden-container {
+  height: 0px;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  width: 0;
+  overflow: hidden;
+  display: none;
+  transition: height 1s ease;
+}

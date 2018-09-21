@@ -1,5 +1,6 @@
 import { IQuestionBaseOptions } from "./i-question-base-options";
-import { IOptionGroup, IOptions } from "../models/drop-down-search";
+import { IOptions } from "./i-options";
+import { IOptionGroup } from "./i-option-group";
 
 export interface IDropdownOptions extends IQuestionBaseOptions {
   options?: Array<IOptions>;

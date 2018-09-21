@@ -6,3 +6,4 @@ export * from "./i-number-input-question-options";
 export * from "./i-question-base-options";
 export * from "./i-form-group-creator";
 export * from "./i-loaded-values";
+export * from "./i-form-group-creator";

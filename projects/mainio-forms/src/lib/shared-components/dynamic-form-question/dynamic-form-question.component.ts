@@ -9,11 +9,7 @@ import {
 import { FormGroup, FormControl, AbstractControl } from "@angular/forms";
 
 import { QuestionBase } from "../../models/question-base";
-import {
-  DropdownSearchQuestion,
-  IOptions,
-  IOptionGroup
-} from "../../models/drop-down-search";
+import { DropdownSearchQuestion } from "../../models/drop-down-search";
 import { Observable, Subject } from "rxjs";
 import { startWith, map } from "rxjs/operators";
 import { DropdownQuestion } from "../../models/dropdown-question";

@@ -16,6 +16,7 @@ import {
   IFormCreationOptions,
   IFormGroupCreatedResult
 } from "../../interfaces/i-form-group-creator";
+import { Observable, Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -55,6 +56,34 @@ export class StoreService implements IFormGroupCreator {
         data ? data.values : undefined
       )
     };
+  }
+
+  isStoreFormValid(id:string):Observable<boolean>
+  {
+    let obs = new Subject<boolean>();
+    this.store.select(x=> x.forms).subscribe(x=>{
+       let f:Form = x[id];
+       obs.next(this.isFormValid(f));
+    })
+    return obs;
+  }
+
+  isFormValid(form:Form)
+  {
+    if(!form.questionGroups)
+    {
+      return true;
+    }
+    let keys = Object.keys(form.questionGroups);
+    for(let x of keys)
+    {
+      let qg:QuestionGroup = form.questionGroups[x];
+      if(!qg.isValid)
+      {
+        return false;
+      }
+    }
+    return true;
   }
 
   public createForm(form: Form) {

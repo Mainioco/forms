@@ -20,6 +20,10 @@ import { FormLayout } from "../models/form-layout.enum";
 @Component({
   selector: "mainio-dynamic-form",
   templateUrl: "./dynamic-form.component.html",
+  styleUrls: [
+    "./dynamic-form.component.css",
+    "../styles/form-shared-styles.css"
+  ],
   providers: [QuestionControlService]
 })
 export class DynamicFormComponent extends MainioFormComponentBaseComponent
@@ -54,6 +58,7 @@ export class DynamicFormComponent extends MainioFormComponentBaseComponent
 
   ngOnChanges(changes: SimpleChanges) {
     this.initialize({ id: undefined, limitToGroup: this.limitToGroup });
+
     if (!this.form) {
       return;
     }

@@ -30,6 +30,28 @@
     "type": "input"
   },
   {
+    "key": "x3_drop",
+    "label": "Dropwdown",
+    "required": false,
+    "order": 2,
+    "controlType": "[Mainio][DynamicForm][ControlType]Dropdown",
+    "minLength": 5,
+    "maxLength": -1,
+    "type": "dropdown",
+    "options": [
+      {
+        "key": "option1",
+        "value": "option1",
+        "label": "Option 1"
+      },
+      {
+        "key": "option2",
+        "value": "option2",
+        "label": "Option 2"
+      }
+    ]
+  },
+  {
     "key": "x4",
     "label": "No length limitations",
     "required": true,

@@ -8,13 +8,11 @@ import {
 import { FormGroup, AbstractControl } from "@angular/forms";
 
 import { QuestionBase } from "../../../models/question-base";
-import {
-  DropdownSearchQuestion,
-  IOptions,
-  IOptionGroup
-} from "../../../models/drop-down-search";
+import { DropdownSearchQuestion } from "../../../models/drop-down-search";
 import { Subject } from "rxjs";
 import { startWith, map } from "rxjs/operators";
+import { IOptionGroup } from "../../../interfaces/i-option-group";
+import { IOptions } from "../../../interfaces/i-options";
 
 export const _filter = (opt: any[], value: IOptions | string): IOptions[] => {
   const filterValue =

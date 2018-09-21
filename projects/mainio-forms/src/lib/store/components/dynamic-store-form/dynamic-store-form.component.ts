@@ -22,7 +22,10 @@ import { Observable } from "rxjs";
 @Component({
   selector: "mainio-form-dynamic-store-form",
   templateUrl: "./dynamic-store-form.component.html",
-  styleUrls: ["./dynamic-store-form.component.css"]
+  styleUrls: [
+    "./dynamic-store-form.component.css",
+    "../../../styles/form-shared-styles.css"
+  ]
 })
 export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent {
   @Input()

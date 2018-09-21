@@ -11,7 +11,7 @@ import {
 import { FormFieldBaseComponent } from "../form-field-base/form-field-base.component";
 import { RepeatInput } from "../../../models/repeat-input";
 import { QuestionBase, InputQuestion } from "../../../models";
-import { QuestionControlService } from "../../../services";
+import { QuestionControlService } from "../../../services/question-control.service";
 import { FormGroup } from "@angular/forms";
 import { IInputQuestionOptions, ILoadedValues } from "../../../interfaces";
 import { Subscription, Observable } from "rxjs";

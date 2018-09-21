@@ -11,6 +11,8 @@ import { QuestionBase } from "../../../models/question-base";
 import { DropdownQuestion } from "../../../models/dropdown-question";
 import { ControlType } from "../../../models/control-type.enum";
 import { AbstractControl } from "@angular/forms";
+import { IOptions } from "../../../interfaces/i-options";
+
 @Component({
   selector: "mainio-form-dropdown-input",
   templateUrl: "./dropdown-input.component.html",
@@ -27,6 +29,10 @@ export class DropdownInputComponent implements OnInit, OnChanges {
   selectedOption: string = "";
 
   constructor() {}
+
+  getOptionValue(option: IOptions) {
+    return option.value ? option.value : option.key;
+  }
 
   ngOnInit() {}
 
