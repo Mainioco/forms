@@ -13,6 +13,8 @@ import {
 } from "@angular/material";
 import { MainioFormsStoreConfig } from "./interfaces/store-config";
 import { MainioFormStoreServiceConfig } from "./tokens/service-config";
+import { EffectsModule } from "@ngrx/effects";
+import { FormLifecycleEffects } from "./effects/form-lifecycle-effects";
 
 @NgModule({
   imports: [
@@ -25,7 +27,8 @@ import { MainioFormStoreServiceConfig } from "./tokens/service-config";
     MatSelectModule,
     MatButtonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    EffectsModule.forRoot([FormLifecycleEffects])
   ],
   declarations: [DynamicStoreFormComponent],
   providers: [],

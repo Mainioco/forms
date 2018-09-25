@@ -17,6 +17,7 @@ import { IInputQuestionOptions, ILoadedValues } from "../../../interfaces";
 import { Subscription, Observable } from "rxjs";
 import { IRepeatInputOptions } from "../../../interfaces/i-repeat-input-options";
 import { AbstractControl } from "@angular/forms";
+import { FormGroupService } from "../../../services";
 
 @Component({
   selector: "mainio-form-repeat-input",
@@ -31,7 +32,7 @@ export class RepeatInputComponent extends FormFieldBaseComponent
   @Output()
   onChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Input()
-  values: Observable<ILoadedValues> | ILoadedValues;
+  values: ILoadedValues;
   @Input()
   controller: AbstractControl;
   nestedForm: FormGroup;
@@ -44,25 +45,38 @@ export class RepeatInputComponent extends FormFieldBaseComponent
   private parentSubscription: Subscription;
   private nestedFormSubscription: Subscription;
   private ownStatusChange: Subscription;
-  constructor(private _formGroupService: QuestionControlService) {
+  constructor(private _formGroupService: FormGroupService) {
     super();
   }
 
   ngOnDestroy() {
     this.unsubscribe();
   }
-  ngOnChanges(changes: SimpleChanges) {
+  async ngOnChanges(changes: SimpleChanges) {
     super.ngOnChanges(changes);
 
+    let values = [];
+    if (
+      this.values &&
+      this.values.values &&
+      this.values.values[this.question.key]
+    ) {
+      try {
+        if (this.values.values[this.question.key].constructor === String) {
+          let s = this.values.values[this.question.key];
+          values = JSON.parse(s);
+        } else if (this.values.values[this.question.key] === Array) {
+          values = this.values.values[this.question.key];
+        }
+      } catch (ex) {}
+    }
     this.unsubscribe();
-    this.updateRepeatFields(
-      changes.question ? changes.question.currentValue.value : changes.values,
-      changes.question
+    this.updateRepeatFields(values, changes.question);
+    this.nestedForm = this._formGroupService.InitializeGroup(
+      this.repeatFields,
+      undefined
     );
-    let res = this._formGroupService.createFormGroupFromQuestions(
-      this.repeatFields
-    );
-    this.nestedForm = res.formGroup;
+    this.setValues(values);
     this.nestedFormSubscription = this.nestedForm.valueChanges.subscribe(x => {
       this.onChanges.emit(this.nestedForm);
     });
@@ -108,8 +122,9 @@ export class RepeatInputComponent extends FormFieldBaseComponent
   }
 
   updateRepeatFields(vals: string[], questionsUpdated) {
-    this.repeatFields = [];
-    let options: InputQuestion = new InputQuestion(this.question);
+    if (this.ownStatusChange) {
+      this.ownStatusChange.unsubscribe();
+    }
     this.ownStatusChange = this.formGroup.controls[
       this.question.key
     ].statusChanges.subscribe(x => {
@@ -121,6 +136,12 @@ export class RepeatInputComponent extends FormFieldBaseComponent
         this.nestedForm.controls[k].markAsTouched();
       }
     });
+    this.setValues(vals);
+  }
+
+  setValues(vals: string[]) {
+    this.repeatFields = [];
+    let options: InputQuestion = new InputQuestion(this.question);
     for (let i = 0; i < this.question.repeatTimes; i++) {
       options.value = vals && i < vals.length ? vals[i] : "";
       let q = new InputQuestion(options);
@@ -137,7 +158,6 @@ export class RepeatInputComponent extends FormFieldBaseComponent
       this.repeatFields.push(q);
     }
   }
-
   private unsubscribe() {
     if (this.parentSubscription) this.parentSubscription.unsubscribe();
     if (this.nestedFormSubscription) this.nestedFormSubscription.unsubscribe();

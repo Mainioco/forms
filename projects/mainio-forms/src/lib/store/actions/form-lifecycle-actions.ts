@@ -4,6 +4,7 @@ import { QuestionBase } from "../../models/question-base";
 import { Form } from "../../models/form";
 import { QuestionGroup } from "../../models/question-group";
 import { FormGroup } from "@angular/forms";
+import { ILoadedValues } from "../../interfaces";
 
 export enum MainioLifecycleActionTypes {
   Created = "[MainioForm][Lifecycle] Created",
@@ -12,9 +13,33 @@ export enum MainioLifecycleActionTypes {
   FormGroupCreated = "[MainioForm][Actions] FormGroupCreated",
   FormGroupDeleted = "[MainioForm][Actions] FormGroupDeleted",
   ValueChanges = "[MainioForm][Actions] ValueChanged",
-  ValueReset = "[MainioForm][Actions] ValueReset"
+  ValueReset = "[MainioForm][Actions] ValueReset",
+  ClearValues = "[MainioForm][Actions] ClearValues",
+  LoadedValues = "[MainioForm][Actions] LoadedValues",
+  SaveValues = "[MainioForm][Actions] SaveValues",
+  EffectRun = "EffectRun"
 }
 
+export class LoadedValuesAction implements Action {
+  readonly type = MainioLifecycleActionTypes.LoadedValues;
+
+  constructor(public payload: { form: Form; values: ILoadedValues }) {}
+}
+export class SaveValuesAction implements Action {
+  readonly type = MainioLifecycleActionTypes.SaveValues;
+
+  constructor(public payload: Form) {}
+}
+
+export class ClearValuesAction implements Action {
+  readonly type = MainioLifecycleActionTypes.ClearValues;
+
+  constructor(public payload: Form) {}
+}
+
+export class EffectRun implements Action {
+  readonly type = MainioLifecycleActionTypes.EffectRun;
+}
 export class Created implements Action {
   readonly type = MainioLifecycleActionTypes.Created;
 
@@ -72,4 +97,8 @@ export type LifecycleActions =
   | FormGroupCreated
   | FormGroupDeleted
   | ValueChanged
-  | ValueReset;
+  | ValueReset
+  | EffectRun
+  | ClearValuesAction
+  | SaveValuesAction
+  | LoadedValuesAction;

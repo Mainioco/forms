@@ -1,5 +1,16 @@
 <div style="justify-content:center;display:flex;width: 100%">
-    <div style="max-width:600px;background:white;padding:20px;border-radius:5px">
-        <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass"></mainio-form-dynamic-store-form>
+    <div style="width:100%;;background:white;padding:20px;border-radius:5px">
+        <p>{{formIsValid ? 'Valid form' : 'Form is invalid'}}</p>
+        <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" [values]="values$ | async"></mainio-form-dynamic-store-form>
     </div>
+
+
+</div>
+<div style="display:flex">
+    <button mat-button (click)="save()" [disabled]="formIsValid">Save</button>
+    <button mat-button (click)="reset()" [disabled]="!hasSavedValues">Clear to save values</button>
+    <button mat-button (click)="clear()">Clear all values</button>
+</div>
+<div style="display:flex">
+    <p>Last saved values : {{savedValues | json}}</p>
 </div>

@@ -16,12 +16,15 @@ import {
   IFormCreationOptions,
   IFormGroupCreatedResult
 } from "../../interfaces/i-form-group-creator";
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject, of } from "rxjs";
+import { take, find } from "rxjs/operators";
+import { catchError, map, mergeMap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
 })
 export class StoreService implements IFormGroupCreator {
+  private _createdStores: string[] = [];
   constructor(
     private _store: Store<LifecycleState>,
     private _formGroupService: FormGroupService,
@@ -37,57 +40,116 @@ export class StoreService implements IFormGroupCreator {
     this._store = val;
   }
 
-  public createFormGroupFromQuestions(
+  public setCreatedForm(form: Form) {
+    if (!this._createdStores) {
+      this._createdStores = [];
+    }
+    this._createdStores.push(form.id);
+  }
+
+  public hasFormWithId(id: string): boolean {
+    return !!this._createdStores.find(x => x == id);
+  }
+
+  public async createFormGroupFromQuestions(
     questions: QuestionBase<any>[],
-    data: IFormCreationOptions
-  ): IFormGroupCreatedResult {
+    data: IFormCreationOptions,
+    isNew: boolean
+  ): Promise<IFormGroupCreatedResult> {
     if (!data.id) {
       throw new Error("Dynamic store requires formId to be set");
     }
-    let res = this.createFormFromQuestions(
+    let res: IFormGroupCreatedResult = await this.createFormFromQuestions(
       data.id,
       questions,
-      data.limitToGroup
+      data.limitToGroup,
+      isNew
     );
-    return {
-      questionsUsed: res,
-      formGroup: this._formGroupService.InitializeGroup(
-        res,
-        data ? data.values : undefined
-      )
-    };
+    return res;
   }
 
-  isStoreFormValid(id:string):Observable<boolean>
-  {
+  saveForm(id: string) {
+    this.store.dispatch(new lifecycleActions.SaveValuesAction({ id: id }));
+  }
+
+  resetForm(id: string) {
+    this.store.dispatch(new lifecycleActions.ValueReset({ form: { id: id } }));
+  }
+
+  clearForm(id: string) {
+    this.store.dispatch(new lifecycleActions.ClearValuesAction({ id: id }));
+  }
+
+  isStoreFormValid(id: string): Observable<boolean> {
     let obs = new Subject<boolean>();
-    this.store.select(x=> x.forms).subscribe(x=>{
-       let f:Form = x[id];
-       obs.next(this.isFormValid(f));
-    })
+    let subs = this.getFormState(id).subscribe(
+      (x: { id: string; form: Form }) => {
+        if (!x[id]) {
+          obs.next(false);
+        } else obs.next(this.isFormValid(x[id]));
+        setTimeout(() => {
+          subs.unsubscribe();
+        }, 10);
+      }
+    );
     return obs;
   }
 
-  isFormValid(form:Form)
-  {
-    if(!form.questionGroups)
-    {
+  isFormValid(form: Form) {
+    if (!form) return false;
+    if (!form.questionGroups) {
       return true;
     }
     let keys = Object.keys(form.questionGroups);
-    for(let x of keys)
-    {
-      let qg:QuestionGroup = form.questionGroups[x];
-      if(!qg.isValid)
-      {
+    for (let x of keys) {
+      let qg: QuestionGroup = form.questionGroups[x];
+      if (!qg.isValid) {
         return false;
       }
     }
     return true;
   }
 
-  public createForm(form: Form) {
-    this.store.dispatch(new lifecycleActions.Created(form));
+  public async createForm(
+    form: Form,
+    withQuestions: QuestionBase<any>[],
+    isNew: boolean
+  ): Promise<IFormGroupCreatedResult> {
+    let promise = new Promise<IFormGroupCreatedResult>(resolve => {
+      if (!this.hasFormWithId(form.id)) {
+        this.store.dispatch(new lifecycleActions.Created(form));
+        let t: IFormGroupCreatedResult = {
+          questionsUsed: withQuestions,
+          formGroup: this._formGroupService.InitializeGroup(
+            withQuestions,
+            undefined
+          )
+        };
+        resolve(t);
+      } else {
+        this.store.dispatch(
+          new lifecycleActions.QuestionsUpdated({
+            form: form,
+            newQuestions: withQuestions
+          })
+        );
+
+        this.store
+          .select(x => x[this.getStoreName()].forms[form.id])
+          .subscribe((x: Form) => {
+            let fg = this._formGroupService.InitializeGroup(
+              withQuestions,
+              x.values
+            );
+            let r = {
+              questionsUsed: withQuestions,
+              formGroup: fg
+            };
+            resolve(r);
+          });
+      }
+    });
+    return promise;
   }
 
   formValuesChanged(id: string, formGroup: FormGroup, groupId: string) {
@@ -96,52 +158,67 @@ export class StoreService implements IFormGroupCreator {
         formId: id,
         newValues: formGroup.value,
         groupIsValid: !formGroup.invalid,
-        groupId: groupId
+        groupId: groupId ? groupId : this.getDefaultGroupKey()
       })
     );
   }
 
-  createFormFromQuestions(
+  async createFormFromQuestions(
     id: string,
     questions: QuestionBase<any>[],
-    limitToGroup: string = undefined
-  ): QuestionBase<any>[] {
+    limitToGroup: string = undefined,
+    isNew: boolean
+  ): Promise<IFormGroupCreatedResult> {
+    let limitedGroup: QuestionGroup;
     let f: Form = new Form();
     f.id = id;
     f.questions = [];
     f.values = undefined;
+    f.savedValues = undefined;
     for (let q of questions) {
       f.questions.push(q);
-      if (!q.group) {
-        continue;
-      }
+      let groupName = q.group ? q.group : this.getDefaultGroupKey();
       let g: QuestionGroup = f.questionGroups
-        ? f.questionGroups[q.group]
+        ? f.questionGroups[groupName]
         : undefined;
+
       if (!g) {
         g = {
-          group: q.group,
+          group: groupName,
           questionsIds: [],
           isValid: false
         };
         if (!f.questionGroups) {
           f.questionGroups = {};
         }
-        f.questionGroups[q.group] = g;
+        f.questionGroups[groupName] = g;
+        if (g.group == limitToGroup) {
+          limitedGroup = g;
+        }
       }
       g.questionsIds.push(q.key);
     }
-    this.createForm(f);
-
-    return limitToGroup
+    let selectedQs = limitToGroup
       ? f.questions.filter(x => x.group === limitToGroup)
       : f.questions;
+    let t = await this.createForm(f, selectedQs, isNew);
+    return t;
   }
 
-  private getStore() {
+  public getStoreName() {
     if (!this.config) {
       return "forms";
     }
     return this.config.storeName;
+  }
+
+  public getDefaultGroupKey() {
+    return !this.config || !this.config.defaultFormGroupKey
+      ? "no-group"
+      : this.config.defaultFormGroupKey;
+  }
+
+  public getFormState(id: string): Observable<{ id: string; form: Form }> {
+    return this.store.select(x => x[this.getStoreName()].forms);
   }
 }

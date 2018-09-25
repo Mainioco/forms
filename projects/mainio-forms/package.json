@@ -1,13 +1,13 @@
 {
   "name": "mainio-forms",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "author": {
     "name": "Juha Möttönen",
     "email": "juha.mottonen@mainio.co",
     "url": "https://twitter.com/JuhaMttnen"
   },
   "description": "Angular 6 dynamic forms module. The goal is to provide easy to integrate forms to projects",
-  "homepage": "https://github.com/Mainioco/sdk",
+  "homepage": "https://github.com/Mainioco/forms",
   "keywords": [
     "mainio",
     "angular",

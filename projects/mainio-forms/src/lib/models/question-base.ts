@@ -38,7 +38,7 @@ export class QuestionBase<T> {
     return this.customValidators ? [...this.customValidators] : [];
   }
 
-  setValue(val: T) {
+  setValue(val: any) {
     this.value = val;
   }
 }

@@ -1,5 +1,6 @@
-import { QuestionBase } from "../models";
+import { QuestionBase, Form } from "../models";
 import { FormGroup } from "@angular/forms";
+import { Observable } from "rxjs";
 
 export interface IFormCreationOptions {
   id: string;
@@ -15,6 +16,7 @@ export interface IFormGroupCreatedResult {
 export abstract class IFormGroupCreator {
   abstract createFormGroupFromQuestions(
     questions: QuestionBase<any>[],
-    data: IFormCreationOptions
-  ): IFormGroupCreatedResult;
+    data: IFormCreationOptions,
+    isNew: boolean
+  ): Promise<IFormGroupCreatedResult>;
 }

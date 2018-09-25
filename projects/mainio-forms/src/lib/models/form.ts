@@ -4,7 +4,8 @@ import { QuestionGroup } from "./question-group";
 
 export class Form {
   public id: string;
-  public questionGroups: { key?: string; value?: QuestionGroup };
-  public questions: QuestionBase<any>[];
-  public values: { key: string; value: any };
+  public questionGroups?: { key?: string; value?: QuestionGroup };
+  public questions?: QuestionBase<any>[];
+  public values?: { key: string; value: any };
+  public savedValues?: { key: string; value: any };
 }

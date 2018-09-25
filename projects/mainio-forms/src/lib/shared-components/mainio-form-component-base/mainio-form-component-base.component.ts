@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  EventEmitter,
+  Output,
+  OnDestroy
+} from "@angular/core";
 import { FormLayout } from "../../models";
 import { IDisplayGroup } from "../../interfaces/i-display-group";
 import { QuestionBase } from "../../models/question-base";
@@ -9,10 +16,10 @@ import {
   IFormCreationOptions,
   IFormGroupCreatedResult
 } from "../../interfaces/i-form-group-creator";
-import { Observable } from "rxjs";
-import { ILoadedValues } from "../../interfaces";
+import { Observable, Subscription } from "rxjs";
+import { ILoadedValues, IFormValuesInput } from "../../interfaces";
 
-export abstract class MainioFormComponentBaseComponent {
+export abstract class MainioFormComponentBaseComponent implements OnDestroy {
   @Input()
   questions: QuestionBase<any>[] = [];
   @Input()
@@ -24,7 +31,7 @@ export abstract class MainioFormComponentBaseComponent {
   @Input()
   limitToGroup: string;
   @Input()
-  values: Observable<ILoadedValues> | ILoadedValues;
+  values: ILoadedValues;
   @Output()
   onSubmit: EventEmitter<any> = new EventEmitter<any>();
   @Output()
@@ -36,6 +43,9 @@ export abstract class MainioFormComponentBaseComponent {
   displayGroups: IDisplayGroup[] = [];
   form: FormGroup;
   protected initalized: boolean = false;
+  protected _ownQuestions: QuestionBase<any>;
+  protected _formValueChanged: Subscription;
+  protected _formStatusChanged: Subscription;
 
   constructor(protected _creator: IFormGroupCreator) {}
 
@@ -57,7 +67,7 @@ export abstract class MainioFormComponentBaseComponent {
     }
   }
 
-  setValuesFromKeys(values: { [key: string]: any }) {
+  setValuesFromKeys(values: IFormValuesInput, emitEvent: boolean = true) {
     for (let x of Object.keys(values)) {
       let q = this.questions.find(y => y.key == x);
       if (!q) {
@@ -67,15 +77,19 @@ export abstract class MainioFormComponentBaseComponent {
         continue;
       }
       // q.setValue(values[x]);
-      this.form.controls[x].setValue(values[x]);
+      this.form.controls[x].setValue(values[x], { emitEvent: emitEvent });
     }
   }
-  protected initialize(data: IFormCreationOptions = undefined) {
+  protected async initialize(data: IFormCreationOptions = undefined) {
+    if (!this.questions || this.questions.length === 0) {
+      return;
+    }
     if (!this.questions) return;
     if (!this.questionsUrl) {
-      let result: IFormGroupCreatedResult = this._creator.createFormGroupFromQuestions(
+      let result = await this._creator.createFormGroupFromQuestions(
         this.questions,
-        data
+        data,
+        !this.initalized
       );
       this.form = result.formGroup;
       this.displayQuestions = result.questionsUsed;
@@ -105,15 +119,25 @@ export abstract class MainioFormComponentBaseComponent {
         }
       }
       if (this.form) {
+        this.unsubscribe();
         this.formValueChanges$ = this.form.valueChanges;
-        this.formValueChanges$.subscribe(x => {
+        this._formValueChanged = this.formValueChanges$.subscribe(x => {
           this.onValueChanges.emit(this.form);
         });
-        this.form.statusChanges.subscribe(x => {
+        this._formStatusChanged = this.form.statusChanges.subscribe(x => {
           this.onStatusChanges.emit(this.form);
         });
       }
+      this.initalized = !!this.form;
     }
-    this.initalized = !!this.form;
+  }
+
+  unsubscribe() {
+    if (this._formValueChanged) this._formValueChanged.unsubscribe();
+    if (this._formStatusChanged) this._formStatusChanged.unsubscribe();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe();
   }
 }

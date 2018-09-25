@@ -34,7 +34,8 @@ import { JsonCreatorComponent } from "./json-creator/json-creator.component";
       maxAge: 5
     }),
     MainioStore.provideStoreInformation({
-      storeName: "mainioForms"
+      storeName: "mainioForms",
+      defaultFormGroupKey: "mainio-no-group"
     })
   ],
   declarations: [

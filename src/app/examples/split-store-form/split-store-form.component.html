@@ -3,23 +3,24 @@
 </div>
 <div style="justify-content:start;display:flex;width: calc(100% - 40px);margin-top:20px;background:white;padding:20px;flex-grow: 1;border-bottom:1px solid black;">
   <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="question_set" style="flex-grow:1"
-    [values]="results"></mainio-form-dynamic-store-form>
+    [values]="values$ | async"></mainio-form-dynamic-store-form>
 </div>
 <div style="justify-content:start;display:flex;width: 100%;border-bottom:1px solid black">
   <div style="background:white;padding:20px;flex-grow:0.3;border-right:1px solid black">
     <h2>Background question</h2>
-    <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="bg_secondary" formLayout="[Mainio][DynamicForm][ControlType]Col_2"
-      [values]="results"></mainio-form-dynamic-store-form>
+    <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="bg_secondary"
+      formLayout="[Mainio][DynamicForm][ControlType]Col_2" [values]="values$ | async"></mainio-form-dynamic-store-form>
   </div>
   <div style="background:white;padding:20px;flex-grow: 1;">
     <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="bg_main" formLayout="[Mainio][DynamicForm][ControlType]Col_2"
-      [values]="results"></mainio-form-dynamic-store-form>
+      [values]="values$ | async"></mainio-form-dynamic-store-form>
   </div>
 </div>
 <div style="justify-content:start;display:flex;width: 100%;border-bottom:1px solid black">
   <div style="background:white;padding:20px;flex-grow:0.3;border-right:1px solid black">
     <h2>CX question</h2>
-    <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="bg_secondary" formLayout="[Mainio][DynamicForm][ControlType]Col_2"></mainio-form-dynamic-store-form>
+    <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="bg_secondary"
+      formLayout="[Mainio][DynamicForm][ControlType]Col_2"></mainio-form-dynamic-store-form>
   </div>
   <div style="background:white;padding:20px;flex-grow: 1;">
     <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="bg_main" formLayout="[Mainio][DynamicForm][ControlType]Col_2"></mainio-form-dynamic-store-form>
@@ -28,7 +29,8 @@
 <div style="justify-content:start;display:flex;width: 100%;border-bottom:1px solid black">
   <div style="background:white;padding:20px;flex-grow:0.3;border-right:1px solid black">
     <h2>Range (NPS) question</h2>
-    <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="bg_secondary" formLayout="[Mainio][DynamicForm][ControlType]Col_2"></mainio-form-dynamic-store-form>
+    <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="bg_secondary"
+      formLayout="[Mainio][DynamicForm][ControlType]Col_2"></mainio-form-dynamic-store-form>
   </div>
   <div style="background:white;padding:20px;flex-grow: 1;">
     <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="bg_main" formLayout="[Mainio][DynamicForm][ControlType]Col_2"></mainio-form-dynamic-store-form>
@@ -37,7 +39,8 @@
 <div style="justify-content:start;display:flex;width: 100%;border-bottom:1px solid black">
   <div style="background:white;padding:20px;flex-grow:0.3;border-right:1px solid black">
     <h2>Open Text question</h2>
-    <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="bg_secondary" formLayout="[Mainio][DynamicForm][ControlType]Col_2"></mainio-form-dynamic-store-form>
+    <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="bg_secondary"
+      formLayout="[Mainio][DynamicForm][ControlType]Col_2"></mainio-form-dynamic-store-form>
   </div>
   <div style="background:white;padding:20px;flex-grow: 1;">
     <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" limitToGroup="bg_main" formLayout="[Mainio][DynamicForm][ControlType]Col_2"></mainio-form-dynamic-store-form>

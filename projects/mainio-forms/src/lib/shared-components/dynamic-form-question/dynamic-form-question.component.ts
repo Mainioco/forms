@@ -16,6 +16,7 @@ import { DropdownQuestion } from "../../models/dropdown-question";
 import { ControlType } from "../../models/control-type.enum";
 import { RepeatInput } from "../../models/repeat-input";
 import { ILoadedValues } from "../../interfaces";
+import { QuestionCreatorService } from "../../services";
 
 @Component({
   selector: "mainio-form-question",
@@ -30,9 +31,12 @@ export class DynamicFormQuestionComponent implements OnChanges {
   @Input()
   form: FormGroup;
   @Input()
-  values: Observable<ILoadedValues> | ILoadedValues;
+  values: ILoadedValues;
 
   controller: AbstractControl;
+  public shallowQuestion: QuestionBase<any>;
+
+  constructor(private _creator: QuestionCreatorService) {}
 
   get controlTypeString() {
     switch (this.question.controlType.toString()) {
@@ -55,13 +59,19 @@ export class DynamicFormQuestionComponent implements OnChanges {
     }
   }
 
+  onDateChanged(event: Date) {
+    this.form.controls[this.question.key].setValue(event, {
+      onlySelf: false,
+      emitEvent: true
+    });
+  }
   onRepeatValuesChanged(event: FormGroup) {
     let stringArr = [];
     for (let control of Object.keys(event.controls)) {
       stringArr.push(event.controls[control].value);
     }
     let obs = {};
-    obs[this.question.key] = JSON.stringify(stringArr);
+    obs = JSON.stringify(stringArr);
     this.form.controls[this.question.key].setValue(obs, {
       onlySelf: false,
       emitEvent: true
@@ -69,6 +79,21 @@ export class DynamicFormQuestionComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.shallowQuestion = this._creator.createQuestionFromControlType(
+      this.question.controlType,
+      this.question
+    );
+    if (this.values) {
+      this.shallowQuestion.setValue(
+        this.values.values[this.question.key]
+          ? this.values.values[this.question.key]
+          : this.question.value
+      );
+    }
     this.controller = this.form.controls[this.question.key];
+    this.controller.setValue(this.shallowQuestion.value, {
+      emitEvent: false,
+      onlySelf: true
+    });
   }
 }

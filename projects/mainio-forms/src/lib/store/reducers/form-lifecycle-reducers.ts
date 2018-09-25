@@ -69,12 +69,28 @@ export function lifecycleReducer(
       if (!hasForm(action.payload.form, state)) {
         break;
       }
+      let formId = action.payload.form.id;
+      let ext = state.forms[formId];
       return {
         ...state,
-        [action.payload.form.id]: {
-          ...action.payload.form,
-          ...state[action.payload.form.id],
-          questions: action.payload.newQuestions
+        forms: {
+          ...state.forms,
+          [formId]: {
+            ...ext,
+            questions: [
+              ...ext.questions.filter(
+                (x: QuestionBase<any>) =>
+                  !!action.payload.newQuestions.find(y => y.key !== x.key)
+              ),
+              ...action.payload.newQuestions.map(x => {
+                let ext: Form = state.forms[action.payload.form.id];
+                return {
+                  ...x,
+                  value: ext[x.key] ? ext[x.key] : x.value
+                };
+              })
+            ]
+          }
         }
       };
     }
@@ -88,15 +104,17 @@ export function lifecycleReducer(
         [action.payload.form.id]: {
           ...action.payload.form,
           ...state[action.payload.form.id],
-          questionGroups: state.forms[
-            action.payload.form.id
-          ].questionGroups.map((x: QuestionGroup) => {
-            return x.group === action.payload.formGroup.group
-              ? {
-                  ...action.payload.formGroup
+          questionGroups: !state.forms[action.payload.form.id].questionGroups
+            ? []
+            : state.forms[action.payload.form.id].questionGroups.map(
+                (x: QuestionGroup) => {
+                  return x.group === action.payload.formGroup.group
+                    ? {
+                        ...action.payload.formGroup
+                      }
+                    : x;
                 }
-              : x;
-          })
+              )
         }
       };
     }

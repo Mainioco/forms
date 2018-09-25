@@ -1,5 +1,5 @@
 <mat-form-field [formGroup]="formGroup" *ngIf="question" class="form-field">
-  <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+  <input matInput [matDatepicker]="picker" placeholder="{{question.label}}" (dateChange)="dateChanged($event)" [value]="value">
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>

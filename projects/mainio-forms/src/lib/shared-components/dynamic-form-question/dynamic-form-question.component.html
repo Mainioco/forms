@@ -1,19 +1,19 @@
-<div [ngSwitch]="controlTypeString" [ngClass]="question.hidden ? 'mainio-input-hidden' : 'mainio-input'">
-  <mainio-form-single-line-input [controller]="controller" [formGroup]="form" [question]="question" class="form-control m-input"
+<div [ngSwitch]="controlTypeString" [ngClass]="shallowQuestion.hidden ? 'mainio-input-hidden' : 'mainio-input'">
+  <mainio-form-single-line-input [controller]="controller" [formGroup]="form" [question]="shallowQuestion" class="form-control m-input"
     *ngSwitchCase="'input'"></mainio-form-single-line-input>
-  <mainio-form-number-input [controller]="controller" [formGroup]="form" [question]="question" class="form-control m-input"
+  <mainio-form-number-input [controller]="controller" [formGroup]="form" [question]="shallowQuestion" class="form-control m-input"
     *ngSwitchCase="'input-number'"></mainio-form-number-input>
-  <mainio-form-dropdown-input [controller]="controller" [formGroup]="form" [question]="question" class="form-control m-input"
+  <mainio-form-dropdown-input [controller]="controller" [formGroup]="form" [question]="shallowQuestion" class="form-control m-input"
     *ngSwitchCase="'dropdown'"></mainio-form-dropdown-input>
-  <mainio-form-dropdown-input-search [controller]="controller" [formGroup]="form" [question]="question" class="form-control m-input"
+  <mainio-form-dropdown-input-search [controller]="controller" [formGroup]="form" [question]="shallowQuestion" class="form-control m-input"
     *ngSwitchCase="'dropdown-search'"></mainio-form-dropdown-input-search>
-  <mainio-form-checkbox [controller]="controller" [formGroup]="form" [question]="question" class="form-control m-input"
+  <mainio-form-checkbox [controller]="controller" [formGroup]="form" [question]="shallowQuestion" class="form-control m-input"
     *ngSwitchCase="'checkbox'"></mainio-form-checkbox>
-  <mainio-form-repeat-input [controller]="controller" [formGroup]="form" [question]="question" class="form-control m-input"
+  <mainio-form-repeat-input [controller]="controller" [formGroup]="form" [question]="shallowQuestion" class="form-control m-input"
     *ngSwitchCase="'repeat-input'" (onChanges)="onRepeatValuesChanged($event)" [values]="values"></mainio-form-repeat-input>
-  <mainio-form-date-input [controller]="controller" [formGroup]="form" [question]="question" class="form-control m-input"
-    *ngSwitchCase="'date'">
+  <mainio-form-date-input [controller]="controller" [formGroup]="form" [question]="shallowQuestion" class="form-control m-input"
+    *ngSwitchCase="'date'" (onChange)="onDateChanged($event)">
   </mainio-form-date-input>
-  <mainio-form-slider-input [controller]="controller" [formGroup]="form" [question]="question" class="form-control m-input"
+  <mainio-form-slider-input [controller]="controller" [formGroup]="form" [question]="shallowQuestion" class="form-control m-input"
     *ngSwitchCase="'slider'"></mainio-form-slider-input>
 </div>

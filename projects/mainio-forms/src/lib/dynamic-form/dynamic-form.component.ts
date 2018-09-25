@@ -6,7 +6,8 @@ import {
   EventEmitter,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  OnDestroy
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
@@ -14,7 +15,7 @@ import { QuestionBase } from "../models/question-base";
 import { QuestionControlService } from "../services/question-control.service";
 import { Observable, Subscription } from "rxjs";
 import { MainioFormComponentBaseComponent } from "../shared-components/mainio-form-component-base/mainio-form-component-base.component";
-import { ILoadedValues } from "../interfaces";
+import { ILoadedValues, IFormChanges } from "../interfaces";
 import { FormLayout } from "../models/form-layout.enum";
 
 @Component({
@@ -27,7 +28,7 @@ import { FormLayout } from "../models/form-layout.enum";
   providers: [QuestionControlService]
 })
 export class DynamicFormComponent extends MainioFormComponentBaseComponent
-  implements OnChanges {
+  implements OnChanges, OnDestroy {
   @Input()
   questions: QuestionBase<any>[] = [];
   @Input()
@@ -39,7 +40,7 @@ export class DynamicFormComponent extends MainioFormComponentBaseComponent
   @Input()
   limitToGroup: string;
   @Input()
-  values: Observable<ILoadedValues> | ILoadedValues;
+  values: ILoadedValues;
   @Output()
   onSubmit: EventEmitter<any> = new EventEmitter<any>();
   @Output()
@@ -48,7 +49,6 @@ export class DynamicFormComponent extends MainioFormComponentBaseComponent
   onStatusChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Input()
   submitButtonTitle: string;
-
   form: FormGroup;
   payLoad = "";
 
@@ -56,13 +56,21 @@ export class DynamicFormComponent extends MainioFormComponentBaseComponent
     super(qcs);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.initialize({ id: undefined, limitToGroup: this.limitToGroup });
+  ngOnDestroy() {
+    super.ngOnDestroy();
+  }
+
+  async ngOnChanges(_changes: any) {
+    let changes: IFormChanges = { ..._changes };
+    await this.initialize({
+      id: undefined,
+      limitToGroup: this.limitToGroup,
+      values: this.values
+    });
 
     if (!this.form) {
       return;
     }
-    this.formValueChanges$ = this.form.valueChanges;
     if (changes.values) {
       for (let x of Object.keys(changes.values)) {
         this.form.controls[x].setValue(changes.values[x]);

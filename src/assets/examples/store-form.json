@@ -1,5 +1,5 @@
 {
-  "id": "form",
+  "id": "store-form",
   "questions": [
     {
       "key": "x1",
@@ -43,6 +43,16 @@
       "required": true,
       "order": 2,
       "controlType": "[Mainio][DynamicForm][ControlType]Input",
+      "type": "number"
+    },
+    {
+      "key": "x6",
+      "label": "Date",
+      "required": true,
+      "order": 2,
+      "controlType": "[Mainio][DynamicForm][ControlType]Date",
+      "minLength": -1,
+      "maxLength": -1,
       "type": "number"
     }
   ]

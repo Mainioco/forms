@@ -9,16 +9,16 @@ import {
   IFormCreationOptions,
   IFormGroupCreatedResult
 } from "../interfaces";
+import { Observable, of } from "rxjs";
+import { Form } from "../models";
 
 @Injectable()
-export class QuestionControlService extends IFormGroupCreator {
+export class QuestionControlService implements IFormGroupCreator {
   constructor(
     private _formGroupService: FormGroupService,
     private _http: HttpClient,
     private _creator: QuestionCreatorService
-  ) {
-    super();
-  }
+  ) {}
 
   loadFromJson(question: QuestionBase<any>[]): QuestionBase<any>[] {
     let toReturn: QuestionBase<any>[] = [];
@@ -43,24 +43,32 @@ export class QuestionControlService extends IFormGroupCreator {
 
   public createFormGroupFromQuestions(
     questions: QuestionBase<any>[],
-    data: IFormCreationOptions = undefined
-  ): IFormGroupCreatedResult {
-    if (!data) {
-      return {
-        questionsUsed: questions,
-        formGroup: this._formGroupService.InitializeGroup(questions, undefined)
-      };
-    }
-    let res = data.limitToGroup
-      ? questions.filter(x => x.group === data.limitToGroup)
-      : questions;
-    return {
-      questionsUsed: res,
-      formGroup: this._formGroupService.InitializeGroup(
-        res,
-        data ? data.values : undefined
-      )
-    };
+    data: IFormCreationOptions = undefined,
+    isNew: boolean
+  ): Promise<IFormGroupCreatedResult> {
+    let promise = new Promise<IFormGroupCreatedResult>(resolve => {
+      if (!data) {
+        resolve({
+          questionsUsed: questions,
+          formGroup: this._formGroupService.InitializeGroup(
+            questions,
+            undefined
+          )
+        });
+        return;
+      }
+      let res = data.limitToGroup
+        ? questions.filter(x => x.group !== data.limitToGroup)
+        : questions;
+      resolve({
+        questionsUsed: res,
+        formGroup: this._formGroupService.InitializeGroup(
+          res,
+          data ? data.values : undefined
+        )
+      });
+    });
+    return promise;
   }
 
   private async loadJsonFromUrl(url: string): Promise<QuestionBase<any>[]> {

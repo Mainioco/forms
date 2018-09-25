@@ -6,7 +6,8 @@ import {
   EventEmitter,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  OnDestroy
 } from "@angular/core";
 import { QuestionBase } from "../../../models/question-base";
 import { FormGroup } from "@angular/forms";
@@ -17,7 +18,7 @@ import { FormLayout } from "../../../models";
 import { IDisplayGroup } from "../../../interfaces/i-display-group";
 import { MainioFormComponentBaseComponent } from "../../../shared-components/mainio-form-component-base/mainio-form-component-base.component";
 import { ILoadedValues } from "../../../interfaces/i-loaded-values";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 
 @Component({
   selector: "mainio-form-dynamic-store-form",
@@ -27,7 +28,8 @@ import { Observable } from "rxjs";
     "../../../styles/form-shared-styles.css"
   ]
 })
-export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent {
+export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent
+  implements OnDestroy {
   @Input()
   dontShowDefaultActions: boolean = false;
   @Input()
@@ -41,7 +43,7 @@ export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent 
   @Input()
   limitToGroup: string;
   @Input()
-  values: Observable<ILoadedValues> | ILoadedValues;
+  values: ILoadedValues;
   @Output()
   onSubmit: EventEmitter<any> = new EventEmitter<any>();
   @Output()
@@ -58,21 +60,33 @@ export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent 
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (changes.values && changes.values.currentValue) {
+      this.setValuesFromKeys(changes.values.currentValue.values, false);
+    }
     if (changes.questions && changes.questions.currentValue) {
       if (changes.questions.currentValue) {
-        this.initialize({ id: this.formId, limitToGroup: this.limitToGroup });
+        this.initialize({
+          id: this.formId,
+          limitToGroup: this.limitToGroup,
+          values: this.values
+        });
       }
-    }
-    if (changes.values && changes.values.currentValue) {
-      this.setValuesFromKeys(changes.values.currentValue.values);
     }
   }
 
-  protected initialize(data: any) {
+  ngOnDestroy() {
+    super.ngOnDestroy();
+  }
+
+  protected async initialize(data: any) {
     if (!this.formId) {
       return;
     }
-    super.initialize({ id: this.formId, limitToGroup: this.limitToGroup });
+    await super.initialize({
+      id: this.formId,
+      limitToGroup: this.limitToGroup,
+      values: this.values
+    });
 
     this.formValueChanges$.subscribe(x => {
       this._storeService.formValuesChanged(

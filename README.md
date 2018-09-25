@@ -25,7 +25,7 @@ The project's split to two parts; one for dynamic form components (such as input
 | Basic validators                               | X           |            |           | Min, max length of input field             |
 | Advanced validators                            |             |            |           | Support for Regex for example              |
 | Clean styles                                   |             |            |           | No Angular material dependencies           |
-| Rxjs Store                                     |             |            |           |                                            |
+| NgRx Store                                     |             |            |           |                                            |
 
 ### Form components
 
@@ -36,8 +36,9 @@ The project's split to two parts; one for dynamic form components (such as input
 | Dropdown menu      | X           |            |
 | Auto Complete      | X           |            |
 | Open Text          |             |            |
-| Range choice       |             |            |
+| Range choice       | X           |            |
 | Radio button group |             |            |
+| Date intpu         | X           |            |
 
 ## How to run on local machine
 

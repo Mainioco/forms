@@ -9,3 +9,6 @@ export * from "./i-loaded-values";
 export * from "./i-form-group-creator";
 export * from "./i-options";
 export * from "./i-option-group";
+export * from "./i-form-values-input";
+export * from "./i-form-changes";
+export * from "./i-question-change";
