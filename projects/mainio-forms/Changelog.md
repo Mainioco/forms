@@ -1,6 +1,6 @@
 # Change log
 
-## Version 1.0.0.alpha-6
+## Version 1.0.0-alpha.6
 
 **Fixes**
 
@@ -26,13 +26,13 @@
 - [**IFormGroupCreator**] now uses ES6 async promise approach instead of Observable. The factories **QuestionControlService**,**StoreService**
 - [**Form Question**] the container component now creates a local copy of question passed to overcome store freeze situations where **DateQuestion** wouldn't work as intended
 
-## Version 1.0.0.alpha-5
+## Version 1.0.0-alpha.5
 
 **Fixes**
 
 - IOptions and IOptionGroup interfaces are exported correctly from library
 
-## Version 1.0.0.alpha-4
+## Version 1.0.0-alpha.4
 
 **Fixes**
 
