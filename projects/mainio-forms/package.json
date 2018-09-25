@@ -1,6 +1,6 @@
 {
   "name": "mainio-forms",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "author": {
     "name": "Juha Möttönen",
     "email": "juha.mottonen@mainio.co",
@@ -26,7 +26,8 @@
   "private": false,
   "peerDependencies": {
     "@angular/cdk": "6.3.1",
-    "@ngrx/store": "6.1.0"
+    "@ngrx/store": "6.1.0",
+    "@ngrx/effects": "6.1.0"
   },
   "dependencies": {
     "tslib": "^1.9.0",

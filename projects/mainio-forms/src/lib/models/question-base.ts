@@ -15,6 +15,7 @@ export class QuestionBase<T> {
     control: Forms.AbstractControl
   ) => Forms.ValidationErrors)[];
   hidden: boolean;
+  customRegExpValidators: string[];
   constructor(options: IQuestionBaseOptions = {}) {
     this.value = options.value;
     this.key = options.key || "";
@@ -26,16 +27,23 @@ export class QuestionBase<T> {
     this.disabled = options.disabled;
     this.customValidators = options.customValidators || undefined;
     this.hidden = options.hidden;
+    this.customRegExpValidators = options.customRegExpValidators || [];
   }
 
   getValidators(): ((
     control: Forms.AbstractControl
   ) => Forms.ValidationErrors)[] {
+    let toAdd = this.customValidators ? this.customValidators : [];
+
+    if (this.customRegExpValidators && this.customRegExpValidators.length > 0) {
+      this.customRegExpValidators
+        .filter(x => !!x)
+        .forEach(x => toAdd.push(Forms.Validators.pattern(x)));
+    }
     if (this.required) {
-      let toAdd = this.customValidators ? this.customValidators : [];
       return [Forms.Validators.required, ...toAdd];
     }
-    return this.customValidators ? [...this.customValidators] : [];
+    return [...toAdd];
   }
 
   setValue(val: any) {

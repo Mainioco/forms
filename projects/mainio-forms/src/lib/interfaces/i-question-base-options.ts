@@ -11,6 +11,7 @@ export interface IQuestionBaseOptions {
   group?: string;
   disabled?: boolean;
   hidden?: boolean;
+  customRegExpValidators?: string[];
   customValidators?: ((
     control: Forms.AbstractControl
   ) => Forms.ValidationErrors)[];

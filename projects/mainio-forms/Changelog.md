@@ -1,5 +1,11 @@
 # Change log
 
+## Version 1.0.0-alpha.7
+
+**Added**
+
+- [**All Questions**] It's now possible to add custom RegExp validator string array as options.
+
 ## Version 1.0.0-alpha.6
 
 **Fixes**

@@ -111,5 +111,13 @@
     "controlType": "[Mainio][DynamicForm][ControlType]Slider",
     "min": 0,
     "max": 100
+  },
+  {
+    "key": "x_reg",
+    "label": "Custom RegExp, Accepts only letters A to Z uppercase",
+    "required": true,
+    "order": 2,
+    "controlType": "[Mainio][DynamicForm][ControlType]Input",
+    "customRegExpValidators": ["[A-Z ]+"]
   }
 ]
