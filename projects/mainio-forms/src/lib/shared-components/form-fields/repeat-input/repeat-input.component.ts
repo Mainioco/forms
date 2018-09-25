@@ -13,11 +13,11 @@ import { RepeatInput } from "../../../models/repeat-input";
 import { QuestionBase, InputQuestion } from "../../../models";
 import { QuestionControlService } from "../../../services/question-control.service";
 import { FormGroup } from "@angular/forms";
-import { IInputQuestionOptions, ILoadedValues } from "../../../interfaces";
+import { ILoadedValues } from "../../../interfaces/i-loaded-values";
 import { Subscription, Observable } from "rxjs";
 import { IRepeatInputOptions } from "../../../interfaces/i-repeat-input-options";
 import { AbstractControl } from "@angular/forms";
-import { FormGroupService } from "../../../services";
+import { FormGroupService } from "../../../services/form-group.service";
 
 @Component({
   selector: "mainio-form-repeat-input",

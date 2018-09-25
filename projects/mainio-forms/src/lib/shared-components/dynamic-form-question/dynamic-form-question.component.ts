@@ -16,7 +16,7 @@ import { DropdownQuestion } from "../../models/dropdown-question";
 import { ControlType } from "../../models/control-type.enum";
 import { RepeatInput } from "../../models/repeat-input";
 import { ILoadedValues } from "../../interfaces";
-import { QuestionCreatorService } from "../../services";
+import { QuestionCreatorService } from "../../services/question-creator.service";
 
 @Component({
   selector: "mainio-form-question",
