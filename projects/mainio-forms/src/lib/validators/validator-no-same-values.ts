@@ -12,17 +12,19 @@ export interface IValidateNoSameValuesResult {
 export function validateNoSameValuesValidator(
   control: AbstractControl
 ): { [s: string]: boolean } {
-  let controlValues: string[] =
-    typeof control.value == "string"
-      ? JSON.parse(control.value)
-      : control.value.constructor === Array
-        ? control.value
-        : typeof control.value == "object"
-          ? getArrayFromObject(control.value)
-          : control.value;
+  let controlValues: string[] = [];
   let sameValues: IValidateNoSameValuesResult = {};
   let counted: number = 0;
-
+  if (control.value) {
+    controlValues =
+      typeof control.value == "string"
+        ? JSON.parse(control.value)
+        : control.value.constructor === Array
+          ? control.value
+          : typeof control.value == "object"
+            ? getArrayFromObject(control.value)
+            : control.value;
+  }
   for (let value of controlValues) {
     let count = getAllIndexes(controlValues, value);
     if (count.length > 1 && !sameValues[value]) {

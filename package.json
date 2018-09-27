@@ -2,8 +2,9 @@
   "name": "mainioco-forms-wrapper",
   "version": "0.0.0",
   "scripts": {
+    "build-project": "ng build mainio-forms --prod && ng build --prod",
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng build mainio-forms --prod && ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

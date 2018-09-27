@@ -8,6 +8,7 @@ import { FormGroup } from "@angular/forms";
 import { QuestionGroup } from "../../models/question-group";
 import { formActionsReducer } from "./form-actions-reducers";
 import { LifecycleState, mainioFormsInitialState } from "../states/forms-state";
+import { IQuestionBaseOptions } from "../../interfaces/i-question-base-options";
 
 export function lifecycleReducer(
   state = mainioFormsInitialState,
@@ -34,10 +35,11 @@ export function lifecycleReducer(
             }
           }
           if (state.forms[action.payload.id].questions) {
-            x.questions = [
-              ...state.forms[action.payload.id].questions,
-              ...action.payload.questions
-            ];
+            x.questions = getQuestions(
+              state.forms[action.payload.id].questions,
+              action.payload.questions,
+              state.forms[action.payload.id]
+            );
           } else {
             x.questions = [...action.payload.questions];
           }
@@ -70,7 +72,7 @@ export function lifecycleReducer(
         break;
       }
       let formId = action.payload.form.id;
-      let ext = state.forms[formId];
+      let ext: Form = state.forms[formId];
       return {
         ...state,
         forms: {
@@ -78,17 +80,7 @@ export function lifecycleReducer(
           [formId]: {
             ...ext,
             questions: [
-              ...ext.questions.filter(
-                (x: QuestionBase<any>) =>
-                  !!action.payload.newQuestions.find(y => y.key !== x.key)
-              ),
-              ...action.payload.newQuestions.map(x => {
-                let ext: Form = state.forms[action.payload.form.id];
-                return {
-                  ...x,
-                  value: ext[x.key] ? ext[x.key] : x.value
-                };
-              })
+              ...getQuestions(ext.questions, action.payload.newQuestions, ext)
             ]
           }
         }
@@ -151,4 +143,24 @@ function hasFormId(id: string, state: LifecycleState) {
 }
 function hasForm(form: Form, state: LifecycleState): boolean {
   return hasFormId(form.id, state);
+}
+
+function getQuestions(
+  original: IQuestionBaseOptions[],
+  tobeSet: IQuestionBaseOptions[],
+  ext: Form
+): IQuestionBaseOptions[] {
+  let toRet = [
+    ...original.filter(
+      (x: IQuestionBaseOptions) => !tobeSet.find(y => y.key != x.key)
+    ),
+    ...tobeSet.map(x => {
+      return {
+        ...x,
+        value: ext ? (ext[x.key] ? ext[x.key] : x.value) : x.value
+      };
+    })
+  ];
+  console.log("Toret", original, tobeSet, toRet);
+  return toRet;
 }

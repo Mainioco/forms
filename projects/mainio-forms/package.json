@@ -12,6 +12,7 @@
     "mainio",
     "angular",
     "dynamic",
+    "reactive",
     "forms"
   ],
   "bugs": {

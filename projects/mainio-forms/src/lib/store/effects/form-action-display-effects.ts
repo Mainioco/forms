@@ -10,7 +10,8 @@ import { startWith, switchMap } from "rxjs/operators";
 import { FormDataMapperService } from "../../services/form-data-mapper.service";
 import { LifecycleState } from "../states/forms-state";
 import { QuestionDisplayValidatorService } from "../../services/question-display-validator.service";
-import { QuestionBase } from "../../models";
+import { QuestionBase } from "../../models/question-base";
+import { QuestionCreatorService } from "../../services/question-creator.service";
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your
@@ -32,13 +33,14 @@ import { QuestionBase } from "../../models";
 @Injectable({
   providedIn: "root"
 })
-export class FormActionEffects {
+export class FormActionDisplayEffects {
   constructor(
     private actions$: Actions,
     private _mapper: FormDataMapperService,
     private _displayValidator: QuestionDisplayValidatorService,
     private _store: Store<any>,
-    private _storeService: StoreService
+    private _storeService: StoreService,
+    private _questionCreator: QuestionCreatorService
   ) {}
 
   @Effect()
@@ -48,44 +50,43 @@ export class FormActionEffects {
     ),
     withLatestFrom(this._store),
     map(([x, store]) => {
-      if (this._mapper.hasMapper(x.payload.modelType)) {
-        return new lifecycleActions.UpdateMappedModelAction({
-          formId: x.payload.formId,
-          model: this._mapper.map(
-            x.payload.modelType,
-            x.payload.formId,
-            {
-              values: x.payload.newValues
-            },
-            this.getCurrentModel(
-              store,
-              x.payload.modelType,
-              x.payload.formId,
-              this._mapper.getMapperModelIdentifier(x.payload.modelType)
-            )
-          ),
-          modelIdentifier: this._mapper.getMapperModelIdentifier(
-            x.payload.modelType
-          )
+      let questions =
+        store[this._storeService.getStoreName()].forms[x.payload.formId]
+          .questions || [];
+      let indexesToChange: number[] = [];
+      let i = 0;
+      for (let q of questions) {
+        let change = this._displayValidator.validate(
+          x.payload.formId,
+          q,
+          questions
+        );
+        if (change !== q.hidden) {
+          indexesToChange.push(i);
+        }
+        i++;
+      }
+      if (indexesToChange.length > 0) {
+        let newQuestions: QuestionBase<any>[] = [];
+        indexesToChange.forEach(x => newQuestions.push({ ...questions[x] }));
+        return new lifecycleActions.QuestionsUpdated({
+          form:
+            store[this._storeService.getStoreName()].forms[x.payload.formId],
+          newQuestions: newQuestions.map((x: QuestionBase<any>) => {
+            let t: QuestionBase<
+              any
+            > = this._questionCreator.createQuestionFromControlType(
+              x.controlType,
+              {
+                ...x,
+                hidden: x.hidden !== undefined ? !x.hidden : true
+              }
+            );
+            return t;
+          })
         });
       }
       return new lifecycleActions.EffectRun();
     })
   );
-
-  private getCurrentModel(
-    store: Store<any>,
-    mapperType: string,
-    formId: string,
-    modelIdentifier: string
-  ) {
-    let lif: LifecycleState = store[this._storeService.getStoreName()];
-    if (lif.mappedModels && lif.mappedModels[modelIdentifier]) {
-      return lif.mappedModels[modelIdentifier];
-    }
-    if (lif.forms && lif.forms[formId] && lif.forms[formId].mappedModel) {
-      return lif.forms[formId].mappedModel;
-    }
-    return this._mapper.getMapperDefaultModel(mapperType);
-  }
 }

@@ -8,12 +8,14 @@
 - [**Store Effects**] Added _FormActionEffects_ that listens to ValueChanged actions and maps the values using IMapConfiguration classes registered
 - [**Store**] Added mappedModels
 - [**All Forms**,**Store**] Implementation for IMapConfiguration added
+- [**DynamicStoreFormComponent**] Is now able to load questions from store
 
 **Changed**
 
 - [**All Forms**] The Forms now emit mapped values if the input binding is given
 - [**Store Effects**] Effects are not included within the library module anymore. The effects _FormActionEffects_ and _FormLifecycleEffects_ must be imported to projects module
 - [**Documentation**] Updated ReadMe.md to correspond to the current 1.0.0 goals
+- [**Store**] Models are now mapped to Option interfaces rather than to question models
 
 ## Version 1.0.0-alpha.7
 

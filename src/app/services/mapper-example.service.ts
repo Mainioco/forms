@@ -52,7 +52,6 @@ export class MapperExampleService extends IMapConfiguration
     let res: Form = await this._store
       .select(x => x.mainioForms.forms[form])
       .toPromise();
-    console.log("res", res);
     return this.map({ values: res.values }, form, undefined);
   }
 

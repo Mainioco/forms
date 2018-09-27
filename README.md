@@ -1,6 +1,6 @@
 # Mainio Forms
 
-This project's aim is to have easily integratable Angular 6 Dynamic forms to any web application. The project's not recommended for production at this stage.
+This project's aim is to have easily integratable Angular 6 Dynamic forms to any web application. The project's not recommended for production at this stage. [Read more about Mainio behind this project](https://mainio.co/en/)
 
 ## Build status
 

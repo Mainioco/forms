@@ -13,3 +13,4 @@ export * from "./i-form-values-input";
 export * from "./i-form-changes";
 export * from "./i-question-change";
 export * from "./i-map-configuration";
+export * from "./i-question-display-validator";

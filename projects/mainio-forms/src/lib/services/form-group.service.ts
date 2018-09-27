@@ -4,15 +4,20 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { Form, ControlType } from "../models";
 import { Observable } from "rxjs";
 import { LibraryLoggerService } from "./library-logger.service";
+import { IQuestionBaseOptions } from "../interfaces/i-question-base-options";
+import { QuestionCreatorService } from "./question-creator.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class FormGroupService {
-  constructor(private _log: LibraryLoggerService) {}
+  constructor(
+    private _log: LibraryLoggerService,
+    private _creator: QuestionCreatorService
+  ) {}
 
   public InitializeGroup(
-    questions: QuestionBase<any>[],
+    questions: IQuestionBaseOptions[],
     values: { [key: string]: any }
   ): FormGroup {
     let group: any = {};
@@ -21,12 +26,16 @@ export class FormGroupService {
     }
     try {
       questions.forEach(question => {
+        let q = this._creator.createQuestionFromControlType(
+          question.controlType,
+          question
+        );
         group[question.key] = new FormControl(
           {
-            value: this.getValueFromValues(question, values),
+            value: this.getValueFromValues(q, values),
             disabled: question.disabled
           },
-          question.getValidators()
+          q.getValidators()
         );
       });
     } catch (ex) {

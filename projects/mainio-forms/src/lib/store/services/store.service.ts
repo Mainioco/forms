@@ -207,7 +207,16 @@ export class StoreService implements IFormGroupCreator {
     let selectedQs = limitToGroup
       ? f.questions.filter(x => x.group === limitToGroup)
       : f.questions;
-    let t = await this.createForm(f, selectedQs, isNew);
+    let t = await this.createForm(
+      f,
+      selectedQs.map(x => {
+        let t: any = {
+          ...x
+        };
+        return t;
+      }),
+      isNew
+    );
     return t;
   }
 

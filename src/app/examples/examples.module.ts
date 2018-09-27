@@ -5,7 +5,8 @@ import { BasicFormComponent } from "./basic-form/basic-form.component";
 import {
   MainioFormsModule,
   DropdownQuestion,
-  InputQuestion
+  InputQuestion,
+  FormActionDisplayEffects
 } from "mainio-forms";
 import { HttpClientModule } from "@angular/common/http";
 import { StoreModule } from "@ngrx/store";
@@ -41,7 +42,11 @@ import { MapperExampleService } from "../services/mapper-example.service";
       storeName: "mainioForms",
       defaultFormGroupKey: "mainio-no-group"
     }),
-    EffectsModule.forRoot([FormLifecycleEffects, FormActionEffects])
+    EffectsModule.forRoot([
+      FormLifecycleEffects,
+      FormActionEffects,
+      FormActionDisplayEffects
+    ])
   ],
   declarations: [
     StoreFormComponent,

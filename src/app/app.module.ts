@@ -6,7 +6,8 @@ import {
   MainioFormsModule,
   DropdownQuestion,
   InputQuestion,
-  IMapConfigurationToken
+  IMapConfigurationToken,
+  IDisplayValidatorToken
 } from "mainio-forms";
 import { RouterModule } from "@angular/router";
 import {
@@ -32,6 +33,7 @@ import { ChatComponent } from "./infos/chat/chat.component";
 import { JsonComponent } from "./infos/json/json.component";
 import { FormSettingChangerComponent } from "./form-setting-changer/form-setting-changer.component";
 import { MapperExampleService } from "./services/mapper-example.service";
+import { DisplayValidatorExampleService } from "./services/display-validator-example.service";
 
 @NgModule({
   declarations: [
@@ -89,6 +91,11 @@ import { MapperExampleService } from "./services/mapper-example.service";
     {
       provide: IMapConfigurationToken,
       useClass: MapperExampleService,
+      multi: true
+    },
+    {
+      provide: IDisplayValidatorToken,
+      useClass: DisplayValidatorExampleService,
       multi: true
     }
   ],

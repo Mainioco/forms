@@ -1,5 +1,25 @@
 # Change log
 
+## Version 1.0.0-alpha.8
+
+**Added**
+
+- [**IMapConfiguration**] New feature that allows the form values to be mapped. Providing mappers to module configuration allows form values to be automatically mapped when values change. Note that there can be only one registered service per type specified
+- [**Store Effects**] Added _FormActionEffects_ that listens to ValueChanged actions and maps the values using IMapConfiguration classes registered
+- [**Store**] Added mappedModels
+- [**All Forms**,**Store**] Implementation for IMapConfiguration added
+- [**DynamicStoreFormComponent**] Is now able to load questions from store
+- [**Examples**] Added MapperExampleService to demonstrate basic use for mapping form values
+- [**Examples**] Added "build-project" npm run command to build both mainio-forms and the examples
+
+**Changed**
+
+- [**All Forms**] The Forms now emit mapped values if the input binding is given
+- [**Store Effects**] Effects are not included within the library module anymore. The effects _FormActionEffects_ and _FormLifecycleEffects_ must be imported to projects module
+- [**Documentation**] Updated ReadMe.md to correspond to the current 1.0.0 goals
+- [**Store**] Models are now mapped to Option interfaces rather than to question models
+- [**NPM**] "start" command now build mainio-forms first and serves examples application after
+
 ## Version 1.0.0-alpha.7
 
 **Added**
