@@ -1,4 +1,4 @@
-import { Injectable, InjectionToken, Inject } from "@angular/core";
+import { Injectable, InjectionToken, Inject, Optional } from "@angular/core";
 import { ILoadedValues } from "../interfaces/i-loaded-values";
 import { IMapConfiguration } from "../interfaces";
 import { LibraryLoggerService } from "./library-logger.service";
@@ -18,9 +18,11 @@ export class FormDataMapperService {
 
   constructor(
     private _log: LibraryLoggerService,
-    @Inject(IMapConfigurationToken) services: IMapConfiguration[]
+    @Optional()
+    @Inject(IMapConfigurationToken)
+    services: IMapConfiguration[]
   ) {
-    services.forEach(s => this.addConfiguration(s.type, s));
+    if (services) services.forEach(s => this.addConfiguration(s.type, s));
   }
 
   public addConfiguration(

@@ -1,5 +1,11 @@
 # Change log
 
+## Version 1.0.0-beta.1
+
+**Fixes**
+
+- [**FormDataMapperService**,**QuestionDisplayValidatorService**] no longer throw error if no providers are registered in project
+
 ## Version 1.0.0-alpha.8
 
 **Added**

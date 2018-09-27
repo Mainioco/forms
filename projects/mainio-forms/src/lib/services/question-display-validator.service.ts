@@ -23,7 +23,8 @@ export class QuestionDisplayValidatorService {
     @Inject(IDisplayValidatorToken)
     private services: IQuestionDisplayValidator[]
   ) {
-    this.services.forEach(s => this.addConfiguration(s.forForm, s));
+    if (this.services)
+      this.services.forEach(s => this.addConfiguration(s.forForm, s));
   }
 
   validate(
