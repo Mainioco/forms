@@ -8,4 +8,5 @@ export class Form {
   public questions?: QuestionBase<any>[];
   public values?: { key: string; value: any };
   public savedValues?: { key: string; value: any };
+  public mappedModel?: any;
 }

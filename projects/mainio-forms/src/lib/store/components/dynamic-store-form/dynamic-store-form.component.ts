@@ -19,6 +19,7 @@ import { IDisplayGroup } from "../../../interfaces/i-display-group";
 import { MainioFormComponentBaseComponent } from "../../../shared-components/mainio-form-component-base/mainio-form-component-base.component";
 import { ILoadedValues } from "../../../interfaces/i-loaded-values";
 import { Observable, Subscription } from "rxjs";
+import { FormDataMapperService } from "../../../services/form-data-mapper.service";
 
 @Component({
   selector: "mainio-form-dynamic-store-form",
@@ -55,8 +56,11 @@ export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent
 
   payLoad = "";
 
-  constructor(private _storeService: StoreService) {
-    super(_storeService);
+  constructor(
+    protected _storeService: StoreService,
+    protected _mapper: FormDataMapperService
+  ) {
+    super(_storeService, _mapper);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -92,7 +96,8 @@ export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent
       this._storeService.formValuesChanged(
         this.formId,
         this.form,
-        this.limitToGroup
+        this.limitToGroup,
+        this.mapValuesTo
       );
     });
   }

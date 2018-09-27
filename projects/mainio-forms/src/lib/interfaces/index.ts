@@ -12,3 +12,4 @@ export * from "./i-option-group";
 export * from "./i-form-values-input";
 export * from "./i-form-changes";
 export * from "./i-question-change";
+export * from "./i-map-configuration";

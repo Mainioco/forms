@@ -152,13 +152,19 @@ export class StoreService implements IFormGroupCreator {
     return promise;
   }
 
-  formValuesChanged(id: string, formGroup: FormGroup, groupId: string) {
+  formValuesChanged(
+    id: string,
+    formGroup: FormGroup,
+    groupId: string,
+    model?: string
+  ) {
     this.store.dispatch(
       new lifecycleActions.ValueChanged({
         formId: id,
         newValues: formGroup.value,
         groupIsValid: !formGroup.invalid,
-        groupId: groupId ? groupId : this.getDefaultGroupKey()
+        groupId: groupId ? groupId : this.getDefaultGroupKey(),
+        modelType: model
       })
     );
   }

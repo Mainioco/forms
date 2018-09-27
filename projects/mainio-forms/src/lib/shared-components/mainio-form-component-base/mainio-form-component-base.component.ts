@@ -18,6 +18,7 @@ import {
 } from "../../interfaces/i-form-group-creator";
 import { Observable, Subscription } from "rxjs";
 import { ILoadedValues, IFormValuesInput } from "../../interfaces";
+import { FormDataMapperService } from "../../services";
 
 export abstract class MainioFormComponentBaseComponent implements OnDestroy {
   @Input()
@@ -32,22 +33,34 @@ export abstract class MainioFormComponentBaseComponent implements OnDestroy {
   limitToGroup: string;
   @Input()
   values: ILoadedValues;
+  @Input()
+  mapValuesTo: string;
+  @Input()
+  emitMappedValuesOnChanges: boolean;
   @Output()
   onSubmit: EventEmitter<any> = new EventEmitter<any>();
   @Output()
-  onValueChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  onValueChanges: EventEmitter<FormGroup | any> = new EventEmitter<
+    FormGroup | any
+  >();
   @Output()
-  onStatusChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  onStatusChanges: EventEmitter<FormGroup | any> = new EventEmitter<
+    FormGroup | any
+  >();
   formValueChanges$: Observable<FormGroup>;
   displayQuestions: QuestionBase<any>[] = [];
   displayGroups: IDisplayGroup[] = [];
   form: FormGroup;
+
   protected initalized: boolean = false;
   protected _ownQuestions: QuestionBase<any>;
   protected _formValueChanged: Subscription;
   protected _formStatusChanged: Subscription;
 
-  constructor(protected _creator: IFormGroupCreator) {}
+  constructor(
+    protected _creator: IFormGroupCreator,
+    protected _mapper: FormDataMapperService
+  ) {}
 
   onSubmitActions() {
     if (!this.onSubmit) {
@@ -68,6 +81,7 @@ export abstract class MainioFormComponentBaseComponent implements OnDestroy {
   }
 
   setValuesFromKeys(values: IFormValuesInput, emitEvent: boolean = true) {
+    if (!this.form) return;
     for (let x of Object.keys(values)) {
       let q = this.questions.find(y => y.key == x);
       if (!q) {
@@ -122,10 +136,10 @@ export abstract class MainioFormComponentBaseComponent implements OnDestroy {
         this.unsubscribe();
         this.formValueChanges$ = this.form.valueChanges;
         this._formValueChanged = this.formValueChanges$.subscribe(x => {
-          this.onValueChanges.emit(this.form);
+          this.onValueChanges.emit(this.getEmitValue());
         });
         this._formStatusChanged = this.form.statusChanges.subscribe(x => {
-          this.onStatusChanges.emit(this.form);
+          this.onStatusChanges.emit(this.getEmitValue());
         });
       }
       this.initalized = !!this.form;
@@ -139,5 +153,23 @@ export abstract class MainioFormComponentBaseComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.unsubscribe();
+  }
+
+  getEmitValue(): FormGroup | any {
+    if (!this.emitMappedValuesOnChanges) {
+      return this.form;
+    }
+    let val = this._mapper.map(
+      this.mapValuesTo,
+      this.formId,
+      {
+        values: this.form.value
+      },
+      undefined
+    );
+    if (val === false) {
+      return this.form;
+    }
+    return val;
   }
 }

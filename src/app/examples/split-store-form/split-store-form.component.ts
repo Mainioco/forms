@@ -10,6 +10,7 @@ import { Subject } from "rxjs";
 import { State } from "../store/reducers";
 import { Store } from "@ngrx/store";
 import { LoadedValuesAction } from "projects/mainio-forms/src/public_api";
+import { MapperExampleService } from "../../services/mapper-example.service";
 
 @Component({
   selector: "mainio-form-split-store-form",
@@ -26,9 +27,11 @@ export class SplitStoreFormComponent implements OnInit {
     private _http: HttpClient,
     private qcs: QuestionControlService,
     private store: Store<State>,
-    private _creator: QuestionCreatorService
+    private _creator: QuestionCreatorService,
+    private _mapper: MapperExampleService
   ) {}
   async ngOnInit() {
+    this._mapper.getFromFormsStore("store-form");
     this.store.select(x => x.mainioForms.forms).subscribe(x => {
       let f: Form = x["split-form"];
       if (f) {

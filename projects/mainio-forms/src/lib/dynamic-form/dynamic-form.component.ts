@@ -7,7 +7,11 @@ import {
   OnChanges,
   SimpleChanges,
   ChangeDetectionStrategy,
-  OnDestroy
+  OnDestroy,
+  ViewChild,
+  ViewContainerRef,
+  AfterViewInit,
+  ContentChild
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
@@ -17,6 +21,8 @@ import { Observable, Subscription } from "rxjs";
 import { MainioFormComponentBaseComponent } from "../shared-components/mainio-form-component-base/mainio-form-component-base.component";
 import { ILoadedValues, IFormChanges } from "../interfaces";
 import { FormLayout } from "../models/form-layout.enum";
+import { FormDataMapperService } from "../services/form-data-mapper.service";
+import { QuestionComponentFactoryService } from "../services/question-component-factory.service";
 
 @Component({
   selector: "mainio-dynamic-form",
@@ -28,7 +34,7 @@ import { FormLayout } from "../models/form-layout.enum";
   providers: [QuestionControlService]
 })
 export class DynamicFormComponent extends MainioFormComponentBaseComponent
-  implements OnChanges, OnDestroy {
+  implements OnChanges, OnDestroy, AfterViewInit {
   @Input()
   questions: QuestionBase<any>[] = [];
   @Input()
@@ -51,15 +57,28 @@ export class DynamicFormComponent extends MainioFormComponentBaseComponent
   submitButtonTitle: string;
   form: FormGroup;
   payLoad = "";
-
-  constructor(private qcs: QuestionControlService) {
-    super(qcs);
+  @ViewChild("questionPlacer", {
+    read: ViewContainerRef
+  })
+  viewContainerRef: ViewContainerRef;
+  constructor(
+    protected qcs: QuestionControlService,
+    protected _mapper: FormDataMapperService,
+    private _questionFactory: QuestionComponentFactoryService,
+    private _viewContainerRef: ViewContainerRef
+  ) {
+    super(qcs, _mapper);
   }
 
   ngOnDestroy() {
     super.ngOnDestroy();
   }
 
+  ngAfterViewInit() {
+    //console.log("view container", this.viewContainerRef);
+    //  this._questionFactory.setRootViewContainerRef(this.viewContainerRef);
+    //   this._questionFactory.addDynamicComponent();
+  }
   async ngOnChanges(_changes: any) {
     let changes: IFormChanges = { ..._changes };
     await this.initialize({

@@ -21,6 +21,10 @@ import {
   MatCardModule
 } from "../../../node_modules/@angular/material";
 import { JsonCreatorComponent } from "./json-creator/json-creator.component";
+import { EffectsModule, Actions } from "@ngrx/effects";
+import { FormLifecycleEffects } from "mainio-forms";
+import { FormActionEffects } from "mainio-forms";
+import { MapperExampleService } from "../services/mapper-example.service";
 @NgModule({
   imports: [
     CommonModule,
@@ -36,7 +40,8 @@ import { JsonCreatorComponent } from "./json-creator/json-creator.component";
     MainioStore.provideStoreInformation({
       storeName: "mainioForms",
       defaultFormGroupKey: "mainio-no-group"
-    })
+    }),
+    EffectsModule.forRoot([FormLifecycleEffects, FormActionEffects])
   ],
   declarations: [
     StoreFormComponent,
@@ -45,6 +50,7 @@ import { JsonCreatorComponent } from "./json-creator/json-creator.component";
     ChatSendComponent,
     JsonCreatorComponent
   ],
+  providers: [Actions, MapperExampleService],
   exports: [BasicFormComponent, StoreFormComponent]
 })
 export class ExamplesModule {}

@@ -3,12 +3,13 @@ import { QuestionBase } from "../models/question-base";
 import { FormGroup, FormControl } from "@angular/forms";
 import { Form, ControlType } from "../models";
 import { Observable } from "rxjs";
+import { LibraryLoggerService } from "./library-logger.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class FormGroupService {
-  constructor() {}
+  constructor(private _log: LibraryLoggerService) {}
 
   public InitializeGroup(
     questions: QuestionBase<any>[],
@@ -29,7 +30,7 @@ export class FormGroupService {
         );
       });
     } catch (ex) {
-      console.error(ex);
+      this._log.error(ex);
     }
     return new FormGroup(group);
   }

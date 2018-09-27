@@ -17,9 +17,25 @@ export enum MainioLifecycleActionTypes {
   ClearValues = "[MainioForm][Actions] ClearValues",
   LoadedValues = "[MainioForm][Actions] LoadedValues",
   SaveValues = "[MainioForm][Actions] SaveValues",
-  EffectRun = "EffectRun"
+  EffectRun = "EffectRun",
+  UpdateMappedModel = "[MainioForm][Actions]UpdateMappedModel",
+  ClearMappedModel = "[MainioForm][Actions]ClearMappedModel"
 }
 
+export class ClearMappedModelAction implements Action {
+  readonly type = MainioLifecycleActionTypes.ClearMappedModel;
+
+  constructor(
+    public payload: { formId: string; model: any; modelIdentifier?: string }
+  ) {}
+}
+export class UpdateMappedModelAction implements Action {
+  readonly type = MainioLifecycleActionTypes.UpdateMappedModel;
+
+  constructor(
+    public payload: { formId: string; model: any; modelIdentifier?: string }
+  ) {}
+}
 export class LoadedValuesAction implements Action {
   readonly type = MainioLifecycleActionTypes.LoadedValues;
 
@@ -80,6 +96,7 @@ export class ValueChanged implements Action {
       newValues: any;
       groupIsValid: boolean;
       groupId: string;
+      modelType?: string;
     }
   ) {}
 }
@@ -101,4 +118,6 @@ export type LifecycleActions =
   | EffectRun
   | ClearValuesAction
   | SaveValuesAction
-  | LoadedValuesAction;
+  | LoadedValuesAction
+  | UpdateMappedModelAction
+  | ClearMappedModelAction;

@@ -9,6 +9,8 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, Subscription, Subject } from "rxjs";
 import { State } from "../store/reducers";
 import { Store } from "@ngrx/store";
+import { MapperExampleService } from "../../services/mapper-example.service";
+import { ExampleModel } from "../../models/example-model";
 
 @Component({
   selector: "mainio-form-store-form",
@@ -23,13 +25,15 @@ export class StoreFormComponent implements OnInit, OnDestroy {
   formIsValid: boolean;
   savedValues: any;
   hasSavedValues: boolean;
+  mappedModel$: Observable<ExampleModel>;
   values$: Subject<ILoadedValues> = new Subject<ILoadedValues>();
   constructor(
     private _http: HttpClient,
     private qcs: QuestionControlService,
     private _store: StoreService,
     private _creator: QuestionCreatorService,
-    private store: Store<State>
+    private store: Store<State>,
+    private _mapper: MapperExampleService
   ) {}
 
   async ngOnInit() {
@@ -40,10 +44,12 @@ export class StoreFormComponent implements OnInit, OnDestroy {
       });
     });
     this.form$ = this._store.getFormState("store-form");
+    this.mappedModel$ = this._mapper.mappedModel$;
     this.formValidSubscription = this.form$.subscribe(x => {
       this.formIsValid = x ? this._store.isFormValid(x["store-form"]) : false;
       this.savedValues =
         x && x["store-form"] ? x["store-form"].savedValues : {};
+
       this.hasSavedValues =
         x && x["store-form"] ? !!x["store-form"].savedValues : false;
     });

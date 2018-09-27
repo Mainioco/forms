@@ -1,1 +1,9 @@
 <p class="mat-display-1 info-text">Ngrx store with splitted form data</p>
+<p class="body-1">
+    More advanced uses cases can be done by splitting one form into separate components. This can be
+    achieved by setting limitToGroup binding to wanted Question's group property. In case of store forms the questions
+    within store are populated so that no
+    duplicate questions will be set.
+</p>
+<p class="body-1">Model mapping works as well: {{(model | async) | json }}</p>
+<button mat-button (click)="clearMappedModel()" style="width:100%">Clear mapped model</button>

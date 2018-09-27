@@ -1,7 +1,8 @@
 <div style="justify-content:center;display:flex;width: 100%">
     <div style="width:100%;;background:white;padding:20px;border-radius:5px">
         <p>{{formIsValid ? 'Valid form' : 'Form is invalid'}}</p>
-        <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" [values]="values$ | async"></mainio-form-dynamic-store-form>
+        <mainio-form-dynamic-store-form [formId]="idToPass" [questions]="questionsToPass" [values]="values$ | async"
+            mapValuesTo="ExampleModel"></mainio-form-dynamic-store-form>
     </div>
 
 
@@ -13,4 +14,7 @@
 </div>
 <div style="display:flex">
     <p>Last saved values : {{savedValues | json}}</p>
+</div>
+<div style="display:flex">
+    <p>Mapped model from current values: {{(mappedModel$ | async) | json}}</p>
 </div>

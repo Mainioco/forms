@@ -1,6 +1,6 @@
 # Mainio Forms
 
-This project's aim is to have easily integratable Angular 6 Dynamic forms to any web application. The project's not recommended for production at this stage. The project utilizes Angular Material at this stage.
+This project's aim is to have easily integratable Angular 6 Dynamic forms to any web application. The project's not recommended for production at this stage.
 
 ## Build status
 
@@ -17,28 +17,25 @@ The project's split to two parts; one for dynamic form components (such as input
 
 ### Functionalities
 
-| Feature                                        | Implemented | Documented | Has Tests | Notes                                      |
-| ---------------------------------------------- | ----------- | ---------- | --------- | ------------------------------------------ |
+| Feature                                        | Implemented | Documented | Has Tests | Notes |
+| ---------------------------------------------- | ----------- | ---------- | --------- | ----- |
 | Display logic                                  | X           |            |
-| Split one form to several display components   | X           |            |           | Basic support only. Service under progress |
-| Service to combine splitted forms to one value |             |            |
-| Basic validators                               | X           |            |           | Min, max length of input field             |
-| Advanced validators                            |             |            |           | Support for Regex for example              |
-| Clean styles                                   |             |            |           | No Angular material dependencies           |
-| NgRx Store                                     |             |            |           |                                            |
+| Split one form to several display components   | X           |            |           |       |
+| Service to combine splitted forms to one value | X           |            |
+| Basic validators                               | X           |            |           |       |
+| Advanced validators                            | X           |            |           |       |
+| NgRx Store                                     | X           |            |           |       |
 
 ### Form components
 
-| Form component     | Implemented | Documented | Has Tests |
-| ------------------ | ----------- | ---------- | --------- |
-| Input field        | X           |            |           |
-| Number field       | X           |            |           |
-| Dropdown menu      | X           |            |
-| Auto Complete      | X           |            |
-| Open Text          |             |            |
-| Range choice       | X           |            |
-| Radio button group |             |            |
-| Date intpu         | X           |            |
+| Form component | Implemented | Documented | Has Tests |
+| -------------- | ----------- | ---------- | --------- |
+| Input field    | X           |            |           |
+| Number field   | X           |            |           |
+| Dropdown menu  | X           |            |
+| Auto Complete  | X           |            |
+| Range choice   | X           |            |
+| Date input     | X           |            |
 
 ## How to run on local machine
 

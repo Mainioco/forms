@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { QuestionBase } from "mainio-forms/mainio-forms";
 import { InputQuestion } from "mainio-forms/mainio-forms";
 import { Router, ActivatedRoute } from "@angular/router";
+import { MapperExampleService } from "./services/mapper-example.service";
 
 interface TabChangeEvent {
   index: number;
@@ -14,7 +15,11 @@ interface TabChangeEvent {
 export class AppComponent implements OnInit {
   title = "Mainioco Forms demo";
   index: number = 0;
-  constructor(private _router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private _router: Router,
+    private route: ActivatedRoute,
+    private mapper: MapperExampleService
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

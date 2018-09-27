@@ -147,9 +147,154 @@ export function formActionsReducer(
       forms: x
     };
   }
-  return state;
+  return modelUpdateReducer(state, action);
 }
 
+function modelUpdateReducer(
+  state = mainioFormsInitialState,
+  action: LifecycleActions
+): LifecycleState {
+  switch (action.type) {
+    case MainioLifecycleActionTypes.ClearMappedModel:
+      if (!hasFormId(action.payload.formId, state)) {
+        if (action.payload.modelIdentifier) {
+          return {
+            ...state,
+            mappedModels: {
+              ...state.mappedModels,
+              [action.payload.modelIdentifier]: action.payload.model
+            }
+          };
+        }
+        return state;
+      }
+      if (action.payload.modelIdentifier) {
+        return {
+          ...state,
+          mappedModels: {
+            ...state.mappedModels,
+            [action.payload.modelIdentifier]: action.payload.model
+          },
+          forms: {
+            ...state.forms,
+            [action.payload.formId]: {
+              ...state.forms[action.payload.formId],
+              mappedModel: action.payload.model
+            }
+          }
+        };
+      }
+      return {
+        ...state,
+        mappedModels: {
+          ...state.mappedModels
+        },
+        forms: {
+          ...state.forms,
+          [action.payload.formId]: {
+            ...state.forms[action.payload.formId],
+            mappedModel: action.payload.model
+          }
+        }
+      };
+    case MainioLifecycleActionTypes.UpdateMappedModel:
+      if (!hasFormId(action.payload.formId, state)) {
+        return state;
+      }
+      if (!state.forms[action.payload.formId].mappedModel) {
+        let t: Form = {
+          ...state.forms[action.payload.formId],
+          mappedModel: {
+            ...action.payload.model
+          }
+        };
+        if (action.payload.modelIdentifier) {
+          let model: any = {};
+          if (
+            !state.mappedModels ||
+            !state.mappedModels[action.payload.modelIdentifier]
+          ) {
+            model[action.payload.modelIdentifier] = { ...action.payload.model };
+          } else {
+            model = {
+              ...state.mappedModels
+            };
+            model[action.payload.modelIdentifier] = {
+              ...state.mappedModels[action.payload.modelIdentifier],
+              ...action.payload.model
+            };
+          }
+          return {
+            ...state,
+            mappedModels: { ...model },
+            forms: {
+              ...state.forms,
+              [action.payload.formId]: {
+                ...t
+              }
+            }
+          };
+        }
+        return {
+          ...state,
+          forms: {
+            ...state.forms,
+            [action.payload.formId]: {
+              ...t
+            }
+          }
+        };
+      }
+      if (action.payload.modelIdentifier) {
+        let model: any = {};
+        if (
+          !state.mappedModels ||
+          !state.mappedModels[action.payload.modelIdentifier]
+        ) {
+          model[action.payload.modelIdentifier] = { ...action.payload.model };
+        } else {
+          model = {
+            ...state.mappedModels
+          };
+          model[action.payload.modelIdentifier] = {
+            ...state.mappedModels[action.payload.modelIdentifier],
+            ...action.payload.model
+          };
+        }
+        return {
+          ...state,
+          mappedModels: { ...model },
+          forms: {
+            ...state.forms,
+            [action.payload.formId]: {
+              ...state.forms[action.payload.formId],
+              mappedModel: {
+                ...state.forms[action.payload.formId].mappedModel,
+                ...action.payload.model
+              }
+            }
+          }
+        };
+      }
+      return {
+        ...state,
+        forms: {
+          ...state.forms,
+          [action.payload.formId]: {
+            ...state.forms[action.payload.formId],
+            mappedModel: {
+              ...state.forms[action.payload.formId].mappedModel,
+              ...action.payload.model
+            }
+          }
+        }
+      };
+
+    default:
+      break;
+  }
+  return state;
+}
 function hasFormId(id: string, state: LifecycleState) {
   return state.forms ? !!state.forms[id] : false;
 }
