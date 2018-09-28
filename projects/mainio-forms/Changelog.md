@@ -1,5 +1,9 @@
 # Change log
 
+## Version 1.0.0-beta.2
+
+- [**DropdownOptions**] No longer throw error if options are not set when trying to set a value
+
 ## Version 1.0.0-beta.1
 
 **Fixes**

@@ -47,12 +47,15 @@ export class DropdownQuestion extends QuestionBase<string> {
       return;
     }
     this._selection = this.getDesignatedSetValue(value).toString();
-    this.value = this.options.find(
-      x => x.key === this.getDesignatedSetValue(value)
-    )
-      ? this.options.find(x => x.key === this.getDesignatedSetValue(value))
-          .value
-      : undefined;
+    this.value = undefined;
+    if (this.options) {
+      this.value = this.options.find(
+        x => x.key === this.getDesignatedSetValue(value)
+      )
+        ? this.options.find(x => x.key === this.getDesignatedSetValue(value))
+            .value
+        : undefined;
+    }
     let a = undefined;
 
     if (this.value) {

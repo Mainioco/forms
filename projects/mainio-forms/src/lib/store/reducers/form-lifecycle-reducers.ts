@@ -161,6 +161,5 @@ function getQuestions(
       };
     })
   ];
-  console.log("Toret", original, tobeSet, toRet);
   return toRet;
 }
