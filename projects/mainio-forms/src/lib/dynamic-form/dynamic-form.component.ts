@@ -74,11 +74,7 @@ export class DynamicFormComponent extends MainioFormComponentBaseComponent
     super.ngOnDestroy();
   }
 
-  ngAfterViewInit() {
-    //console.log("view container", this.viewContainerRef);
-    //  this._questionFactory.setRootViewContainerRef(this.viewContainerRef);
-    //   this._questionFactory.addDynamicComponent();
-  }
+  ngAfterViewInit() {}
   async ngOnChanges(_changes: any) {
     let changes: IFormChanges = { ..._changes };
     await this.initialize({
@@ -92,7 +88,8 @@ export class DynamicFormComponent extends MainioFormComponentBaseComponent
     }
     if (changes.values) {
       for (let x of Object.keys(changes.values)) {
-        this.form.controls[x].setValue(changes.values[x]);
+        if (this.form.controls[x])
+          this.form.controls[x].setValue(changes.values[x]);
       }
     }
     this.formValueChanges$.subscribe(x => {

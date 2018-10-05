@@ -91,14 +91,15 @@ export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent
       limitToGroup: this.limitToGroup,
       values: this.values
     });
-
-    this.formValueChanges$.subscribe(x => {
-      this._storeService.formValuesChanged(
-        this.formId,
-        this.form,
-        this.limitToGroup,
-        this.mapValuesTo
-      );
-    });
+    if (this.form) {
+      this.formValueChanges$.subscribe(x => {
+        this._storeService.formValuesChanged(
+          this.formId,
+          this.form,
+          this.limitToGroup,
+          this.mapValuesTo
+        );
+      });
+    }
   }
 }

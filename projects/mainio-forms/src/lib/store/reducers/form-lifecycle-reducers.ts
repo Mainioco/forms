@@ -45,12 +45,22 @@ export function lifecycleReducer(
           }
         }
       }
+      let hasValues = action.payload.questions.filter(
+        x => x.value !== undefined
+      );
+      let vals: any = {};
+      for (let a of hasValues) {
+        vals[a.key] = a.value;
+      }
       return {
         ...state,
         forms: {
           ...state.forms,
           [action.payload.id]: {
-            ...x
+            ...x,
+            values:{
+              ...vals
+            }
           }
         }
       };

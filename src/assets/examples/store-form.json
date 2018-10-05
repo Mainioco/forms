@@ -9,6 +9,7 @@
       "controlType": "[Mainio][DynamicForm][ControlType]Input",
       "minLength": 5,
       "maxLength": 200,
+      "value": "Predefined value",
       "type": "input"
     },
     {

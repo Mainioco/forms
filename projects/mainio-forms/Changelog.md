@@ -1,5 +1,12 @@
 # Change log
 
+## Version 1.0.0-beta.3
+
+**Fixes**
+
+- [**Store**] Question values are now passed to store when they exist on form creation. Updating questions later on doesn't affect the values
+- [**DynamicFormComponent**] Don't throw message when values are set that don't have question counterpart
+
 ## Version 1.0.0-beta.2
 
 - [**DropdownOptions**] No longer throw error if options are not set when trying to set a value
