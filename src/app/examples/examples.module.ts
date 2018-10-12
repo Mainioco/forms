@@ -19,13 +19,28 @@ import { ChatSendComponent } from "./chat-send/chat-send.component";
 import {
   MatInputModule,
   MatButtonModule,
+  MatAutocompleteModule,
+  MatTabsModule,
+  MatOptionModule,
+  MatFormFieldModule,
+  MatSelectModule,
   MatCardModule
-} from "../../../node_modules/@angular/material";
+} from "@angular/material";
 import { JsonCreatorComponent } from "./json-creator/json-creator.component";
 import { EffectsModule, Actions } from "@ngrx/effects";
 import { FormLifecycleEffects } from "mainio-forms";
 import { FormActionEffects } from "mainio-forms";
 import { MapperExampleService } from "../services/mapper-example.service";
+import { ExamplesContainerComponent } from "./examples-container/examples-container.component";
+import { RouterModule } from "@angular/router";
+
+export const examplesRoutes = [
+  {
+    path: "examples",
+    component: ExamplesContainerComponent
+  }
+];
+
 @NgModule({
   imports: [
     CommonModule,
@@ -33,6 +48,15 @@ import { MapperExampleService } from "../services/mapper-example.service";
     HttpClientModule,
     MatInputModule,
     MatButtonModule,
+    MatCardModule,
+    MainioFormsModule,
+    RouterModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatTabsModule,
+    MatOptionModule,
+    MatFormFieldModule,
+    MatSelectModule,
     MatCardModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
@@ -53,9 +77,18 @@ import { MapperExampleService } from "../services/mapper-example.service";
     BasicFormComponent,
     SplitStoreFormComponent,
     ChatSendComponent,
-    JsonCreatorComponent
+    JsonCreatorComponent,
+    ExamplesContainerComponent
   ],
   providers: [Actions, MapperExampleService],
-  exports: [BasicFormComponent, StoreFormComponent]
+  exports: [
+    ExamplesContainerComponent,
+    StoreFormComponent,
+    BasicFormComponent,
+    SplitStoreFormComponent,
+    ChatSendComponent,
+    JsonCreatorComponent,
+    ExamplesContainerComponent
+  ]
 })
 export class ExamplesModule {}

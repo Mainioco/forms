@@ -23,7 +23,7 @@ interface EditQuestion {
 }
 
 @Component({
-  selector: "mainio-form-json-creator",
+  selector: "mainio-form-json",
   templateUrl: "./json-creator.component.html",
   styleUrls: ["./json-creator.component.css"]
 })

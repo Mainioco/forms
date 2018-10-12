@@ -13,7 +13,7 @@ import { MapperExampleService } from "../../services/mapper-example.service";
 import { ExampleModel } from "../../models/example-model";
 
 @Component({
-  selector: "mainio-form-store-form",
+  selector: "mainio-form-store",
   templateUrl: "./store-form.component.html",
   styleUrls: ["./store-form.component.css"]
 })

@@ -4,7 +4,7 @@ import { IInputQuestionOptions } from "mainio-forms";
 import { FormGroup } from "../../../../node_modules/@angular/forms";
 
 @Component({
-  selector: "mainio-form-chat-send",
+  selector: "mainio-form-chat",
   templateUrl: "./chat-send.component.html",
   styleUrls: ["./chat-send.component.css"]
 })

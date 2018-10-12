@@ -13,7 +13,7 @@ import { LoadedValuesAction } from "projects/mainio-forms/src/public_api";
 import { MapperExampleService } from "../../services/mapper-example.service";
 
 @Component({
-  selector: "mainio-form-split-store-form",
+  selector: "mainio-form-split-store",
   templateUrl: "./split-store-form.component.html",
   styleUrls: ["./split-store-form.component.css"]
 })

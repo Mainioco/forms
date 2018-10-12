@@ -5,7 +5,7 @@ import { QuestionControlService } from "mainio-forms";
 import { FormLayoutService } from "../../services/form-layout.service";
 
 @Component({
-  selector: "mainio-form-basic-form",
+  selector: "mainio-form-basic",
   templateUrl: "./basic-form.component.html",
   styleUrls: ["./basic-form.component.css"]
 })

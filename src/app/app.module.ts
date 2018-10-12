@@ -22,7 +22,7 @@ import {
 } from "@angular/material";
 import { BasicFormComponent } from "./examples/basic-form/basic-form.component";
 import { StoreFormComponent } from "./examples/store-form/store-form.component";
-import { ExamplesModule } from "./examples/examples.module";
+import { ExamplesModule, examplesRoutes } from "./examples/examples.module";
 import { SplitStoreFormComponent } from "./examples/split-store-form/split-store-form.component";
 import { ChatSendComponent } from "./examples/chat-send/chat-send.component";
 import { JsonCreatorComponent } from "./examples/json-creator/json-creator.component";
@@ -34,21 +34,19 @@ import { JsonComponent } from "./infos/json/json.component";
 import { FormSettingChangerComponent } from "./form-setting-changer/form-setting-changer.component";
 import { MapperExampleService } from "./services/mapper-example.service";
 import { DisplayValidatorExampleService } from "./services/display-validator-example.service";
+import { IndexComponent } from "./index/index.component";
+import {
+  documentationRoutes,
+  DocumentationModule
+} from "./documentation/documentation.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BasicComponent,
-    StoreComponent,
-    SplitStoreComponent,
-    ChatComponent,
-    JsonComponent,
-    FormSettingChangerComponent
-  ],
+  declarations: [AppComponent, FormSettingChangerComponent, IndexComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MainioFormsModule,
+    DocumentationModule,
     MatAutocompleteModule,
     MatInputModule,
     MatTabsModule,
@@ -59,30 +57,15 @@ import { DisplayValidatorExampleService } from "./services/display-validator-exa
     ExamplesModule,
     MatButtonModule,
     RouterModule.forRoot([
+      ...documentationRoutes,
+      ...examplesRoutes,
       {
-        path: "basic",
-        component: BasicFormComponent,
-        children: []
-      },
-      {
-        path: "store",
-        component: StoreFormComponent
-      },
-      {
-        path: "store-split",
-        component: SplitStoreFormComponent
-      },
-      {
-        path: "chat-send",
-        component: ChatSendComponent
-      },
-      {
-        path: "json",
-        component: JsonCreatorComponent
+        path: "index",
+        component: IndexComponent
       },
       {
         path: "**",
-        redirectTo: "basic",
+        redirectTo: "index",
         pathMatch: "full"
       }
     ])
