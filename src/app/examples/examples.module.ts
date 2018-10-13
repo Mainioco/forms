@@ -33,7 +33,12 @@ import { FormActionEffects } from "mainio-forms";
 import { MapperExampleService } from "../services/mapper-example.service";
 import { ExamplesContainerComponent } from "./examples-container/examples-container.component";
 import { RouterModule } from "@angular/router";
-
+import { BasicComponent } from "./infos/basic/basic.component";
+import { StoreComponent } from "./infos/store/store.component";
+import { SplitStoreComponent } from "./infos/split-store/split-store.component";
+import { ChatComponent } from "./infos/chat/chat.component";
+import { JsonComponent } from "./infos/json/json.component";
+import { FormSettingChangerComponent } from "../form-setting-changer/form-setting-changer.component";
 export const examplesRoutes = [
   {
     path: "examples",
@@ -78,7 +83,13 @@ export const examplesRoutes = [
     SplitStoreFormComponent,
     ChatSendComponent,
     JsonCreatorComponent,
-    ExamplesContainerComponent
+    ExamplesContainerComponent,
+    BasicComponent,
+    SplitStoreComponent,
+    StoreComponent,
+    ChatComponent,
+    JsonComponent,
+    FormSettingChangerComponent
   ],
   providers: [Actions, MapperExampleService],
   exports: [

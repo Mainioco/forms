@@ -7,4 +7,17 @@ html,
 body {
   padding: 0;
   margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+p {
+  font-size: 16px;
+  line-height: 24px;
+}
+mainio-form-examples-container {
+  width: 100%;
+}
+
+mainio-form-intro {
+  width: calc(100% - 100px);
 }

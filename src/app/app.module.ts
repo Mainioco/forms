@@ -23,15 +23,7 @@ import {
 import { BasicFormComponent } from "./examples/basic-form/basic-form.component";
 import { StoreFormComponent } from "./examples/store-form/store-form.component";
 import { ExamplesModule, examplesRoutes } from "./examples/examples.module";
-import { SplitStoreFormComponent } from "./examples/split-store-form/split-store-form.component";
-import { ChatSendComponent } from "./examples/chat-send/chat-send.component";
-import { JsonCreatorComponent } from "./examples/json-creator/json-creator.component";
-import { BasicComponent } from "./infos/basic/basic.component";
-import { StoreComponent } from "./infos/store/store.component";
-import { SplitStoreComponent } from "./infos/split-store/split-store.component";
-import { ChatComponent } from "./infos/chat/chat.component";
-import { JsonComponent } from "./infos/json/json.component";
-import { FormSettingChangerComponent } from "./form-setting-changer/form-setting-changer.component";
+
 import { MapperExampleService } from "./services/mapper-example.service";
 import { DisplayValidatorExampleService } from "./services/display-validator-example.service";
 import { IndexComponent } from "./index/index.component";
@@ -39,9 +31,10 @@ import {
   documentationRoutes,
   DocumentationModule
 } from "./documentation/documentation.module";
+import { MarkdownModule } from "ngx-markdown";
 
 @NgModule({
-  declarations: [AppComponent, FormSettingChangerComponent, IndexComponent],
+  declarations: [AppComponent, IndexComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -55,6 +48,7 @@ import {
     MatSelectModule,
     MatCardModule,
     ExamplesModule,
+    MarkdownModule.forRoot(),
     MatButtonModule,
     RouterModule.forRoot([
       ...documentationRoutes,

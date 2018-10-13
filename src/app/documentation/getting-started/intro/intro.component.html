@@ -3,6 +3,10 @@
     <mainio-form-navigation></mainio-form-navigation>
   </mat-drawer>
   <mat-drawer-content>
+    <div style="padding:0 50px 50px 50px">
+      <markdown [data]="content$ | async">
 
+      </markdown>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>

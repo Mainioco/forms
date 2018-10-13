@@ -1,22 +1,32 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-tab-group (selectedTabChange)="navigate($event)" class="example-card" style="padding: 0 20px 20px 20px"
-      [selectedIndex]="index">
-      <mat-tab label="Basic"></mat-tab>
-      <mat-tab label="Store"> </mat-tab>
-      <mat-tab label="Splitted Store"></mat-tab>
-      <mat-tab label="Chat send"></mat-tab>
-      <mat-tab label="JSON creator"></mat-tab>
-    </mat-tab-group>
-  </mat-card-header>
-  <mat-card-content>
-    <div style="width:400px;margin:0 auto;flex-grow: 1;padding:40px" class="mat-typography">
-      <mainio-form-basic *ngIf="!index"></mainio-form-basic>
-      <mainio-form-chat *ngIf="index === 3"></mainio-form-chat>
-      <mainio-form-store *ngIf="index === 1"></mainio-form-store>
-      <mainio-form-split-store *ngIf="index === 2"></mainio-form-split-store>
-      <mainio-form-json *ngIf="index === 4"></mainio-form-json>
+<div style="width:100%;display: flex;flex-direction: row-reverse;">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-tab-group (selectedTabChange)="navigate($event)" class="example-card" style="padding: 0 20px 20px 20px"
+        [selectedIndex]="index">
+        <mat-tab label="Basic"></mat-tab>
+        <mat-tab label="Store"> </mat-tab>
+        <mat-tab label="Splitted Store"></mat-tab>
+        <mat-tab label="Chat send"></mat-tab>
+        <mat-tab label="JSON creator"></mat-tab>
+      </mat-tab-group>
+    </mat-card-header>
+    <mat-card-content>
 
-    </div>
-  </mat-card-content>
-</mat-card>
+      <div style="margin:0 auto;flex-grow: 1;padding:40px" class="mat-typography">
+        <mainio-form-basic *ngIf="!index"></mainio-form-basic>
+        <mainio-form-chat *ngIf="index === 3"></mainio-form-chat>
+        <mainio-form-store *ngIf="index === 1"></mainio-form-store>
+        <mainio-form-split-store *ngIf="index === 2"></mainio-form-split-store>
+        <mainio-form-json *ngIf="index === 4"></mainio-form-json>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div style="min-width:400px;margin:0 auto;flex-grow: 1;padding:40px" class="mat-typography">
+    <mainio-form-basic-info *ngIf="!index"></mainio-form-basic-info>
+    <mainio-form-chat-info *ngIf="index === 3"></mainio-form-chat-info>
+    <mainio-form-store-info *ngIf="index === 1"></mainio-form-store-info>
+    <mainio-form-split-store-info *ngIf="index === 2"></mainio-form-split-store-info>
+    <mainio-form-json-info *ngIf="index === 4"></mainio-form-json-info>
+  </div>
+</div>

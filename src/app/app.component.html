@@ -8,10 +8,10 @@
       <div style="position:absolute;width: 100%;right:0;bottom:0;background-color: rgba(51, 0, 114,0.5);display:flex;justify-content: end;flex-direction: row;color:white">
         <a mat-stroked-button routerLink="/home">Home</a>
         <a mat-stroked-button routerLink="/examples">Examples</a>
-        <a mat-stroked-button routerLink="/documentation/getting-started">Documentation</a>
+        <a mat-stroked-button routerLink="/documentation/getting-started/" [queryParams]="{p: 'intro'}">Documentation</a>
       </div>
     </div>
-    <div style="display:flex;flex-direction: row;flex-wrap: wrap;margin-top:20px">
+    <div style="display:flex;flex-direction: row;flex-wrap: wrap;margin-top:20px;flex-grow: 1;align-items: stretch">
       <router-outlet></router-outlet>
     </div>
   </div>

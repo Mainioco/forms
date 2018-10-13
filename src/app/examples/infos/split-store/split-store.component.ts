@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { MapperExampleService } from "../../services/mapper-example.service";
+import { MapperExampleService } from "../../../services/mapper-example.service";
 import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
-import { State } from "../../examples/store/reducers";
+import { State } from "../../store/reducers";
 import { ClearMappedModelAction } from "mainio-forms";
 
 @Component({
-  selector: "mainio-form-split-store",
+  selector: "mainio-form-split-store-info",
   templateUrl: "./split-store.component.html",
   styleUrls: ["./split-store.component.css"]
 })

@@ -1,0 +1,4 @@
+<a mat-button style="width: 100%" [routerLink]="'/documentation/'+ (prefix ? prefix : '') +item.link">{{item.title}}</a>
+<div *ngIf="item.children">
+  <mainio-form-item *ngFor="let c of item.children" [item]="c" [prefix]="(prefix ? prefix : '') + item.link+'/'"></mainio-form-item>
+</div>
