@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 interface NavItem {
-  link: string;
+  link?: string;
   title: string;
   children?: NavItem[];
 }
@@ -31,6 +31,17 @@ export class NavigationComponent implements OnInit {
             {
               link: "dynamic-form",
               title: "DynamicForm (no store)"
+            },
+            {
+              link: "dynamic-store-form",
+              title: "DynamicStoreForm (NgRx Store)"
+            },
+            {
+              title: "Internal Components"
+            },
+            {
+              link: "form-question",
+              title: "FormQuestionContainer"
             }
           ]
         }

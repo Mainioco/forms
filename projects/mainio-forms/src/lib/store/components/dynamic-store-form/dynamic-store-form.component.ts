@@ -53,7 +53,7 @@ export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent
   onStatusChanges: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Input()
   submitButtonTitle: string;
-
+  formValueSubscription: Subscription;
   payLoad = "";
 
   constructor(
@@ -66,6 +66,12 @@ export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent
   ngOnChanges(changes: SimpleChanges) {
     if (changes.values && changes.values.currentValue) {
       this.setValuesFromKeys(changes.values.currentValue.values, false);
+      this._storeService.formValuesChanged(
+        this.formId,
+        this.form,
+        this.limitToGroup,
+        this.mapValuesTo
+      );
     }
     if (changes.questions && changes.questions.currentValue) {
       if (changes.questions.currentValue) {
@@ -80,6 +86,7 @@ export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent
 
   ngOnDestroy() {
     super.ngOnDestroy();
+    if (this.formValueSubscription) this.formValueSubscription.unsubscribe();
   }
 
   protected async initialize(data: any) {
@@ -92,7 +99,14 @@ export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent
       values: this.values
     });
     if (this.form) {
-      this.formValueChanges$.subscribe(x => {
+      this._storeService.formValuesChanged(
+        this.formId,
+        this.form,
+        this.limitToGroup,
+        this.mapValuesTo
+      );
+      if (this.formValueSubscription) this.formValueSubscription.unsubscribe();
+      this.formValueSubscription = this.formValueChanges$.subscribe(x => {
         this._storeService.formValuesChanged(
           this.formId,
           this.form,
