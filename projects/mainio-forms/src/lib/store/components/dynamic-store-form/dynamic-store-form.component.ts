@@ -66,12 +66,6 @@ export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent
   ngOnChanges(changes: SimpleChanges) {
     if (changes.values && changes.values.currentValue) {
       this.setValuesFromKeys(changes.values.currentValue.values, false);
-      this._storeService.formValuesChanged(
-        this.formId,
-        this.form,
-        this.limitToGroup,
-        this.mapValuesTo
-      );
     }
     if (changes.questions && changes.questions.currentValue) {
       if (changes.questions.currentValue) {

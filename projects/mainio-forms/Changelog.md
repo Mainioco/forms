@@ -1,5 +1,11 @@
 # Change log
 
+## Version 1.0.0-beta.4
+
+**Fixes**
+
+- [**DynamicStoreFormComponent**] Adds fix where values didn't update form validity to store
+
 ## Version 1.0.0-beta.3
 
 **Fixes**
