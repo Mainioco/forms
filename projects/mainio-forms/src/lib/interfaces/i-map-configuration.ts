@@ -1,5 +1,4 @@
 import { ILoadedValues } from "./i-loaded-values";
-import { FormDataMapperService } from "../services/form-data-mapper.service";
 import { InjectionToken, Inject } from "@angular/core";
 
 export abstract class IMapConfiguration {

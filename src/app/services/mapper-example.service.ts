@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import {
   IMapConfiguration,
   ILoadedValues,
-  FormDataMapperService,
   IMapConfigurationStore,
   Form
 } from "mainio-forms";
@@ -28,10 +27,7 @@ export class MapperExampleService extends IMapConfiguration
     ExampleModel
   >(new ExampleModel());
 
-  constructor(
-    private _mapper: FormDataMapperService,
-    private _store: Store<State>
-  ) {
+  constructor(private _store: Store<State>) {
     super();
     this._store.select(x => x.mainioForms.mappedModels).subscribe(x => {
       if (x && x[this.mapToModelIdentifier]) {

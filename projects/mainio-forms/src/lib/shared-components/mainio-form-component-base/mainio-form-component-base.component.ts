@@ -18,7 +18,7 @@ import {
 } from "../../interfaces/i-form-group-creator";
 import { Observable, Subscription } from "rxjs";
 import { ILoadedValues, IFormValuesInput } from "../../interfaces";
-import { FormDataMapperService } from "../../services";
+import { FormDataMapperService } from "../../services/form-data-mapper.service";
 
 export abstract class MainioFormComponentBaseComponent implements OnDestroy {
   @Input()

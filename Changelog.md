@@ -1,5 +1,16 @@
 # Change log
 
+## Version 1.0.0-beta.5
+
+**Changes**
+
+- [**DropdownInputComponent**] select options ids have been changed. Old syntaxt was use option.key, now the format is question.key + "-"+option.key
+
+**Fixes**
+
+- [**General**] Fixes missing service with AOT builds
+- [**DropdownInputComponent**] No longer throw error when creating a selection if groups are not defined for the component
+
 ## Version 1.0.0-beta.4
 
 **Fixes**

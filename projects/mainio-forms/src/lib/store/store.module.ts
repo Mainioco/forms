@@ -13,6 +13,7 @@ import {
 } from "@angular/material";
 import { MainioFormsStoreConfig } from "./interfaces/store-config";
 import { MainioFormStoreServiceConfig } from "./tokens/service-config";
+import { StoreService } from "./services/store.service";
 
 @NgModule({
   imports: [
@@ -28,7 +29,7 @@ import { MainioFormStoreServiceConfig } from "./tokens/service-config";
     FormsModule
   ],
   declarations: [DynamicStoreFormComponent],
-  providers: [],
+  providers: [StoreService],
   exports: [DynamicStoreFormComponent]
 })
 export class StoreModule {
