@@ -17,7 +17,7 @@ export class QuestionBase<T> {
   hidden: boolean;
   customRegExpValidators: string[];
   constructor(options: IQuestionBaseOptions = {}) {
-    this.value = options.value;
+    this.setValue(options.value);
     this.key = options.key || "";
     this.label = options.label || "";
     this.required = !!options.required;
@@ -48,5 +48,10 @@ export class QuestionBase<T> {
 
   setValue(val: any) {
     this.value = val;
+  }
+
+  getSetValues(val: any) {
+    if (val) return val;
+    return this.value;
   }
 }

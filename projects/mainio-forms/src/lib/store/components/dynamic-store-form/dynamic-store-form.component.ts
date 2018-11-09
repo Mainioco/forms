@@ -99,6 +99,7 @@ export class DynamicStoreFormComponent extends MainioFormComponentBaseComponent
         this.limitToGroup,
         this.mapValuesTo
       );
+      this.form.updateValueAndValidity({ onlySelf: false, emitEvent: false });
       if (this.formValueSubscription) this.formValueSubscription.unsubscribe();
       this.formValueSubscription = this.formValueChanges$.subscribe(x => {
         this._storeService.formValuesChanged(

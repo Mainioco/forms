@@ -7,7 +7,16 @@ import { Form } from "../../models/form";
 import { FormGroup } from "@angular/forms";
 import { QuestionGroup } from "../../models/question-group";
 import { LifecycleState, mainioFormsInitialState } from "../states/forms-state";
+import { ControlType } from "../../models";
 
+function getSetValue(value, qs: QuestionBase<any>) {
+  switch (qs.controlType) {
+    case ControlType.Date:
+      return typeof value == "string" ? new Date(value) : value;
+    default:
+      return value;
+  }
+}
 export function formActionsReducer(
   state = mainioFormsInitialState,
   action: LifecycleActions
@@ -35,12 +44,16 @@ export function formActionsReducer(
         },
         questions: state.forms[action.payload.formId].questions.map(
           (x: QuestionBase<any>) => {
-            let t = {
-              ...x
-            };
-            if (action.payload.newValues[x.key]) {
-              t.value = action.payload.newValues[x.key];
-            }
+            let a = action.payload.newValues[x.key]
+              ? getSetValue(action.payload.newValues[x.key], x)
+              : undefined;
+            let t: QuestionBase<any> = action.payload.newValues[x.key]
+              ? ({
+                  ...x,
+                  value: a
+                } as any)
+              : ({ ...x } as any);
+
             return t;
           }
         ),

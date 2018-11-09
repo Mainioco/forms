@@ -12,6 +12,7 @@ import { DropdownQuestion } from "../../../models/dropdown-question";
 import { ControlType } from "../../../models/control-type.enum";
 import { AbstractControl } from "@angular/forms";
 import { IOptions } from "../../../interfaces/i-options";
+import { FormFieldBaseComponent } from "../form-field-base/form-field-base.component";
 
 @Component({
   selector: "mainio-form-dropdown-input",
@@ -19,7 +20,8 @@ import { IOptions } from "../../../interfaces/i-options";
   styleUrls: ["./dropdown-input.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DropdownInputComponent implements OnInit, OnChanges {
+export class DropdownInputComponent extends FormFieldBaseComponent
+  implements OnInit, OnChanges {
   @Input()
   question: DropdownQuestion;
   @Input()
@@ -28,7 +30,9 @@ export class DropdownInputComponent implements OnInit, OnChanges {
   controller: AbstractControl;
   selectedOption: string = "";
 
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   getOptionValue(option: IOptions) {
     return option.value ? option.value : option.key;

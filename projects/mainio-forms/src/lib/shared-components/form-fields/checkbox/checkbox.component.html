@@ -3,4 +3,7 @@
     [labelPosition]="question.suffix ? 'after' : 'before'">
     {{question.suffix ? question.suffix : question.prefix}}
   </mat-checkbox>
+  <mat-error *ngFor="let error of errors">
+    {{error.message}}
+  </mat-error>
 </div>

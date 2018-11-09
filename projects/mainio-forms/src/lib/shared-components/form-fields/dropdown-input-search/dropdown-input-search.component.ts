@@ -13,6 +13,7 @@ import { Subject } from "rxjs";
 import { startWith, map } from "rxjs/operators";
 import { IOptionGroup } from "../../../interfaces/i-option-group";
 import { IOptions } from "../../../interfaces/i-options";
+import { FormFieldBaseComponent } from "../form-field-base/form-field-base.component";
 
 export const _filter = (opt: any[], value: IOptions | string): IOptions[] => {
   const filterValue =
@@ -28,7 +29,8 @@ export const _filter = (opt: any[], value: IOptions | string): IOptions[] => {
   styleUrls: ["./dropdown-input-search.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DropdownInputSearchComponent implements OnInit, OnChanges {
+export class DropdownInputSearchComponent extends FormFieldBaseComponent
+  implements OnInit, OnChanges {
   @Input()
   question: DropdownSearchQuestion;
   @Input()
@@ -37,7 +39,9 @@ export class DropdownInputSearchComponent implements OnInit, OnChanges {
   controller: AbstractControl;
   stateGroupOptions: Subject<IOptionGroup[]> = new Subject<IOptionGroup[]>();
   selectedOption: string = "";
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   ngOnInit() {}
 

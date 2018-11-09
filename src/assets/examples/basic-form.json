@@ -16,7 +16,7 @@
     "order": 2,
     "controlType": "[Mainio][DynamicForm][ControlType]Input",
     "minLength": -1,
-    "maxLength": 200,
+    "maxLength": 10,
     "type": "input"
   },
   {

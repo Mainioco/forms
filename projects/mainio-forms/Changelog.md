@@ -1,5 +1,15 @@
 # Change log
 
+## Version 1.0.0-beta.6
+
+**Changes**
+
+- [**All inputs**] Added first stage errors to input fields.
+
+**Fixes**
+
+- [**DateInputComponent**] Date is now correctly parsed to date inputs when loaded from string
+
 ## Version 1.0.0-beta.5
 
 **Changes**

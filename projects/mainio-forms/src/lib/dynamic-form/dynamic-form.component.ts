@@ -75,6 +75,7 @@ export class DynamicFormComponent extends MainioFormComponentBaseComponent
   }
 
   ngAfterViewInit() {}
+
   async ngOnChanges(_changes: any) {
     let changes: IFormChanges = { ..._changes };
     await this.initialize({
@@ -95,8 +96,9 @@ export class DynamicFormComponent extends MainioFormComponentBaseComponent
     this.formValueChanges$.subscribe(x => {
       this.onStatusChanges.emit(this.form);
       for (let q of this.questions) {
-        q.value = this.form.controls[q.key].value;
+        q.setValue(this.form.controls[q.key].value);
       }
     });
+    this.form.updateValueAndValidity({ onlySelf: false, emitEvent: false });
   }
 }

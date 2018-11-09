@@ -9,3 +9,4 @@ export * from "./number-input-question";
 export * from "./checkbox-question";
 export * from "./form-layout.enum";
 export * from "./date-question";
+export * from "./default-validation-messages";

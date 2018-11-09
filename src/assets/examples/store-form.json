@@ -9,7 +9,7 @@
       "controlType": "[Mainio][DynamicForm][ControlType]Input",
       "minLength": 5,
       "maxLength": 200,
-      "value": "Predefined value",
+      "value": "Pre",
       "type": "input"
     },
     {
@@ -54,6 +54,7 @@
       "controlType": "[Mainio][DynamicForm][ControlType]Date",
       "minLength": -1,
       "maxLength": -1,
+      "value": "2018-11-09T22:13:29.747Z",
       "type": "number"
     }
   ]

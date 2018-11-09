@@ -22,6 +22,8 @@ export class SingleLineInputComponent extends FormFieldBaseComponent {
   question: InputQuestion;
   @Input()
   controller: AbstractControl;
+  @Input()
+  errors: string[];
   minLength: number = 0;
   maxLength: number = 0;
   inputHint: string = "";

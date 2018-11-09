@@ -15,6 +15,8 @@ export class FormFieldBaseComponent implements OnChanges {
   question: QuestionBase<any>;
   @Input()
   formGroup: FormGroup;
+  @Input()
+  errors: string[];
   @Output()
   onFieldChanged: EventEmitter<QuestionBase<any>> = new EventEmitter<
     QuestionBase<any>

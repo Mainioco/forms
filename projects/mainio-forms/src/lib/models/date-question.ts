@@ -11,10 +11,19 @@ export class DateQuestion extends QuestionBase<Date> {
   }
 
   set date(value: Date) {
-    this.value = value;
+    this.value = this.getSetValues(value);
   }
 
   get date(): Date {
     return this.value;
+  }
+
+  setValue(value: any) {
+    this.value = this.getSetValues(value);
+  }
+
+  getSetValues(value: any) {
+    let x = value ? value : this.value;
+    return typeof x == "string" ? new Date(x) : x;
   }
 }

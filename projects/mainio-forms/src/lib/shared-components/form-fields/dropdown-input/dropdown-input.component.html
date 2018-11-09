@@ -10,4 +10,7 @@
       {{option.label}}
     </mat-option>
   </mat-select>
+  <mat-error *ngFor="let error of errors">
+    {{error.message}}
+  </mat-error>
 </mat-form-field>
