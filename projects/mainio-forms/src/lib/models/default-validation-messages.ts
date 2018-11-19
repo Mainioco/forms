@@ -14,6 +14,14 @@ export const defaultValidationMessages: IValidationMessages = {
     {
       error: "maxlength",
       message: "This field has too many characters"
+    },
+    {
+      error: "min",
+      message: "The number is too small"
+    },
+    {
+      error: "max",
+      message: "The number is too large"
     }
   ],
   formSpecific: [],

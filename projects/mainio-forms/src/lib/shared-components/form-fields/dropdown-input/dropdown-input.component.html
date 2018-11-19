@@ -1,16 +1,29 @@
 <mat-form-field [formGroup]="formGroup" class="form-field">
-  <mat-select placeholder="{{question.label}}" [formControlName]="question.key" [value]="selectedOption"
-    (selectionChange)="setSelection($event)">
-    <mat-optgroup *ngFor="let group of question.groups " [label]="group.groupName">
-      <mat-option *ngFor="let option of group?.options" [value]="getOptionValue(option)" [id]="question.key + '-'+option.key">
-        {{option.label}}
+  <mat-select
+    placeholder="{{question.label}}"
+    [formControlName]="question.key"
+    [value]="selectedOption"
+    (selectionChange)="setSelection($event)"
+  >
+    <mat-optgroup
+      *ngFor="let group of question.groups"
+      [label]="group.groupName"
+    >
+      <mat-option
+        *ngFor="let option of group?.options"
+        [value]="getOptionValue(option)"
+        [id]="question.key + '-' + option.key"
+      >
+        {{ option.label }}
       </mat-option>
     </mat-optgroup>
-    <mat-option *ngFor="let option of question.options" [value]="getOptionValue(option)" [id]="question.key + '-'+option.key">
-      {{option.label}}
+    <mat-option
+      *ngFor="let option of question.options"
+      [value]="getOptionValue(option)"
+      [id]="question.key + '-' + option.key"
+    >
+      {{ option.label }}
     </mat-option>
   </mat-select>
-  <mat-error *ngFor="let error of errors">
-    {{error.message}}
-  </mat-error>
+  <mat-error *ngFor="let error of errors"> {{ error }} </mat-error>
 </mat-form-field>

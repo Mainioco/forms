@@ -88,7 +88,6 @@ export class ValidationMessagesService {
       ...questionErrors,
       ...this._messages.defaultMessages
     ];
-
     let toRet = all
       .filter(x => {
         return control.hasError(x.error);
@@ -97,13 +96,11 @@ export class ValidationMessagesService {
         if (x.paramValues) {
           let t = x.message;
           let err = control.getError(x.error);
-          console.log("err", err, t);
           x.paramValues.forEach((p, index) => {
             if (err[p]) {
               t = x.message.replace("{" + index + "}", err[p]);
             }
           });
-          console.log("t", t);
           return t;
         }
         return x.message;

@@ -16,8 +16,6 @@ export class NumberInputQuestion extends QuestionBase<number> {
   constructor(options: INumberInputQuestionOptions = {}) {
     super(options);
     this.type = "number";
-    this.minLength = options.minLength || -1;
-    this.maxLength = options.maxLength || -1;
     this.suffix = options.suffix || "";
     this.prefix = options.prefix || "";
     this.min = options.min;
@@ -28,6 +26,12 @@ export class NumberInputQuestion extends QuestionBase<number> {
     let exist = super.getValidators();
     var re = new RegExp("^-?\\d{1,9}");
     exist.push(Forms.Validators.pattern(re));
+    if (this.min !== undefined) {
+      exist.push(Forms.Validators.min(this.min));
+    }
+    if (this.max !== undefined) {
+      exist.push(Forms.Validators.max(this.max));
+    }
     return exist;
   }
 }

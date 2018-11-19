@@ -1,5 +1,30 @@
 # Change log
 
+## Version 1.0.0-beta.7
+
+**Added**
+
+- [**Number Input**] Adds validators for minimum and maximum numerical value
+- [**Number Input**] Adds validator error message
+
+**Changes**
+
+- [**Number Input**] No longer limit the values bbby min and max length; use mimimum number and maximum number values
+
+**Removed**
+
+- [**NumberInputQuestionOptions**] removed min and max length from the settings
+
+## Version 1.0.0-beta.6
+
+**Changes**
+
+- [**All inputs**] Added first stage errors to input fields.
+
+**Fixes**
+
+- [**DateInputComponent**] Date is now correctly parsed to date inputs when loaded from string
+
 ## Version 1.0.0-beta.5
 
 **Changes**
@@ -43,8 +68,6 @@
 - [**Store**] Added mappedModels
 - [**All Forms**,**Store**] Implementation for IMapConfiguration added
 - [**DynamicStoreFormComponent**] Is now able to load questions from store
-- [**Examples**] Added MapperExampleService to demonstrate basic use for mapping form values
-- [**Examples**] Added "build-project" npm run command to build both mainio-forms and the examples
 
 **Changed**
 
@@ -52,14 +75,12 @@
 - [**Store Effects**] Effects are not included within the library module anymore. The effects _FormActionEffects_ and _FormLifecycleEffects_ must be imported to projects module
 - [**Documentation**] Updated ReadMe.md to correspond to the current 1.0.0 goals
 - [**Store**] Models are now mapped to Option interfaces rather than to question models
-- [**NPM**] "start" command now build mainio-forms first and serves examples application after
 
 ## Version 1.0.0-alpha.7
 
 **Added**
 
 - [**All Questions**] It's now possible to add custom RegExp validator string array as options.
-- [**Basic Form Example**] The form now demonstrates use of custom RegExp patters
 
 ## Version 1.0.0-alpha.6
 
@@ -81,7 +102,6 @@
 - [**Store**] Added actions _ClearValues_, _SaveValues_
 - [**Store**] Added effect _FormLifecycleEffects_ that informs _StoreService_ when new forms are created to store
 - [**MainioFormsStoreConfig**] Added default group name parameter
-- [**Examples**] Added functionality for new store actions for Simple Form example
 
 **Changed**
 
@@ -105,8 +125,6 @@
 - [**StoreService**] Added isFormValid(form:Form) to check if specific store form's questionGroups are valid. Returns false if one group is not valid
 - [**StoreService**] Added isStoreFormValid(id:string) to check if a store form with specific id is valid. uses isFormValid(form:Form) internally
 - DynamicForm and DynamicStoreForm now use shared styles _form-shared-styles.css_
-- Examples now contain more information
-- Basic form example demonstrates use for FormLayout enum
 
 **Changed**
 

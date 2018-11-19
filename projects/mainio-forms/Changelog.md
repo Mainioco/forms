@@ -1,5 +1,20 @@
 # Change log
 
+## Version 1.0.0-beta.7
+
+**Added**
+
+- [**Number Input**] Adds validators for minimum and maximum numerical value
+- [**Number Input**] Adds validator error message
+
+**Changes**
+
+- [**Number Input**] No longer limit the values bbby min and max length; use mimimum number and maximum number values
+
+**Removed**
+
+- [**NumberInputQuestionOptions**] removed min and max length from the settings
+
 ## Version 1.0.0-beta.6
 
 **Changes**

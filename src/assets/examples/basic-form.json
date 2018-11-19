@@ -66,9 +66,9 @@
     "label": "Number",
     "required": true,
     "order": 2,
-    "controlType": "[Mainio][DynamicForm][ControlType]Input",
-    "minLength": -1,
-    "maxLength": -1,
+    "controlType": "[Mainio][DynamicForm][ControlType]NumberInput",
+    "min": 1,
+    "max": 7,
     "type": "number"
   },
   {

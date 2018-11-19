@@ -1,9 +1,17 @@
-<div [formGroup]="formGroup" [ngClass]="question.suffix ? 'checkbox-container-start' : 'checkbox-container-end'">
-  <mat-checkbox matInput [checked]="question.enabled" [formControlName]="question.key" [id]="'mainio-checkbox'+question.key"
-    [labelPosition]="question.suffix ? 'after' : 'before'">
-    {{question.suffix ? question.suffix : question.prefix}}
+<div
+  [formGroup]="formGroup"
+  [ngClass]="
+    question.suffix ? 'checkbox-container-start' : 'checkbox-container-end'
+  "
+>
+  <mat-checkbox
+    matInput
+    [checked]="question.enabled"
+    [formControlName]="question.key"
+    [id]="'mainio-checkbox' + question.key"
+    [labelPosition]="question.suffix ? 'after' : 'before'"
+  >
+    {{ question.suffix ? question.suffix : question.prefix }}
   </mat-checkbox>
-  <mat-error *ngFor="let error of errors">
-    {{error.message}}
-  </mat-error>
+  <mat-error *ngFor="let error of errors"> {{ error }} </mat-error>
 </div>

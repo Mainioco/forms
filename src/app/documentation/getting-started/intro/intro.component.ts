@@ -14,7 +14,6 @@ export class IntroComponent implements OnInit {
   constructor(private _acr: ActivatedRoute, private _http: HttpClient) {}
 
   ngOnInit() {
-    console.log(this._acr.snapshot.url);
     this.content$ = this._acr.queryParams.pipe(
       switchMap(x => {
         return this._http.get<any>(

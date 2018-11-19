@@ -1,16 +1,41 @@
 <mat-form-field [formGroup]="formGroup" *ngIf="question" class="form-field">
-  <input matInput placeholder="{{question.label}}" [formControlName]="question.key" [id]="'mainio-input'+question.key"
-    type="number" [minLength]="question.minLength" [maxLength]="question.maxLength" [required]="question.required"
-    *ngIf="question.minLength > 0 && question.maxLength > 0">
-  <input matInput placeholder="{{question.label}}" [formControlName]="question.key" [id]="'mainio-input'+question.key"
-    type="number" [minLength]="question.minLength" [required]="question.required" *ngIf="question.minLength > 0 && question.maxLength <= 0 ">
-  <input matInput placeholder="{{question.label}}" [formControlName]="question.key" [id]="'mainio-input'+question.key"
-    type="number" [maxLength]="question.maxLength" [required]="question.required" *ngIf=" question.maxLength > 0 && question.minLength <= 0">
-  <input matInput placeholder="{{question.label}}" [formControlName]="question.key" [id]="'mainio-input'+question.key"
-    type="number" [required]="question.required" *ngIf=" question.maxLength <= 0 && question.minLength <= 0">
-  <span matPrefix *ngIf="prefix">{{prefix}}</span>
-  <span matSuffix *ngIf="suffix">{{suffix}}</span>
-  <mat-error *ngFor="let error of errors">
-    {{error.message}}
-  </mat-error>
+  <input
+    matInput
+    placeholder="{{question.label}}"
+    [formControlName]="question.key"
+    [id]="'mainio-input' + question.key"
+    type="number"
+    [required]="question.required"
+    *ngIf="question.minLength > 0 && question.maxLength > 0"
+  />
+  <input
+    matInput
+    placeholder="{{question.label}}"
+    [formControlName]="question.key"
+    [id]="'mainio-input' + question.key"
+    type="number"
+    [required]="question.required"
+    *ngIf="question.minLength > 0 && question.maxLength <= 0"
+  />
+  <input
+    matInput
+    placeholder="{{question.label}}"
+    [formControlName]="question.key"
+    [id]="'mainio-input' + question.key"
+    type="number"
+    [required]="question.required"
+    *ngIf="question.maxLength > 0 && question.minLength <= 0"
+  />
+  <input
+    matInput
+    placeholder="{{question.label}}"
+    [formControlName]="question.key"
+    [id]="'mainio-input' + question.key"
+    type="number"
+    [required]="question.required"
+    *ngIf="question.maxLength <= 0 && question.minLength <= 0"
+  />
+  <span matPrefix *ngIf="prefix">{{ prefix }}</span>
+  <span matSuffix *ngIf="suffix">{{ suffix }}</span>
+  <mat-error *ngFor="let error of errors"> {{ error }} </mat-error>
 </mat-form-field>

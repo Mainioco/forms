@@ -1,14 +1,26 @@
 <mat-form-field [formGroup]="formGroup" class="form-field">
-  <input #select type="text" matInput placeholder="{{question.label}}" [formControlName]="question.key" required
-    [matAutocomplete]="autoGroup">
+  <input
+    #select
+    type="text"
+    matInput
+    placeholder="{{question.label}}"
+    [formControlName]="question.key"
+    required
+    [matAutocomplete]="autoGroup"
+  />
   <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayFn">
-    <mat-optgroup *ngFor="let group of stateGroupOptions | async " [label]="group.groupName">
-      <mat-option *ngFor="let option of group?.options" [value]="option" attr.selected="selected">
-        {{option.label}}
+    <mat-optgroup
+      *ngFor="let group of (stateGroupOptions | async)"
+      [label]="group.groupName"
+    >
+      <mat-option
+        *ngFor="let option of group?.options"
+        [value]="option"
+        attr.selected="selected"
+      >
+        {{ option.label }}
       </mat-option>
     </mat-optgroup>
   </mat-autocomplete>
-  <mat-error *ngFor="let error of errors">
-    {{error.message}}
-  </mat-error>
+  <mat-error *ngFor="let error of errors"> {{ error }} </mat-error>
 </mat-form-field>
