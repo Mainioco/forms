@@ -1,0 +1,16 @@
+<div class="container">
+  <div>
+    <div class="container icon">
+      <div>
+        <fa-icon [icon]="icon"></fa-icon>
+        <h3>{{ title }}</h3>
+      </div>
+    </div>
+    <div class="container">
+      <a mat-raised-button color="primary" href="{{ url }}" class="cta"
+        >Learn more</a
+      >
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

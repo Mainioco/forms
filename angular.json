@@ -20,7 +20,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "node_modules/prismjs/themes/prism-okaidia.css",
               "src/assets/roboto.css"
             ],

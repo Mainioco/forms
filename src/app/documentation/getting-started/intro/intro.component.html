@@ -1,12 +1,8 @@
-<mat-drawer-container class="example-container">
-  <mat-drawer mode="side" opened>
-    <mainio-form-navigation></mainio-form-navigation>
-  </mat-drawer>
-  <mat-drawer-content>
-    <div style="padding:0 50px 50px 50px">
-      <markdown [data]="content$ | async">
-
-      </markdown>
+<div class="row">
+  <div class="col-4"><mainio-form-navigation></mainio-form-navigation></div>
+  <div class="example-container col-8">
+    <div style="padding:50px 50px 50px 50px">
+      <markdown [data]="content$ | async"> </markdown>
     </div>
-  </mat-drawer-content>
-</mat-drawer-container>
+  </div>
+</div>

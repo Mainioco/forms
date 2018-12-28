@@ -2,7 +2,8 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "primeng/resources/themes/nova-light/theme.css";
 @import "primeng/resources/primeng.min.css";
-
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap-grid";
 html,
 body {
   padding: 0;
@@ -10,6 +11,9 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.section {
+  margin: 10px 0 10px 0;
+}
 p {
   font-size: 16px;
   line-height: 24px;
@@ -20,4 +24,18 @@ mainio-form-examples-container {
 
 mainio-form-intro {
   width: calc(100% - 100px);
+}
+
+.ingress {
+  text-align: center;
+}
+
+.primary-section {
+  background: #00263e;
+  color: white;
+  padding: 40px;
+}
+
+.cta {
+  margin: 10px;
 }

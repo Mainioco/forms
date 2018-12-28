@@ -14,3 +14,8 @@
 h2 {
   font: 200 24px/30px Roboto, "Helvetica Neue", sans-serif;
 }
+
+.hero {
+  background: url("https://mainio.co/wp-content/uploads/2018/05/asiakasymmarrys-ratkaisee-mainio-co.jpg?id=10715");
+  background-position: -5px -110px;
+}

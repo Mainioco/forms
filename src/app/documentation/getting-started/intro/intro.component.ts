@@ -16,6 +16,7 @@ export class IntroComponent implements OnInit {
   ngOnInit() {
     this.content$ = this._acr.queryParams.pipe(
       switchMap(x => {
+        console.log("HI");
         return this._http.get<any>(
           "../assets/documentation/getting-started/" + x["p"] + ".md",
           { responseType: "text" } as any

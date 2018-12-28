@@ -32,9 +32,18 @@ import {
   DocumentationModule
 } from "./documentation/documentation.module";
 import { MarkdownModule } from "ngx-markdown";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faCoffee,
+  faArchway,
+  faBezierCurve
+} from "@fortawesome/free-solid-svg-icons";
+import { faAngular } from "@fortawesome/free-brands-svg-icons";
+import { FeatureComponent } from "./components/feature/feature.component";
 
 @NgModule({
-  declarations: [AppComponent, IndexComponent],
+  declarations: [AppComponent, IndexComponent, FeatureComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -50,6 +59,7 @@ import { MarkdownModule } from "ngx-markdown";
     ExamplesModule,
     MarkdownModule.forRoot(),
     MatButtonModule,
+    FontAwesomeModule,
     RouterModule.forRoot([
       ...documentationRoutes,
       ...examplesRoutes,
@@ -78,4 +88,11 @@ import { MarkdownModule } from "ngx-markdown";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    // Add an icon to the library for convenient access in other components
+    library.add(faAngular);
+    library.add(faBezierCurve);
+    library.add(faArchway);
+  }
+}

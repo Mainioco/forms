@@ -1,24 +1,107 @@
-<div style="min-height: 100vh;display: flex;flex-direction: column;justify-content: space-between">
+<div
+  style="min-height: 100vh;display: flex;flex-direction: column;justify-content: space-between;"
+>
   <div style="display: flex;flex-direction: column;">
-    <div style="position:relative;padding:20px;background-size: cover;min-height: 200px;">
-      <div style="position:absolute;height:100%;width: 100%;left:0;top:0;background-color: rgba(51, 0, 114,0.5);display:flex;justify-content: center;flex-direction: column">
-        <h1 style="color:white;padding:20px 50;margin:50px 0 0px 20px;z-index:2">Angular 6 Dynamic Forms made simple
+    <div
+      style="position:relative;padding:20px;background-size: cover;min-height: 200px;"
+      class="hero"
+    >
+      <div
+        style="position:absolute;height:100%;width: 100%;left:0;top:0;background-color: rgba(51, 0, 114,0.5);display:flex;justify-content: center;flex-direction: column"
+      >
+        <h1
+          style="color:white;padding:20px 50;margin:50px 0 0px 20px;z-index:2"
+        >
+          Angular 6 Dynamic Forms made simple
         </h1>
       </div>
-      <div style="position:absolute;width: 100%;right:0;bottom:0;background-color: rgba(51, 0, 114,0.5);display:flex;justify-content: end;flex-direction: row;color:white">
-        <a mat-stroked-button routerLink="/home">Home</a>
+      <div
+        style="position:absolute;width: 100%;right:0;bottom:0;background-color: rgba(51, 0, 114,0.5);display:flex;justify-content: end;flex-direction: row;color:white"
+      >
+        <a mat-stroked-button routerLink="/index">Home</a>
         <a mat-stroked-button routerLink="/examples">Examples</a>
-        <a mat-stroked-button routerLink="/documentation/getting-started/" [queryParams]="{p: 'intro'}">Documentation</a>
+        <a
+          mat-stroked-button
+          routerLink="/documentation/getting-started/"
+          [queryParams]="{ p: 'intro' }"
+          >Documentation</a
+        >
       </div>
     </div>
-    <div style="display:flex;flex-direction: row;flex-wrap: wrap;margin-top:20px;flex-grow: 1;align-items: stretch">
+    <div class="container" style="margin:0;max-width: 100%;padding: 0;">
       <router-outlet></router-outlet>
     </div>
   </div>
-  <div style="margin-top:20px;min-height:200px;justify-self: flex-end">
-    <div style="display:flex;flex-grow: 1;justify-content: flex-end;padding: 0 20px">
-      <img width="200" alt="Mainio Logo" src="./assets/mainio-co-footer-element.png">
+  <div
+    style="margin-top:20px;min-height:200px;justify-self: flex-end;z-index: 50;"
+  >
+    <div
+      style="display:flex;flex-grow: 1;justify-content: flex-end;padding: 0 20px"
+    >
+      <img
+        width="200"
+        alt="Mainio Logo"
+        src="./assets/mainio-co-footer-element.png"
+      />
     </div>
-    <div style="min-height:200px;background:#00263e"></div>
+    <div
+      style="min-height:200px;background:#00263e;color:rgba(255,255,255,0.8)"
+    >
+      <footer class="container" style="padding:20px">
+        <div class="row">
+          <div class="col">
+            <h2>Mainio Dynamic forms</h2>
+            <p>Angular 6 dynamic forms made simple</p>
+            <h3>Quick links</h3>
+            <div style="display:flex;flex-direction: column">
+              <a href="https://github.com/Mainioco/forms" target="_blank"
+                >Github</a
+              >
+              <a
+                href="https://www.npmjs.com/package/mainio-forms"
+                target="_blank"
+                >NPM</a
+              >
+              <a href="https://twitter.com/mainioco" target="_blank"
+                >Mainio at Twitter</a
+              >
+              <a
+                href="https://www.linkedin.com/company/mainioco/"
+                target="_blank"
+                >Mainio at LinkedIn</a
+              >
+              <a href="https://mainio.co" target="_blank">Mainio homesite</a>
+            </div>
+          </div>
+          <div class="col">
+            <h2>Developers</h2>
+            <p>Get started with Mainio development</p>
+            <h3>Documentation</h3>
+            <div style="display:flex;flex-direction: column">
+              <a href="https://github.com/Mainioco/forms" target="_blank"
+                >Getting started</a
+              >
+              <a
+                href="https://www.npmjs.com/package/mainio-forms"
+                target="_blank"
+                >Install</a
+              >
+              <a href="https://twitter.com/mainioco" target="_blank">FAQ</a>
+              <h3>Other packages</h3>
+              <a href="https://github.com/Mainioco/forms" target="_blank"
+                >Mainio Surveys</a
+              >
+              <a href="https://github.com/Mainioco/forms" target="_blank"
+                >Mainio Chat Bot</a
+              >
+              <a href="https://github.com/Mainioco/forms" target="_blank"
+                >Mainio SDK</a
+              >
+            </div>
+          </div>
+        </div>
+        <p style="text-align: right">&copy; Copright 2019 Mainioco Oy</p>
+      </footer>
+    </div>
   </div>
 </div>
