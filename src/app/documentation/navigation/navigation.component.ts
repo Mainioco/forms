@@ -56,40 +56,116 @@ export class NavigationComponent implements OnInit {
           title: "Services",
           children: [
             {
-              link: "dynamic-form",
-              title: "DynamicForm (no store)"
+              link: "?p=data-mapper",
+              title: "Data Mapper"
             },
             {
-              link: "dynamic-store-form",
+              link: "?p=form-group",
               title: "DynamicStoreForm (NgRx Store)"
             },
             {
-              title: "Internal Components"
+              link: "?p=library-logger",
+              title: "Logger"
             },
             {
-              link: "form-question",
-              title: "FormQuestionContainer"
+              link: "?p=question-control",
+              title: "Form Field"
+            },
+            {
+              link: "?p=question-creator",
+              title: "Question Creator"
+            },
+            {
+              link: "?p=display-validator",
+              title: "Question Display Validator"
+            },
+            {
+              link: "?p=question-group",
+              title: "Question Group"
+            },
+            {
+              link: "?p=json-parser",
+              title: "JSON Parser"
+            },
+            {
+              link: "?p=validation-message",
+              title: "Validation Message"
             }
           ]
         },
         {
-          link: "models",
-          title: "Models & Interfaces",
+          link: "form-fields",
+          title: "Form fields",
           children: [
             {
-              link: "dynamic-form",
-              title: "DynamicForm (no store)"
+              link: "?p=input",
+              title: "Basic input"
             },
             {
-              link: "dynamic-store-form",
-              title: "DynamicStoreForm (NgRx Store)"
+              link: "?p=dropdown",
+              title: "Dropdown"
             },
             {
-              title: "Internal Components"
+              title: "Number Input",
+              link: "?p=number-input"
             },
             {
-              link: "form-question",
-              title: "FormQuestionContainer"
+              title: "Repeat Input",
+              link: "?p=repeat-input"
+            },
+            {
+              title: "Slider",
+              link: "?p=slider"
+            },
+            {
+              title: "Date",
+              link: "?p=date"
+            }
+          ]
+        },
+        {
+          link: "interfaces",
+          title: "Interfaces",
+          children: [
+            {
+              link: "?p=question-base",
+              title: "IQuestionBaseOptions"
+            },
+            {
+              link: "?p=display-group",
+              title: "IDisplayGroup"
+            },
+            {
+              link: "?p=form-changes",
+              title: "IFormChanges"
+            },
+            {
+              title: "IFormGroupCreator",
+              link: "?p=form-group-creator"
+            },
+            {
+              title: "IJSonParser",
+              link: "?p=json-parser"
+            },
+            {
+              title: "IMapConfiguration",
+              link: "?p=map-configuration"
+            },
+            {
+              link: "?p=option-group",
+              title: "IOptionGroup"
+            },
+            {
+              link: "?p=question-change",
+              title: "IQuestionChage"
+            },
+            {
+              link: "?p=validation-message",
+              title: "IValidationMessage"
+            },
+            {
+              link: "?p=validation-messages",
+              title: "IValidationMessages"
             }
           ]
         }

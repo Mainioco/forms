@@ -6,7 +6,7 @@ import { NavigationComponent } from "./navigation/navigation.component";
 import { RouterModule } from "@angular/router";
 import { IntroComponent } from "./getting-started/intro/intro.component";
 import { MarkdownModule } from "ngx-markdown";
-import { ItemComponent } from './navigation/components/item/item.component';
+import { ItemComponent } from "./navigation/components/item/item.component";
 
 export const documentationRoutes = [
   {
@@ -15,6 +15,11 @@ export const documentationRoutes = [
   },
   {
     path: "documentation/getting-started",
+    component: IntroComponent,
+    pathMatch: "prefix"
+  },
+  {
+    path: "documentation/api/form-fields",
     component: IntroComponent,
     pathMatch: "prefix"
   }
@@ -27,7 +32,12 @@ export const documentationRoutes = [
     RouterModule,
     MarkdownModule.forRoot()
   ],
-  declarations: [WelcomeComponent, NavigationComponent, IntroComponent, ItemComponent],
+  declarations: [
+    WelcomeComponent,
+    NavigationComponent,
+    IntroComponent,
+    ItemComponent
+  ],
   exports: [WelcomeComponent]
 })
 export class DocumentationModule {}
