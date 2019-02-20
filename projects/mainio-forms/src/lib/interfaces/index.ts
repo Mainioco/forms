@@ -16,3 +16,4 @@ export * from "./i-map-configuration";
 export * from "./i-question-display-validator";
 export * from "./i-validation-message";
 export * from "./i-validation-messages";
+export * from './i-slider-options';

@@ -10,3 +10,4 @@ export * from "./checkbox-question";
 export * from "./form-layout.enum";
 export * from "./date-question";
 export * from "./default-validation-messages";
+export * from './slider-question';

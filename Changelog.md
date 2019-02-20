@@ -1,5 +1,11 @@
 # Change log
 
+## Version 1.0.0-beta.8
+
+**Added**
+
+- [**Slider input**] The model and interface are now correctly exported from the library
+
 ## Version 1.0.0-beta.7
 
 **Added**
